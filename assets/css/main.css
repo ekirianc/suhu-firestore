@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lato:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+    body{
+        @apply bg-[#F1F1F1] min-h-[100vh] font-lato
+    }
+}
+
+@layer components{
+
+}
+
+@layer utilities{
+    .ins{
+        @apply border border-black border-2
+    }
+}
