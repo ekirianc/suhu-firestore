@@ -15,18 +15,15 @@ const currentTime = ref('');
 const currentDate = ref('');
 const ampm = ref('');
 
-setInterval(() => {
-  const date = new Date();
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const seconds = date.getSeconds();
-  ampm.value = date.getHours() >= 12 ? 'PM' : 'AM';
-  currentTime.value = `${hours % 12}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+const date = new Date();
+const hours = date.getHours();
+const minutes = date.getMinutes();
+ampm.value = date.getHours() >= 12 ? 'PM' : 'AM';
+currentTime.value = `${hours % 12}:${minutes < 10 ? '0' : ''}${minutes}`;
 
-  const day = date.getDate();
-  const month = date.toLocaleString('default', { month: 'short' });
-  const year = date.getFullYear();
-  currentDate.value = `${day} ${month} ${year}`;
-}, 1000);
+const day = date.getDate();
+const month = date.toLocaleString('default', { month: 'short' });
+const year = date.getFullYear();
+currentDate.value = `${day} ${month} ${year}`;
 
 </script>

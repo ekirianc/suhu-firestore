@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full mx-auto p-4 flex items-center space-x-4 absolute top-[-4rem] ">
+    <div class="w-full mx-auto p-4 flex items-center space-x-4 absolute top-[-4rem] z-0 ">
       <div class="w-1/2 h-5 bg-white border rounded-full mx-auto">
         <div :style="{ width: progress + '%' }" class="h-full bg-sky-500 rounded-full"></div>
       </div>
