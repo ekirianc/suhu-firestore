@@ -8,7 +8,8 @@ import {
     CategoryScale,
     LinearScale,
     PointElement,
-    LineElement
+    LineElement,
+    TimeScale
 } from 'chart.js'
 
 export default defineNuxtPlugin(() => {
@@ -20,6 +21,7 @@ export default defineNuxtPlugin(() => {
         Tooltip,
         Legend,
         PointElement,
-        LineElement
+        LineElement,
+        TimeScale
     )
 })
