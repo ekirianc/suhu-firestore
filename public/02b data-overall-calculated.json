@@ -1,0 +1,21 @@
+{
+  "total_valid_data_points": 43349,
+  "overall_peak_temperature": {
+    "value": 36.2,
+    "date": "2023-12-09",
+    "time": "09:21 PM"
+  },
+  "overall_low_temperature": {
+    "value": 27.6,
+    "date": "2023-12-09",
+    "time": "09:21 PM"
+  },
+  "overall_avg_temp": 31.026374310826114,
+  "overall_avg_humidity": 80.4496758864103,
+  "total_recorded_days": 184,
+  "total_valid_days": 152,
+  "overall_total_valid_temp": 1344962.3000000012,
+  "overall_total_valid_humidity": 3487413.0,
+  "correlation_temperature_humidity": -0.8183106898892691,
+  "correlation_peak_low_temperature": 0.40677620847415324
+}
