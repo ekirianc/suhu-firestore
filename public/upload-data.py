@@ -30,8 +30,8 @@ try:
     for data in last_100_data:
         doc_ref = db.collection('temperature').add({
             'time': data['time'],
-            'temp': str(data['temp']),
-            'humid': str(data['humid'])
+            'temp': data['temp'],
+            'humid': data['humid']
         })
         print(f'Data added with ID: {doc_ref[1].id}')  # Mengakses ID dari elemen pertama tuple
 
