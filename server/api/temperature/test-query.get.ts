@@ -1,14 +1,14 @@
 interface DataEntry {
     time: number;
-    temp: string;
-    humid: string;
+    temp: number;
+    humid: number;
 }
 
 export default defineEventHandler(async (event) => {
     const timeRange = getQuery(event).timeRange;
 
     const validTimeRange: string = typeof timeRange === 'string' ? timeRange : 'last';
-    const validTimeRanges = ['3hours', '24hours', 'today', 'yesterday', '3days', 'all', 'last'];
+    const validTimeRanges: string[] = ['3hours', '24hours', 'today', 'yesterday', '3days', '7days', 'all', 'last'];
 
     if (!validTimeRanges.includes(validTimeRange)) {
         return {
@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
         };
     }
 
-    const response = await fetch('http://localhost:3000/data-generated.json');
+    const response = await fetch('http://localhost:3000/01 data-real.json');
     const responseData = await response.json();
 
     const filterDataBy3Hours = (data: DataEntry[]) => {
@@ -46,6 +46,11 @@ export default defineEventHandler(async (event) => {
         return data.filter((entry) => entry.time > currentTime - 3 * 24 * 60 * 60);
     };
 
+    const filterDataBy7Days = (data: DataEntry[]) => {
+        const currentTime = Math.floor(Date.now() / 1000);
+        return data.filter((entry) => entry.time > currentTime - 7 * 24 * 60 * 60);
+    };
+
     const getDefaultData = (data: DataEntry[]) => {
         // Assuming "latest data" means the entry with the highest timestamp
         const latest = data.reduce((latest, entry) => (entry.time > latest.time ? entry : latest), data[0]);
@@ -60,6 +65,7 @@ export default defineEventHandler(async (event) => {
         'today': filterDataByToday,
         'yesterday': filterDataByYesterday,
         '3days': filterDataBy3Days,
+        '7days': filterDataBy7Days,
         'all': getAllData,
         'last': getDefaultData
     };
@@ -73,7 +79,7 @@ export default defineEventHandler(async (event) => {
     return {
         statusCode: 200,
         message: 'Filtered data fetched successfully',
-        latest: lastTemperature,
+        latest: lastTemperature[0],
         count: filteredData.length,
         data: filteredData,
     };

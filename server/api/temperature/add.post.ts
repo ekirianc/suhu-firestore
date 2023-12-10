@@ -3,11 +3,8 @@ import { setDoc, doc } from 'firebase/firestore';
 import { useFirestore } from "vuefire";
 
 const appConfig = useAppConfig()
-
 const firebaseConfig = appConfig.config
-
 const app = initializeApp(firebaseConfig);
-
 const dbFirestore = useFirestore(); //  Firestore instance
 
 export default defineEventHandler(async (event) => {

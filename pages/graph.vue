@@ -1,6 +1,5 @@
 <script setup>
 import { useCollection, useFirestore } from 'vuefire'
-import {DateTime} from 'luxon';
 import 'chartjs-adapter-moment';
 
 import {

@@ -27,11 +27,11 @@
 
 <script setup>
 defineProps({
-  temp: String,
+  temp: Number,
   update: String,
   time: String,
   change: String,
-  humidity: String,
+  humidity: Number,
   highTime: String,
   high: String,
   lowTime: String,

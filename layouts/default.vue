@@ -32,13 +32,7 @@
 </template>
 
 <script setup>
-import {onMounted} from "vue";
 
-const nav = ref(0)
-const navH = ref(0)
-onMounted(() => {
-  navH.value = nav.value.clientHeight + 24
-})
 </script>
 
 <style scoped>
