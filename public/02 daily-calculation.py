@@ -64,9 +64,6 @@ def process_temperature_data(input_file, output_file_daily, output_file_calculat
         daily_temperatures[day]['data_point_count'] += 1
         daily_temperatures[day]['valid'] = daily_temperatures[day]['data_point_count'] >= 230
 
-        # Menambahkan temperatur ke dalam field z_scores_temp
-        daily_temperatures[day]['z_scores_temp'].append(temperature)
-
     # Menyimpan hasil ke file JSON
     daily_temperatures_list = []
     output_data_calculated = {}
@@ -134,15 +131,17 @@ def process_temperature_data(input_file, output_file_daily, output_file_calculat
         })
 
     # Menambah field total data point valid, max temperature, dan low temperature
-    output_data_calculated['total_valid_data_points'] = total_valid_data_points
-    output_data_calculated['overall_peak_temperature'] = {'value': max_temp, 'date': max_temp_date, 'time': max_temp_time}
-    output_data_calculated['overall_low_temperature'] = {'value': low_temp, 'date': low_temp_date, 'time': low_temp_time}
-    output_data_calculated['overall_avg_temp'] = overall_total_valid_temp / total_valid_data_points if total_valid_data_points > 0 else 0  # Menghindari NaN jika tidak ada hari yang valid
-    output_data_calculated['overall_avg_humidity'] = overall_total_valid_humidity / total_valid_data_points if total_valid_data_points > 0 else 0
-    output_data_calculated['total_recorded_days'] = total_recorded_days
-    output_data_calculated['total_valid_days'] = total_valid_days
-    output_data_calculated['overall_total_valid_temp'] = overall_total_valid_temp
-    output_data_calculated['overall_total_valid_humidity'] = overall_total_valid_humidity
+    output_data_calculated.update({
+        'total_valid_data_points': total_valid_data_points,
+        'overall_peak_temperature': {'value': max_temp, 'date': max_temp_date, 'time': max_temp_time},
+        'overall_low_temperature': {'value': low_temp, 'date': low_temp_date, 'time': low_temp_time},
+        'overall_avg_temp': overall_total_valid_temp / max(total_valid_data_points, 1),
+        'overall_avg_humidity': overall_total_valid_humidity / max(total_valid_data_points, 1),
+        'total_recorded_days': total_recorded_days,
+        'total_valid_days': total_valid_days,
+        'overall_total_valid_temp': overall_total_valid_temp,
+        'overall_total_valid_humidity': overall_total_valid_humidity
+    })
 
     # Menambahkan nilai korelasi antara temperature dan humidity
     temperature_values = []
