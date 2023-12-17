@@ -6,7 +6,7 @@
 
 @layer base{
     body{
-        @apply bg-[#F1F1F1] min-h-[100vh] font-lato
+        @apply bg-[url('/img/background.png')] min-h-screen font-lato bg-fixed
     }
 }
 
@@ -16,6 +16,18 @@
 
 @layer utilities{
     .ins{
-        @apply border border-black border-2
+        @apply border-black border-2
+    }
+    .shadow-text{
+        filter: drop-shadow(0px 6.762px 4.459px rgba(219, 56, 155, 0.04)) drop-shadow(0px 11.561px 12.019px rgba(219, 56, 155, 0.06)) drop-shadow(0px 17.388px 27.948px rgba(219, 56, 155, 0.09)) drop-shadow(0px 36px 86px rgba(219, 56, 155, 0.14));
+    }
+    .text-bg-clip{
+        @apply bg-[url('/img/text-red-gradient.png')] bg-cover bg-clip-text
+    }
+    .text-bg-clip{
+        -webkit-text-fill-color: transparent;
+    }
+    .label{
+        @apply text-gray-500
     }
 }

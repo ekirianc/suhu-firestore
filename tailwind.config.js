@@ -6,7 +6,7 @@ export default {
       fontFamily: {
         lato : ['Lato'],
         inter : ['Inter']
-      }
+      },
     },
   },
   plugins: [],

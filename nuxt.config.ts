@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     'nuxt-vuefire',
     'nuxt-icon',
+    '@pinia/nuxt',
   ],
   vuefire: {
     config: {
