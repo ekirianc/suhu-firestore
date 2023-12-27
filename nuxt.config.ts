@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     'nuxt-vuefire',
     'nuxt-icon',
     '@pinia/nuxt',
+    '@vueuse/nuxt',
   ],
   vuefire: {
     config: {

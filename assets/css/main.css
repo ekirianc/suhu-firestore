@@ -6,7 +6,9 @@
 
 @layer base{
     body{
-        @apply bg-[url('/img/background.png')] min-h-screen font-lato bg-fixed
+        @apply bg-[url('https://ik.imagekit.io/kariki/bg-white?updatedAt=1703171021395')]
+        dark:bg-[url('https://ik.imagekit.io/kariki/blur-dark-bg?updatedAt=1703169481124')]
+        max-h-screen font-lato bg-fixed bg-cover
     }
 }
 
@@ -21,8 +23,11 @@
     .shadow-text{
         filter: drop-shadow(0px 6.762px 4.459px rgba(219, 56, 155, 0.04)) drop-shadow(0px 11.561px 12.019px rgba(219, 56, 155, 0.06)) drop-shadow(0px 17.388px 27.948px rgba(219, 56, 155, 0.09)) drop-shadow(0px 36px 86px rgba(219, 56, 155, 0.14));
     }
+    .shadow-active{
+        box-shadow: 0px 0.775px 0.122px 0px rgba(241, 54, 157, 0.01), 0px 1.332px 0.573px 0px rgba(241, 54, 157, 0.03), 0px 1.717px 1.554px 0px rgba(241, 54, 157, 0.06), 0px 2.011px 3.443px 0px rgba(241, 54, 157, 0.09), 0px 2.411px 6.846px 0px rgba(241, 54, 157, 0.11), 0px 4px 12px 0px rgba(241, 54, 157, 0.12);
+    }
     .text-bg-clip{
-        @apply bg-[url('/img/text-red-gradient.png')] bg-cover bg-clip-text
+        @apply bg-[url('https://ik.imagekit.io/kariki/text-red-gradient.png?updatedAt=1703170616561')] bg-cover bg-clip-text
     }
     .text-bg-clip{
         -webkit-text-fill-color: transparent;
@@ -30,4 +35,18 @@
     .label{
         @apply text-gray-500
     }
+    .bg-primary-gradient{
+        background: rgb(250,104,146);
+        background: linear-gradient(93deg, rgba(250,104,146,1) 0%, rgba(240,53,133,1) 100%);
+    }
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
 }

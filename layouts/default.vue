@@ -2,18 +2,26 @@
 
   <nav class="p-4">
     <div class="flex space-x-4 content-center">
-      <nuxt-link to="/" class="px-4 py-3"><icon name="ion:arrow-back"/></nuxt-link>
+      <nuxt-link to="/" class="px-4 py-3 dark:text-white"><icon name="ion:arrow-back"/></nuxt-link>
       <nuxt-link to="/chart" class="px-4 py-3 bg-white rounded-2xl text-pink-600">
         <icon name="lucide:line-chart" class="text-xl"/>
       </nuxt-link>
       <nuxt-link to="/list" class="px-4 py-3 bg-white rounded-2xl text-pink-600">
         <icon name="fluent:apps-list-detail-20-regular" class="text-2xl"/>
       </nuxt-link>
-      <button class="px-4 py-3"><icon name="tabler:moon" class="text-2xl"/></button>
+
+      <button @click="toggleDark()" class="dark:text-gray-400 dark:hover:text-gray-100 text-gray-600 hover:text-gray-900">
+        <span class="rounded-full border border-transparent hover:border-gray-400 transition-all px-3 py-1">
+          <span v-if="isDark"> <icon name="tabler:moon" class="text-xl relative bottom-0.5"/> </span>
+          <span v-else> <icon name="tabler:sun" class="text-xl relative bottom-0.5"/> </span>
+          <span class="ml-2 ">{{ isDark ? 'Dark' : 'Light' }}</span>
+        </span>
+      </button>
+
     </div>
   </nav>
 <!--  :style="{'margin-top':navH+'px'}"-->
-  <div class="md:mx-20 mt-16 md:mt-0 mb-10">
+  <div class="md:mx-20 md:mt-0 mb-10">
 
     <slot />
 
@@ -21,7 +29,10 @@
 
 </template>
 
-<script setup>
+<script setup lang="ts">
+
+  const isDark = useDark()
+  const toggleDark = useToggle(isDark)
 
 </script>
 

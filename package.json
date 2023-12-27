@@ -11,6 +11,8 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@vueuse/core": "^10.7.0",
+    "@vueuse/nuxt": "^10.7.0",
     "firebase": "^9.23.0",
     "firebase-admin": "^11.11.1",
     "nuxt": "^3.8.2",
@@ -25,6 +27,8 @@
     "@types/luxon": "^3.3.7",
     "chart.js": "^4.4.0",
     "chartjs-adapter-moment": "^1.0.1",
+    "chartjs-plugin-annotation": "^3.0.1",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.0",
     "firebase-functions": "^4.5.0",
