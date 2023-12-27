@@ -1,15 +1,31 @@
 import json
+import requests
+import os
+from dotenv import load_dotenv
+from tqdm import tqdm
 
-# Specify the input and output file paths
-input_file_path = r"D:\Code\web\suhu-v2\public\00 readings-export.json"
-output_file_path = r"D:\Code\web\suhu-v2\public\01 data-real.json"
+# Load environment variables from .env file
+load_dotenv()
 
-# Read input JSON from file
-with open(input_file_path, 'r') as file:
-    input_json = file.read()
+# Access the Firebase URL
+firebase_url = os.getenv("FIREBASE_URL")
 
-# Load the input JSON
-data = json.loads(input_json)
+# Mendapatkan data dari URL Firebase dengan tambahan bar progres
+response = requests.get(firebase_url, stream=True)
+total_size = int(response.headers.get('content-length', 0))
+block_size = 1024  # 1 Kibibyte
+
+# Inisialisasi bar progres
+progress_bar = tqdm(total=total_size, unit='iB', unit_scale=True)
+
+# Membaca data dari respons dengan bar progres
+data = b""
+for data_block in response.iter_content(block_size):
+    progress_bar.update(len(data_block))
+    data += data_block
+
+# Tutup bar progres setelah pemrosesan selesai
+progress_bar.close()
 
 # Convert the structure
 output_data = {
@@ -17,7 +33,7 @@ output_data = {
     "message": "Last data fetched successfully",
     "data": [
         {"time": int(entry["timestamp"]), "temp": float(entry["temperature"]), "humid": float(entry["humidity"])}
-        for entry in data.values()
+        for entry in json.loads(data).values()
     ]
 }
 
@@ -25,6 +41,7 @@ output_data = {
 output_json = json.dumps(output_data, indent=2)
 
 # Save the output to the specified file path
+output_file_path = ".\\01 data-real.json"
 with open(output_file_path, 'w') as output_file:
     output_file.write(output_json)
 
