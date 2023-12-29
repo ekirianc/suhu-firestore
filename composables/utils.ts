@@ -80,7 +80,7 @@ export function formattedDate(docDate: string){
     return  day + ' ' + month;
 }
 
-export function generateDateTimeRange(): Date[] {
+export function generateHourlyIntervalDT(): Date[] {
     // generate datetime with interval 1 hour from 0 AM to 11 PM then 11:59 PM
     const startDate = new Date();
     startDate.setHours(0, 0, 0, 0); // Set to midnight
