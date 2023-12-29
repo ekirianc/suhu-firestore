@@ -1,15 +1,5 @@
 import type {Context} from "chartjs-plugin-datalabels";
 
-interface YAxis {
-  type: string;
-  display: boolean;
-  position: string;
-  grid: {
-    color: (context: any) => string;
-  };
-  max?: number; // Optional 'max' property
-}
-
 const totalDuration = 200;
 const delayBetweenPoints = totalDuration / 200;
 export const animation = {
@@ -28,13 +18,13 @@ export const animation = {
   },
 };
 
-export const annotation = (mode: number)=>{
+export const annotation = (mode?: number, color?: string)=>{
   // use 1 for hourly data
   let interval = mode === 1 ? 60 : 5;
   return {
 
     type: 'line',
-    borderColor: 'black',
+    borderColor: color ? color : 'black',
     borderWidth: 1,
     label: {
       display: true,
@@ -71,7 +61,7 @@ export function customFormatter(value: number, ctx: Context) {
       ctx.dataIndex % 2 !== 0 &&
       localStorage.getItem('timerangeIsOne') === 'true'
   ){
-    return value
+    return value.toFixed(1)
   } else {
     return null
   }
@@ -104,25 +94,18 @@ export const chartOptions = ref({
       ticks: {
         autoSkip: true,
         autoSkipPadding: 20,
-        maxRotation: 0
+        maxRotation: 0,
+        color: ''
       },
+      grid: {},
     },
     y: {
       type: 'linear',
       display: true,
       position: 'left',
-      grid: {
-        color: function(context:any) {
-          if (context.tick.value == 30) {
-            return '#2f2f2f';
-          } else if(context.tick.value == 34){
-            return '#2f2f2f';
-          } else {
-            return `#d5d5d5`
-          }
-        }
-      },
-    } as YAxis,
+      grid: {},
+      ticks: {}
+    },
     y1: {
       type: 'linear',
       display: true,
@@ -130,8 +113,9 @@ export const chartOptions = ref({
       grid: {
         drawOnChartArea: false, // only want the grid lines for one axis to show up
       },
+      ticks: {}
     },
-  },
+  } as any,
   plugins: {
     legend: {
       display: false,

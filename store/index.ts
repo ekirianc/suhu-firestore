@@ -40,6 +40,7 @@ export const useDataStore = defineStore('temperature', {
     lastHeatIndex: 0,
     lastEntryTime: '',
     relativeTime: '',
+    lastDatetime: new Date(),
     todayHighTempData: 0,
     todayHighTempTime: 0,
     todayLowTempData: 0,
@@ -73,10 +74,29 @@ export const useDataStore = defineStore('temperature', {
           const originalOverallHourlyAverage = Object.values(overallData.overall_hourly_average);
           this.adj_overall_hourly_average = [...originalOverallHourlyAverage, originalOverallHourlyAverage[0]] as number[];
         });
+        let count = 0
 
         const dailyListener = onSnapshot(qDaily, (snapshot) => {
           if (!snapshot.empty) {
-
+            // snapshot.docChanges().forEach((change) => {
+            //   if (change.type === 'added') {
+            //     // Document added
+            //     console.log('Document added:', change.doc.data().date);
+            //     // Trigger your custom event for document added
+            //   }
+            //
+            //   if (change.type === 'modified') {
+            //     // Document modified
+            //     console.log('Document modified:', change.doc.data().date);
+            //     // Trigger your custom event for document modified
+            //   }
+            //
+            //   if (change.type === 'removed') {
+            //     // Document removed
+            //     console.log('Document removed:', change.doc.data().date);
+            //     // Trigger your custom event for document removed
+            //   }
+            // });
             // ====================================================
             // get last data
             const lastDocument = snapshot.docs[0];
@@ -88,13 +108,14 @@ export const useDataStore = defineStore('temperature', {
             this.lastTemperature = tempArray[tempArray.length - 1];
             this.lastHumidity = humidArray[humidArray.length - 1];
             this.lastHeatIndex = heatIndexArray[heatIndexArray.length - 1];
-            this.lastEntryTime = timeArray[timeArray.length - 1];
+            this.lastEntryTime = timeArray[timeArray.length - 1]; // HH:mm
 
             // get last entry relative time
             const lastTimeEntry = timeArray[timeArray.length - 1];
             const dateTimeString = `${lastDocument.data().date} ${lastTimeEntry}`;
             const dateTime = new Date(dateTimeString);
             this.relativeTime = formatDistanceToNow(dateTime, { addSuffix: true, includeSeconds: true });
+            this.lastDatetime = dateTime
 
             // get today high and low
             this.todayHighTempData = lastDocument.data().peak_temp.value;
@@ -105,13 +126,12 @@ export const useDataStore = defineStore('temperature', {
             // ============================================
 
             const getTimeOnly = (date: Date) => date.getHours() * 60 + date.getMinutes();
-            // create null array of data
+
             const dataCNullContainer = new Array(288).fill(null).map(() => ({
               temperature: null,
               humidity: null
             }));
 
-            // Populate temperatureEntries
             this.dataEntries = snapshot.docs.map((doc) => {
               const data = doc.data();
               const date = data.date;
@@ -124,20 +144,21 @@ export const useDataStore = defineStore('temperature', {
                 return new Date(dateTimeString);
               });
 
-              // // get null array of temperature
+              // generate null array of temperature
               const temperatureContainer = dataCNullContainer.map(entry => entry.temperature);
               const humidityContainer = dataCNullContainer.map(entry => entry.humidity);
 
               // variabel ini digunakan untuk menyamakan jumlah data point setiap harinya walaupn ada yang kosong di tenaah
               // return 288 data point from today datetime
               // khusus ketika Series OFF
-              const dummyDatetimeArray = [];
+              const dummyDatetimeArray: Date[] = [];
               for (let i = 0; i < 24 * 60; i += 5) {
                 const dummyDate = new Date();
                 dummyDate.setHours(Math.floor(i / 60));
                 dummyDate.setMinutes(i % 60);
                 dummyDatetimeArray.push(dummyDate);
               }
+
 
               dummyDatetimeArray.forEach((dummyDatetime, index) => {
                 const dummyTime = getTimeOnly(dummyDatetime);

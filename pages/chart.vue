@@ -2,7 +2,12 @@
 import {useDataStore, usePreferences} from "~/store";
 import { Line } from 'vue-chartjs';
 import 'chartjs-adapter-moment';
-import {expandHourlyData, formattedDate, generateDateTimeRange, reduceDatetimeToHourly} from "~/composables/utils";
+import {
+  expandHourlyData,
+  formattedDate,
+  generateHourlyIntervalDT,
+  reduceDatetimeToHourly,
+} from "~/composables/utils";
 import {animation, annotation, chartOptions} from "~/composables/chartOptions";
 import {
   assignAverageDataset,
@@ -10,13 +15,13 @@ import {
   assignHumidityDataset,
   assignTemperatureDataset, assignSimpleHumidDataset
 } from "~/composables/assignChartDataset";
-
+import {formatDistanceToNow} from "date-fns";
 
 // for refresh chart when change
 const chartLoaded = ref(false);
 const dataStore = useDataStore()
 const userPreference = usePreferences()
-const { width, height } = useWindowSize()
+const { width } = useWindowSize()
 
 let realDatetime: Date[] = [];
 let realTemperatures: (number | null)[] = []
@@ -29,6 +34,17 @@ const isFocusOnRef = ref()
 const isShowLabelOnRef = ref()
 const isChartAnimationOnRef = ref()
 const chartRefreshTrigger = ref(0);
+
+function updateRelativeDatetime(){
+  dataStore.relativeTime = formatDistanceToNow(dataStore.lastDatetime, { addSuffix: true, includeSeconds: true })
+}
+
+const intervalId = setInterval(updateRelativeDatetime, 60000)
+
+onBeforeUnmount(()=>{
+  // Clear the interval to avoid memory leaks
+  clearInterval(intervalId)
+})
 
 const SHOW_LABEL = 'labelEnabled'
 const labelToggle = (isChecked: boolean) => {
@@ -124,7 +140,6 @@ onMounted(async () => {
 
   isSimpleOnRef.value = localStorage.getItem(SIMPLE_MODE) === 'true';
   isShowLabelOnRef.value = localStorage.getItem(SHOW_LABEL) === 'true';
-
 });
 
 const disableSeriesToggle = ref(false)
@@ -159,13 +174,13 @@ const timeRanges = [
 // ==========================================================
 // ==========================================================
 
-watch([selectedTimeRange, isChartAnimationOnRef, isFocusOnRef, isSimpleOnRef, isShowLabelOnRef], () => {
+watch([selectedTimeRange, isChartAnimationOnRef, isFocusOnRef, isSimpleOnRef, isShowLabelOnRef, useDark()], () => {
   // If isChartAnimationOnRef changes, increment chartRefreshTrigger
-  // put this to :key on chart component so it will refresh every option changes
+  // put this to :key on chart component, so it will refresh on every option changes
   chartRefreshTrigger.value += 1;
 });
 
-watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef],
+watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark()],
     async ([timeRange, isSeriesOn, isSimpleOn]) => {
   userPreference.timeRange = timeRange
   chartLoaded.value = false
@@ -184,16 +199,6 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef],
   chartData.value.datasets = []
   chartData.value.labels = []
 
-  if(timeRange == "1"){
-    disableOverallAvgToggle.value = false
-    isSeriesOnRef.value = false
-    userPreference.seriesToggle = false
-    disableShowLabel.value = false
-    localStorage.setItem('timerangeIsOne', 'true')
-  }else {
-    localStorage.removeItem('timerangeIsOne')
-  }
-
   try {
     let totalDataPointCount = 0;
     let averageDataset: ChartDataset = {}
@@ -209,7 +214,6 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef],
       chartData.value.datasets.push(averageDataset);
     }
 
-    let isFirstIteration = true;
     dataStore.dataEntries.slice(0, Number(timeRange)).forEach((doc, index) => {
       if (!isSeriesOn){
         // Series OFF
@@ -225,13 +229,17 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef],
 
         if (isSimpleOn){
           // Series OFF and Simple ON, assign hourly data
-          chartOptions.value.plugins.annotation.annotations = { annotation: annotation(1), }
+          if (useDark().value){
+            chartOptions.value.plugins.annotation.annotations = {annotation: annotation(1, '#a9a9a9')}
+          }else {
+            chartOptions.value.plugins.annotation.annotations = { annotation: annotation(1), }
+          }
 
           chartData.value.labels = []
-          chartData.value.labels = generateDateTimeRange()
+          chartData.value.labels = generateHourlyIntervalDT()
 
 
-          if (timeRange == "1"){
+          if (timeRange === "1"){
             // karena data adjHourlyTemperature ditambah 1 di depan, jadi last entry maju 1 jam.
             // slice last entry for fix it
             const simpleTemperature: ChartDataset = assignSimpleTempDataset(formattedDate(doc.date), doc.adjHourlyTemperature.slice(0, -1), index)
@@ -240,6 +248,8 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef],
             const simpleHumidity: ChartDataset = assignSimpleHumidDataset(doc.adjHourlyHumidity.slice(0, -1))
             chartData.value.datasets.push(simpleHumidity);
             chartOptions.value.scales.y.max = Math.max(...doc.hourlyTemperatureValue) + 1
+
+            disableShowLabel.value = false
 
           }else {
             const simpleTemperature: ChartDataset = assignSimpleTempDataset(formattedDate(doc.date), doc.adjHourlyTemperature, index)
@@ -253,20 +263,24 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef],
           }
         }else {
           // Simple OFF, assign real data
-          chartOptions.value.plugins.annotation.annotations = { annotation }
+          if (useDark().value){
+            chartOptions.value.plugins.annotation.annotations = {annotation: annotation(0, '#a9a9a9')}
+          }else {
+            chartOptions.value.plugins.annotation.annotations = { annotation: annotation(), }
+          }
           chartOptions.value.scales.y.max = undefined
 
           const temperatureDataset: ChartDataset = assignTemperatureDataset(formattedDate(doc.date), temp, index)
           chartData.value.datasets.push(temperatureDataset);
           // just assign humidity when timerange = 1
-          if (timeRange == "1"){
+          if (timeRange === "1"){
             const humidityDataset: ChartDataset = assignHumidityDataset(humidity)
             chartData.value.datasets.push(humidityDataset);
           }
         }
 
         // Series OFF and range 1
-        if (timeRange == "1"){
+        if (timeRange === "1"){
           if (!isSimpleOn){
             disableSeriesToggle.value = true
             disableShowLabel.value = true
@@ -329,40 +343,67 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef],
       )
       chartData.value.datasets.push(assignAverageDataset(avgTemperatureSeries))
 
-      // console.log(avgTemperatureSeries.length)
-      // console.log(sortedTemp.length)
-      // console.log(realDatetime)
+      if (useDark().value){
+        chartData.value.datasets[1].borderColor = "#777777"
+      }
     }
-
-
 
   } catch (error) {
     dataCountLabel.value = `${error}`
   } finally {
     chartLoaded.value = true
-  }
-})
 
-// const selectedTimeRangeLabel = ref("")
+  }
+
+  if(timeRange === "1"){
+    disableOverallAvgToggle.value = false
+    isSeriesOnRef.value = false
+    userPreference.seriesToggle = false
+    localStorage.setItem('timerangeIsOne', 'true')
+    if (useDark().value){
+      chartData.value.datasets[2].borderColor = "#777777"
+    }
+  }else {
+    localStorage.removeItem('timerangeIsOne')
+  }
+
+  const isDarkMode = useDark().value;
+  chartOptions.value.scales.y.grid.color = (ctx: any) => {
+    const threshold = ctx.tick.value === 30 || ctx.tick.value === 34;
+    return isDarkMode ? (threshold ? '#aba6a6' : '#4b4b4b') : (threshold ? '#2f2f2f' : '#d5d5d5');
+  };
+  chartOptions.value.scales.x.grid.color = () => (isDarkMode ? '#4b4b4b' : '#d5d5d5')
+
+  const darkModeScaleColor = () => (isDarkMode ? '#bebebe' : '');
+  chartOptions.value.scales.y.ticks.color = darkModeScaleColor;
+  chartOptions.value.scales.y1.ticks.color = darkModeScaleColor;
+  chartOptions.value.scales.x.ticks.color = darkModeScaleColor;
+
+
+})
 
 </script>
 
 <template>
   <div class="lg:flex mb-12">
     <!-- sidebar -->
-    <div class="py-4 lg:basis-1/5 transition-all overflow-hidden hidden lg:block">
-      <div class="text-xl space-y-5">
-        <div class="grid text-center md:text-left">
-          <span class="label">current temperature (°C)</span>
-          <span class="text-6xl font-medium font-inter text-gray-800">
-          {{ dataStore.lastTemperature }}
-        </span>
+    <div class="py-4 lg:basis-1/6 transition-all overflow-hidden hidden lg:block ">
+      <div class="text-xl space-y-5 dark:text-gray-100">
+        <div class="grid md:text-left">
+          <span class="label dark:text-gray-400">Current</span>
+          <div>
+            <div class="text-6xl font-medium font-inter text-gray-800 dark:text-white">
+              <span>{{ dataStore.lastTemperature }}</span>
+              <span class="ml-2 text-2xl relative -top-6">°C</span>
+            </div>
+            <div class="text-gray-500 dark:text-gray-400">
+              <span class="mr-2">{{ dataStore.relativeTime }}</span> <br/>
+              <Icon name="mingcute:time-line" class="mr-1"/>
+              <span class="text-sm">{{ dataStore.lastEntryTime }}</span>
+            </div>
+          </div>
         </div>
-        <div class="grid">
-          <span class="label">last update</span>
-          <span class="mr-2 text-gray-600">{{ dataStore.relativeTime }}</span>
-          <span class="text-gray-400 text-sm">({{ dataStore.lastEntryTime }})</span>
-        </div>
+
         <div class="grid">
           <span class="label">humidity</span>
           <span>{{ dataStore.lastHumidity }}%</span>
@@ -375,14 +416,14 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef],
           <span class="label">today high</span>
           <div>
             <span>{{ dataStore.todayHighTempData }} °C </span>
-            <span class="text-gray-400 text-lg">({{dataStore.todayHighTempTime}})</span>
+            <span class="text-gray-400 text-sm">({{dataStore.todayHighTempTime}})</span>
           </div>
         </div>
         <div class="grid">
           <span class="label">today low</span>
           <div>
             <span>{{ dataStore.todayLowTempData }} °C </span>
-            <span class="text-gray-400 text-lg">({{dataStore.todayLowTempTime}})</span>
+            <span class="text-gray-400 text-sm">({{dataStore.todayLowTempTime}})</span>
           </div>
         </div>
         <div class="grid">
@@ -392,9 +433,9 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef],
       </div>
     </div>
 
-    <div class="lg:basis-4/5" >
+    <div class="lg:basis-5/6" >
       <!-- mini info / sidebar mini -->
-      <div class="px-4 py-8 flex space-x-4 md:hidden justify-center text-gray-800 font-inter">
+      <div class="px-4 py-8 flex space-x-4 md:hidden justify-center text-gray-800 font-inter dark:text-white">
         <div class="grid">
           <span>Last Temp.</span>
           <span class="text-4xl font-medium">{{dataStore.lastTemperature}}</span>
@@ -406,9 +447,9 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef],
         </div>
       </div>
 
-      <div class="lg:flex lg:space-x-4">
+      <div class="lg:flex lg:space-x-4 ">
         <!-- chart data option-->
-        <div v-if="!isFocusOnRef" class="md:basis-1/4 p-4 bg-white rounded-3xl overflow-y-scroll no-scrollbar md:block">
+        <div v-if="!isFocusOnRef" class="md:basis-1/4 p-4 bg-white space-y-2 rounded-3xl overflow-y-scroll no-scrollbar md:block dark:bg-zinc-900 dark:text-white">
           <h2 class="ml-1 font-bold text-xl mb-2" >Option</h2>
           <toggle-switch @toggle="focusToggle"
                          label="Focus Mode"
@@ -431,7 +472,7 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef],
         </div>
 
         <!--  chart view-->
-        <div class="bg-white rounded-3xl mt-4 lg:mt-0"
+        <div class="bg-white rounded-3xl mt-4 lg:mt-0 dark:text-white dark:bg-zinc-900"
              :class="{'px-2 pb-4 pt-0 md:w-full md:px-4': isFocusOnRef, 'p-4 md:basis-3/4': !isFocusOnRef}">
           <div>
             <!-- focus mode ON-->
@@ -444,7 +485,8 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef],
                                      :time-ranges="timeRanges"
                                      :initial-timerange="selectedTimeRange"
                                      @update:selectedTimeRange="handleSelectedTimeRange"
-                                      />
+                                     class="relative top-2"
+                />
               </div>
             </div>
 
@@ -460,13 +502,14 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef],
                                    :time-ranges="timeRanges"
                                    :initial-timerange="selectedTimeRange"
                                    @update:selectedTimeRange="handleSelectedTimeRange"
+                                   class="relative -top-1.5"
               />
             </div>
 
-            <div class="h-64 md:h-80">
+            <div class="h-64 md:h-80 mb-2">
               <Line v-if="chartLoaded" :data="computedChartData" :options="chartOptions" :key="chartRefreshTrigger" />
             </div>
-            <div id="legend-container"></div>
+            <div id="legend-container"></div> <!--config legend di plugins/chartjs.ts-->
 
           </div>
         </div>
@@ -474,7 +517,7 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef],
     </div>
   </div>
 
-  <div class="p-4 flex justify-center">
+  <div class="p-4 flex justify-end">
     <a href="https://github.com/ekirianc/temperature-monitor-2 " target="_blank"
        class="dark:text-gray-400 dark:hover:text-gray-100 text-gray-600 hover:text-gray-900 block">
       <Icon name ="mdi:github" class="relative bottom-0.5" /> Github

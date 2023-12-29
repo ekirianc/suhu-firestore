@@ -88,7 +88,7 @@ const htmlLegendPlugin = {
 
             // Text
             const textContainer = document.createElement('p') as HTMLParagraphElement;
-            textContainer.style.color = item.fontColor;
+            // textContainer.style.color = item.fontColor;
             textContainer.style.margin = '0';
             textContainer.style.padding = '0';
             textContainer.style.textDecoration = item.hidden ? 'line-through' : '';

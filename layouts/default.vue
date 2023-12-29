@@ -3,10 +3,10 @@
   <nav class="p-4">
     <div class="flex space-x-4 content-center">
       <nuxt-link to="/" class="px-4 py-3 dark:text-white"><icon name="ion:arrow-back"/></nuxt-link>
-      <nuxt-link to="/chart" class="px-4 py-3 bg-white rounded-2xl text-pink-600">
+      <nuxt-link to="/chart" class="px-4 py-3 bg-white rounded-2xl text-pink-600 dark:bg-gray-600 dark:text-white">
         <icon name="lucide:line-chart" class="text-xl"/>
       </nuxt-link>
-      <nuxt-link to="/list" class="px-4 py-3 bg-white rounded-2xl text-pink-600">
+      <nuxt-link to="/list" class="px-4 py-3 bg-white rounded-2xl text-pink-600 dark:bg-gray-600 dark:text-white">
         <icon name="fluent:apps-list-detail-20-regular" class="text-2xl"/>
       </nuxt-link>
 
