@@ -33,7 +33,7 @@ onBeforeUnmount(()=>{
 
   <div class="min-h-screen grid place-content-center font-inter absolute overflow-hidden z-10 w-full">
     <div class="flex justify-center font-medium shadow-text text-bg-clip">
-      <span class="md:text-[12rem] text-8xl px-4 leading-none">{{ dataStore.lastTemperature }}</span>
+      <span class="md:text-[12rem] text-8xl px-4 leading-none">{{ dataStore.lastTemperature.toFixed(1) }}</span>
       <div class="grid place-content-center md:text-right p-2">
         <span class="md:text-8xl text-3xl mb-4">°C</span>
         <span class="md:text-5xl text-3xl">{{ dataStore.lastHumidity }}%</span>

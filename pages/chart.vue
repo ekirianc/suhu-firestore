@@ -22,6 +22,8 @@ const chartLoaded = ref(false);
 const dataStore = useDataStore()
 const userPreference = usePreferences()
 const { width } = useWindowSize()
+const SMALL_SCREEN = 480
+const HUMIDITY_DARK_BORDER_COLOR = "#444444"
 
 let realDatetime: Date[] = [];
 let realTemperatures: (number | null)[] = []
@@ -78,8 +80,8 @@ const FOCUS_MODE = 'focusEnabled'
 const focusToggle = (isChecked: boolean) => {
   if (isChecked){
     isFocusOnRef.value = true
-    if (width.value <= 480){
-      chartOptions.value.scales.y.display = false
+    if (width.value <= SMALL_SCREEN){
+      // chartOptions.value.scales.y.display = false
       chartOptions.value.scales.y1.display = false
     }
     localStorage.setItem(FOCUS_MODE, 'true')
@@ -119,7 +121,7 @@ onMounted(() => {
   const storedFocusModeSetting = localStorage.getItem(FOCUS_MODE);
   if (storedFocusModeSetting === 'true') {
     if (width.value <= 480){
-      chartOptions.value.scales.y.display = false
+      // chartOptions.value.scales.y.display = false
       chartOptions.value.scales.y1.display = false
     }
 
@@ -242,10 +244,12 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark()],
           if (timeRange === "1"){
             // karena data adjHourlyTemperature ditambah 1 di depan, jadi last entry maju 1 jam.
             // slice last entry for fix it
-            const simpleTemperature: ChartDataset = assignSimpleTempDataset(formattedDate(doc.date), doc.adjHourlyTemperature.slice(0, -1), index)
+            // const simpleTemperature: ChartDataset = assignSimpleTempDataset(formattedDate(doc.date), doc.adjHourlyTemperature.slice(0, -1), index)
+            const simpleTemperature: ChartDataset = assignSimpleTempDataset(formattedDate(doc.date), doc.adjHourlyTemperature, index)
             chartData.value.datasets.push(simpleTemperature);
 
-            const simpleHumidity: ChartDataset = assignSimpleHumidDataset(doc.adjHourlyHumidity.slice(0, -1))
+            // const simpleHumidity: ChartDataset = assignSimpleHumidDataset(doc.adjHourlyHumidity.slice(0, -1))
+            const simpleHumidity: ChartDataset = assignSimpleHumidDataset(doc.adjHourlyHumidity)
             chartData.value.datasets.push(simpleHumidity);
             chartOptions.value.scales.y.max = Math.max(...doc.hourlyTemperatureValue) + 1
 
@@ -315,6 +319,7 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark()],
         }
         totalDataPointCount += doc.dataPointCount;
         dataCountLabel.value = totalDataPointCount.toString()
+
       }
     })
 
@@ -344,7 +349,8 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark()],
       chartData.value.datasets.push(assignAverageDataset(avgTemperatureSeries))
 
       if (useDark().value){
-        chartData.value.datasets[1].borderColor = "#777777"
+        chartData.value.datasets[1].borderColor = HUMIDITY_DARK_BORDER_COLOR
+        chartData.value.datasets[2].borderColor = "#2d5a9f" // avg border color
       }
     }
 
@@ -361,7 +367,7 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark()],
     userPreference.seriesToggle = false
     localStorage.setItem('timerangeIsOne', 'true')
     if (useDark().value){
-      chartData.value.datasets[2].borderColor = "#777777"
+      chartData.value.datasets[2].borderColor = HUMIDITY_DARK_BORDER_COLOR
     }
   }else {
     localStorage.removeItem('timerangeIsOne')
@@ -373,6 +379,7 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark()],
     return isDarkMode ? (threshold ? '#aba6a6' : '#4b4b4b') : (threshold ? '#2f2f2f' : '#d5d5d5');
   };
   chartOptions.value.scales.x.grid.color = () => (isDarkMode ? '#4b4b4b' : '#d5d5d5')
+  // chartOptions.value.scales.x.grid.display = () => !(width.value < 480 && isFocusOnRef.value)
 
   const darkModeScaleColor = () => (isDarkMode ? '#bebebe' : '');
   chartOptions.value.scales.y.ticks.color = darkModeScaleColor;
@@ -387,7 +394,7 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark()],
 <template>
   <div class="lg:flex mb-12">
     <!-- sidebar -->
-    <div class="py-4 lg:basis-1/6 transition-all overflow-hidden hidden lg:block ">
+    <div class="py-4 lg:basis-1/6 overflow-hidden hidden lg:block">
       <div class="text-xl space-y-5 dark:text-gray-100">
         <div class="grid md:text-left">
           <span class="label dark:text-gray-400">Current</span>
@@ -473,19 +480,17 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark()],
 
         <!--  chart view-->
         <div class="bg-white rounded-3xl mt-4 lg:mt-0 dark:text-white dark:bg-zinc-900"
-             :class="{'px-2 pb-4 pt-0 md:w-full md:px-4': isFocusOnRef, 'p-4 md:basis-3/4': !isFocusOnRef}">
+             :class="{'px-0 pb-4 pt-0 md:w-full md:px-4': isFocusOnRef, 'p-4 md:basis-3/4': !isFocusOnRef}">
           <div>
             <!-- focus mode ON-->
-            <div v-if="isFocusOnRef" class="flex justify-between mx-4 my-2">
+            <div v-if="isFocusOnRef" class="flex justify-between mx-4 my-2 pt-4 lg:pt-0">
               <toggle-switch @toggle="focusToggle"
-                             label="Focus Mode"
                              :default-toggle="isFocusOnRef"/>
               <div>
-                <time-range-dropdown :chart-loaded="chartLoaded"
+                <time-range-tabs :chart-loaded="chartLoaded"
                                      :time-ranges="timeRanges"
                                      :initial-timerange="selectedTimeRange"
                                      @update:selectedTimeRange="handleSelectedTimeRange"
-                                     class="relative top-2"
                 />
               </div>
             </div>
@@ -498,7 +503,7 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark()],
                 <span>{{ dataCountLabel }}</span>
               </div>
               <!-- Select Dropdown  -->
-              <time-range-dropdown :chart-loaded="chartLoaded"
+              <time-range-tabs :chart-loaded="chartLoaded"
                                    :time-ranges="timeRanges"
                                    :initial-timerange="selectedTimeRange"
                                    @update:selectedTimeRange="handleSelectedTimeRange"

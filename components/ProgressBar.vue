@@ -1,69 +1,83 @@
 <template>
-    <div class="w-full mx-auto p-4 flex items-center space-x-4 absolute top-[-4rem] z-0 ">
-      <div class="w-1/2 h-5 bg-white border rounded-full mx-auto">
-        <div :style="{ width: progress + '%' }" class="h-full bg-sky-500 rounded-full"></div>
+  <div class="flex">
+    <div class="w-full h-10 bg-white rounded-xl text-gray-400 dark:bg-slate-600 relative">
+      <div :style="{ width: progress + '%' }" class="h-full bg-slate-200 rounded-xl flex items-center pl-4 dark:bg-slate-800 transition-all duration-500 ease-out"></div>
+      <div class="text-slate-600 dark:text-slate-300 ">
+        <span class="absolute top-2 left-4">{{progress.toFixed(2)}}%</span>
+        <div v-if="dataFetched" :style="{left: sunrisePercentage + '%'}" class="absolute top-1.5 h-2/3 w-1 bg-gray-400 rounded-full">
+          <Icon name="tabler:sun" class="ml-2 text-2xl"/>
+        </div>
+        <div v-if="dataFetched" :style="{left: sunsetPercentage + '%'}" class="absolute top-1.5 h-2/3 w-1 bg-gray-400 rounded-full">
+          <Icon name="tabler:moon" class="ml-2 text-xl"/>
+        </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
+import moment from "moment-timezone";
 
-// Define a ref to store the start time and assign it the current time initially
-const startTime = ref(new Date());
+const startOfDay = new Date();
+startOfDay.setHours(0, 0, 0, 0);
 
-// Define a ref to store the progress percentage
 const progress = ref(0);
+const totalMillisecondsInDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
-// Define a function to update the progress based on the elapsed time
 const updateProgress = () => {
-  // Get the current time
   const currentTime = new Date();
+  const elapsedMilliseconds = currentTime - startOfDay;
 
-  // Calculate the elapsed time in milliseconds using the start time ref
-  const elapsedTime = currentTime - startTime.value;
-
-  // Calculate the progress percentage based on 10 seconds (10000 milliseconds)
-  const percentage = Math.min((elapsedTime / 10000) * 100, 100);
-
-  // Update the progress ref
-  progress.value = percentage;
-
-  // Reset the progress bar if it's full
-  if (percentage === 100) {
-    resetStartTime();
-  }
+  progress.value = Math.min((elapsedMilliseconds / totalMillisecondsInDay) * 100, 100)
 };
 
-// Define a variable to store the interval ID
 let interval;
 
-// Define a function to start the interval
 const startInterval = () => {
-  // Update the progress every second (1000 milliseconds)
   interval = setInterval(updateProgress, 1000);
 };
 
-// Define a function to stop the interval
 const stopInterval = () => {
-  // Clear the interval
   clearInterval(interval);
 };
 
-// Define a function to reset the start time to the current time
-const resetStartTime = () => {
-  // Assign the current time to the start time ref
-  startTime.value = new Date();
-};
-
-// Use the onMounted hook to start the interval when the component is mounted
 onMounted(() => {
+  fetchData();
   startInterval();
 });
 
-// Use the onUnmounted hook to stop the interval when the component is unmounted
 onUnmounted(() => {
   stopInterval();
 });
 
-// Use the onUpdated hook to check if the progress has reached 100% and call th
+const dataFetched = ref(false);
+const sunsetPercentage = ref()
+const sunrisePercentage = ref()
+
+const fetchData = async () => {
+  try {
+    const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=0.59&longitude=117&hourly=temperature_2m&daily=sunrise,sunset&timezone=Asia%2FSingapore');
+    const responseData = await response.json();
+
+    const today = moment().format('YYYY-MM-DD')
+    const todayIndex = responseData.daily.time.indexOf(today);
+    const sunsetTime = new Date(responseData.daily.sunset[todayIndex]).getTime();
+    const sunriseTime = new Date(responseData.daily.sunrise[todayIndex]).getTime();
+
+    const timeUntilSunset = sunsetTime - startOfDay;
+    sunsetPercentage.value = Math.min((timeUntilSunset / totalMillisecondsInDay) * 100, 100);
+
+    const timeUntilSunrise = sunriseTime - startOfDay;
+    sunrisePercentage.value = Math.min((timeUntilSunrise / totalMillisecondsInDay) * 100, 100);
+
+    // Set the dataFetched variable to true after successful data fetch
+    dataFetched.value = true;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    // Handle errors if needed
+  }
+};
+
+
 </script>
