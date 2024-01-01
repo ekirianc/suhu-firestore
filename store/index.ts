@@ -5,11 +5,13 @@ import {
   query,
   orderBy,
   limit,
-  getDocs, doc, QuerySnapshot, onSnapshot
+  getDocs, QuerySnapshot, onSnapshot
 } from 'firebase/firestore'
 import {
   formatDistanceToNow
 } from 'date-fns';
+
+const FETCH_LIMIT = 7
 
 interface TemperatureEntry {
   date: string;
@@ -25,12 +27,12 @@ interface TemperatureEntry {
   adjHourlyTemperature: []
   adjHourlyHumidity: []
 
-  hourlyTemperatureValue: []
-  hourlyHumidityValue: []
+  hourlyTemperature: []
+  hourlyHumidity: []
+}
 
-  hourlyTemperatureObject: []
-  hourlyHumidityValueObject: []
-
+interface HourlyData {
+  [hour: string]: number | null;
 }
 
 export const useDataStore = defineStore('temperature', {
@@ -59,7 +61,7 @@ export const useDataStore = defineStore('temperature', {
         const qDaily = query(
             collection(db, 'temperature'),
             orderBy('date', 'desc'),
-            limit(7)
+            limit(FETCH_LIMIT)
         );
         const qOverall = query(collection(db, 'overall'));
 
@@ -74,7 +76,6 @@ export const useDataStore = defineStore('temperature', {
           const originalOverallHourlyAverage = Object.values(overallData.overall_hourly_average);
           this.adj_overall_hourly_average = [...originalOverallHourlyAverage, originalOverallHourlyAverage[0]] as number[];
         });
-        let count = 0
 
         const dailyListener = onSnapshot(qDaily, (snapshot) => {
           if (!snapshot.empty) {
@@ -176,9 +177,29 @@ export const useDataStore = defineStore('temperature', {
                 }
               });
 
+              function fillMissingHours(hourlyData: HourlyData) {
+                const filledHourlyTemp: (number | null)[] = [];
+
+                // Assuming the hours range from 0 to 23
+                for (let hour = 0; hour < 24; hour++) {
+                  const hourKey = hour.toString();
+
+                  if (hourlyData[hourKey] !== undefined) {
+                    filledHourlyTemp[hour] = hourlyData[hourKey];
+                  }
+                }
+
+                return filledHourlyTemp;
+              }
+
+
+              const filledHourlyTemp = fillMissingHours(data.hourly_temp);
+              const filledHourlyHumid = fillMissingHours(data.hourly_humid);
+              // console.log(filledHourlyTemp)
+
               // assign first data instead avg value on index 0
-              const adjHourlyTemp = [realTemperature[0], ...Object.values(data.hourly_temp)];
-              const adjHourlyHumid = [realHumidity[0], ...Object.values(data.hourly_humid)];
+              const adjHourlyTemp = [realTemperature[0], ...filledHourlyTemp];
+              const adjHourlyHumid = [realHumidity[0], ...filledHourlyHumid];
 
               return {
                 date: data.date,
@@ -187,11 +208,10 @@ export const useDataStore = defineStore('temperature', {
                 datetime: realDatetime,
                 dataPointCount: data.data_point_count,
 
-                hourlyTemperatureValue: Object.values(data.hourly_temp),
-                hourlyHumidityValue: Object.values(data.hourly_humid),
-
-                hourlyTemperatureObject: data.hourly_temp,
-                hourlyHumidityValueObject: data.hourly_humid,
+                // hourlyTemperature: Object.values(data.hourly_temp),
+                // hourlyHumidity: Object.values(data.hourly_humid),
+                hourlyTemperature: filledHourlyTemp,
+                hourlyHumidity: filledHourlyHumid,
 
                 adjHourlyTemperature: adjHourlyTemp,
                 adjHourlyHumidity: adjHourlyHumid,

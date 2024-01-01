@@ -3,6 +3,7 @@ import {Chart} from "chart.js";
 Chart.register(ChartDataLabels);
 
 const chartColor = ['#fa4183', '#8ADAB2', '#F7D060', '#FFC5C5', '#BEADFA', '#9BB8CD', '#B6BBC4'];
+const skipped = (ctx: any, value: any) => ctx.p0.skip || ctx.p1.skip ? value : undefined;
 
 // Single day / Series OFF
 export const assignHumidityDataset = (data: (number | null)[]) => {
@@ -27,9 +28,9 @@ export const assignTemperatureDataset = (label: string, data: (number | null)[] 
     radius: 0,
     yAxisID: 'y',
     spanGaps: true,
-    datalabels: {
-      color: '#FFCE56'
-    }
+    segment: {
+      borderDash: (ctx: any) => skipped(ctx, [6, 6]),
+    },
   }
 }
 
@@ -59,7 +60,10 @@ export const assignSimpleTempDataset = (label: string, data: (number | null)[], 
     datalabels: {
       align: 'end',
       anchor: 'end'
-    }
+    },
+    segment: {
+      borderDash: (ctx: any) => skipped(ctx, [6, 6]),
+    },
   }
 };
 
@@ -73,7 +77,9 @@ export const assignSimpleHumidDataset = (data: (number | null)[]) => {
     yAxisID: 'y1',
     spanGaps: true,
     tension: 0.4,
-
+    segment: {
+      borderDash: (ctx: any) => skipped(ctx, [6, 6]),
+    },
   }
 };
 
@@ -88,6 +94,9 @@ export const assignDatasets = (tempData: (number | null)[], humidData: (number |
       radius: 0,
       yAxisID: 'y',
       spanGaps: true,
+      segment: {
+        borderDash: (ctx: any) => skipped(ctx, [6, 6]),
+      },
     },
     {
       label: "humidity",
@@ -96,8 +105,11 @@ export const assignDatasets = (tempData: (number | null)[], humidData: (number |
       borderWidth: 2,
       radius: 0,
       // showLine: false,
-      // spanGaps: true,
+      spanGaps: true,
       yAxisID: 'y1',
+      segment: {
+        borderDash: (ctx: any) => skipped(ctx, [6, 6]),
+      },
     },
 
   ];

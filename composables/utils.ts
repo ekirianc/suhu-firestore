@@ -27,6 +27,7 @@ export function expandHourlyData(hourly_data: number[]){
             expandedData[startIndex + i] = i === 0 ? existingValue : null;
         }
     }
+    // duplicate first entry to last
     const lastData = hourly_data[24];
     const keys = Object.keys(expandedData);
     const secondLastIndex = keys.length - 2;
@@ -36,20 +37,6 @@ export function expandHourlyData(hourly_data: number[]){
     const expandedDataArray: (number | null)[] = Object.values(expandedData);
 
     return expandedDataArray
-}
-
-export function expandHourlyDataOnSeries(hourly_data: number[]): (number | null)[] {
-    const expandedData: (number | null)[] = [];
-
-    for (let hour = 0; hour < 24; hour++) {
-        const existingValue = hourly_data[hour];
-
-        for (let i = 0; i < 12; i++) {
-            expandedData.push(i === 0 ? existingValue : null);
-        }
-    }
-
-    return expandedData;
 }
 
 export function reduceDatetimeToHourly(dates: Date[]): Date[] {
@@ -101,3 +88,42 @@ export function generateHourlyIntervalDT(): Date[] {
 
     return dateTimeRange;
 }
+
+export function addMissingTimes(
+    dataset: Date[],
+    temperatures: (number | null)[],
+    humidity: (number | null)[],
+): { timestamp: Date; temperature: number | null; humidity: number | null }[] {
+    const timeInterval = 5 * 60 * 1000; // 5 minutes in milliseconds
+    const result = [];
+
+    for (let i = 1; i < dataset.length; i++) {
+        const previousTime = dataset[i - 1];
+        const currentTime = dataset[i];
+
+        // Calculate the time difference between two entries in milliseconds
+        const timeDifference = currentTime.getTime() - previousTime.getTime();
+
+        // If the time difference is greater than the interval, add missing times
+        if (timeDifference > timeInterval) {
+            const missingIntervals = Math.floor(timeDifference / timeInterval);
+
+            for (let j = 1; j <= missingIntervals; j++) {
+                const newTime = new Date(previousTime.getTime() + j * timeInterval);
+
+                // Assign null values for temperature and humidity
+                result.push({ timestamp: newTime, temperature: null, humidity: null });
+            }
+        }
+
+        // Add the existing data point
+        result.push({
+            timestamp: currentTime,
+            temperature: temperatures[i] ?? null, // Use the nullish coalescing operator to handle null or undefined
+            humidity: humidity[i] ?? null,
+        });
+    }
+
+    return result;
+}
+

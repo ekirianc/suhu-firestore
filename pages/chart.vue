@@ -3,6 +3,7 @@ import {useDataStore, usePreferences} from "~/store";
 import { Line } from 'vue-chartjs';
 import 'chartjs-adapter-moment';
 import {
+  addMissingTimes,
   expandHourlyData,
   formattedDate,
   generateHourlyIntervalDT,
@@ -171,7 +172,6 @@ const timeRanges = [
   { name: '3 days', value: '3' },
   { name: '7 days', value: '7' }
 ]
-
 // ==========================================================
 // ==========================================================
 // ==========================================================
@@ -186,12 +186,7 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark()],
     async ([timeRange, isSeriesOn, isSimpleOn]) => {
   userPreference.timeRange = timeRange
   chartLoaded.value = false
-
-  if (dataStore.dataEntries.length == 0){
-    dataCountLabel.value = 'no data'
-  } else {
-    dataCountLabel.value = 'calculating...'
-  }
+  dataCountLabel.value = dataStore.dataEntries.length === 0 ? 'no data' : 'calculating...';
 
   // Clear the arrays before fetching new data
   realTemperatures.length = 0
@@ -206,13 +201,9 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark()],
     let averageDataset: ChartDataset = {}
 
     if (!isSeriesOn) {
-      // series OFF
-      if (isSimpleOn){
-
-        averageDataset = assignAverageDataset(dataStore.adj_overall_hourly_average)
-      }else {
-        averageDataset = assignAverageDataset(expandHourlyData(dataStore.adj_overall_hourly_average))
-      }
+      // averageDataset on Series OFF
+      const sourceData = isSimpleOn ? dataStore.adj_overall_hourly_average : expandHourlyData(dataStore.adj_overall_hourly_average);
+      averageDataset = assignAverageDataset(sourceData);
       chartData.value.datasets.push(averageDataset);
     }
 
@@ -231,27 +222,22 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark()],
 
         if (isSimpleOn){
           // Series OFF and Simple ON, assign hourly data
-          if (useDark().value){
-            chartOptions.value.plugins.annotation.annotations = {annotation: annotation(1, '#a9a9a9')}
-          }else {
-            chartOptions.value.plugins.annotation.annotations = { annotation: annotation(1), }
-          }
+          chartOptions.value.plugins.annotation.annotations = {
+            annotation: annotation(1, useDark().value ? '#a9a9a9' : undefined)
+          };
 
           chartData.value.labels = []
           chartData.value.labels = generateHourlyIntervalDT()
 
-
           if (timeRange === "1"){
-            // karena data adjHourlyTemperature ditambah 1 di depan, jadi last entry maju 1 jam.
-            // slice last entry for fix it
-            // const simpleTemperature: ChartDataset = assignSimpleTempDataset(formattedDate(doc.date), doc.adjHourlyTemperature.slice(0, -1), index)
+            // Series OFF and Simple ON
             const simpleTemperature: ChartDataset = assignSimpleTempDataset(formattedDate(doc.date), doc.adjHourlyTemperature, index)
             chartData.value.datasets.push(simpleTemperature);
 
-            // const simpleHumidity: ChartDataset = assignSimpleHumidDataset(doc.adjHourlyHumidity.slice(0, -1))
             const simpleHumidity: ChartDataset = assignSimpleHumidDataset(doc.adjHourlyHumidity)
             chartData.value.datasets.push(simpleHumidity);
-            chartOptions.value.scales.y.max = Math.max(...doc.hourlyTemperatureValue) + 1
+            const maxValue = Math.max(...doc.hourlyTemperature.filter(value => value !== null) as number[]);
+            chartOptions.value.scales.y.max = maxValue + 1
 
             disableShowLabel.value = false
 
@@ -267,11 +253,10 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark()],
           }
         }else {
           // Simple OFF, assign real data
-          if (useDark().value){
-            chartOptions.value.plugins.annotation.annotations = {annotation: annotation(0, '#a9a9a9')}
-          }else {
-            chartOptions.value.plugins.annotation.annotations = { annotation: annotation(), }
-          }
+          chartOptions.value.plugins.annotation.annotations = {
+            annotation: useDark().value ? annotation(0, '#a9a9a9') : annotation()
+          };
+
           chartOptions.value.scales.y.max = undefined
 
           const temperatureDataset: ChartDataset = assignTemperatureDataset(formattedDate(doc.date), temp, index)
@@ -302,10 +287,9 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark()],
         // Series ON
         if (isSimpleOn){
           // Series ON simple ON
-          realTemperatures = realTemperatures.concat(doc.hourlyTemperatureValue)
-          realHumidity = realHumidity.concat(doc.hourlyHumidityValue)
+          realTemperatures = realTemperatures.concat(doc.hourlyTemperature)
+          realHumidity = realHumidity.concat(doc.hourlyHumidity)
           realDatetime = realDatetime.concat(reduceDatetimeToHourly(doc.datetime))
-          // TODO buat hourlyTemperature berada pada jam yang sama seperti key-nya
 
           avgTemperatureSeries = avgTemperatureSeries.concat(dataStore.overall_hourly_average)
 
@@ -330,23 +314,52 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark()],
       disableShowLabel.value = true
       localStorage.removeItem(SHOW_LABEL)
 
-      // Sort data chronologically
-      const sortedData = realDatetime.map((timestamp, index) => ({
-        timestamp,
-        temperature: realTemperatures[index],
-        humidity: realHumidity[index],
-      })).sort((a, b) => (a.timestamp.getTime() - b.timestamp.getTime()));
+      if (!isSimpleOn){
+        // Series ON Simple OFF
+        const filledData = addMissingTimes(realDatetime, realTemperatures, realHumidity);
+        const sortedFilledData = filledData.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime());
 
-      const sortedTemp = sortedData.map(entry => entry.temperature)
-      const sortedHumid = sortedData.map(entry => entry.humidity)
+        const sortedTemp = filledData.map(entry => entry.temperature);
+        const sortedHumid = filledData.map(entry => entry.humidity);
 
-      // Assign sorted data to chart
-      chartData.value.labels = sortedData.map(entry => entry.timestamp);
-      chartData.value.datasets = assignDatasets(
-          [sortedData[0].temperature, ...sortedTemp],
-          [sortedData[0].humidity, ...sortedHumid],
-      )
-      chartData.value.datasets.push(assignAverageDataset(avgTemperatureSeries))
+        // Assign sorted data to chart
+        // chartData.value.labels = sortedData.map(entry => entry.timestamp);
+        chartData.value.labels = sortedFilledData.map(entry => entry.timestamp);
+
+        chartData.value.datasets = assignDatasets(
+            [filledData[0].temperature, ...sortedTemp],
+            [filledData[0].humidity, ...sortedHumid],
+        )
+        chartData.value.datasets.push(assignAverageDataset(avgTemperatureSeries))
+      }else {
+        // Series ON Simple ON
+        const sortedData = realDatetime.map((timestamp, index) => ({
+          timestamp,
+          temperature: realTemperatures[index],
+          humidity: realHumidity[index],
+        })).sort((a, b) => (a.timestamp.getTime() - b.timestamp.getTime()));
+
+        const sortedTemp = sortedData.map(entry => entry.temperature)
+        const sortedHumid = sortedData.map(entry => entry.humidity)
+
+        // add new 1 hour at the end
+        const lastTimestamp = sortedData[sortedData.length - 1].timestamp;
+        const newTimestamp = new Date(lastTimestamp.getTime() + 60 * 60 * 1000); // Add 1 hour (in milliseconds)
+        const newEntry = {
+          timestamp: newTimestamp,
+          temperature: null,
+          humidity: null,
+        };
+        const updatedSortedData = [...sortedData, newEntry].sort((a, b) => (a.timestamp.getTime() - b.timestamp.getTime()));
+
+        chartData.value.labels = updatedSortedData.map(entry => entry.timestamp);
+
+        chartData.value.datasets = assignDatasets(
+            [sortedData[0].temperature, ...sortedTemp],
+            [sortedData[0].humidity, ...sortedHumid],
+        )
+        chartData.value.datasets.push(assignAverageDataset(avgTemperatureSeries))
+      }
 
       if (useDark().value){
         chartData.value.datasets[1].borderColor = HUMIDITY_DARK_BORDER_COLOR
@@ -446,6 +459,7 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark()],
         <div class="grid">
           <span>Last Temp.</span>
           <span class="text-4xl font-medium">{{dataStore.lastTemperature}}</span>
+          <span class="text-sm">{{ dataStore.relativeTime }}</span>
         </div>
         <div class="grid">
           <span>Humid: {{dataStore.lastHumidity}}%</span>

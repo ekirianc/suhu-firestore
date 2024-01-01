@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
-    <div class="w-full h-10 bg-white rounded-xl text-gray-400 dark:bg-slate-600 relative">
-      <div :style="{ width: progress + '%' }" class="h-full bg-slate-200 rounded-xl flex items-center pl-4 dark:bg-slate-800 transition-all duration-500 ease-out"></div>
+    <div class="w-full h-10 rounded-xl text-gray-400 relative border-l-2 border-r-2 border-slate-500 dark:bg-gray-900 bg-slate-200">
+      <div :style="{ width: progress + '%' }" class="h-full bg-slate-300 rounded-xl flex items-center pl-4 dark:bg-slate-800 transition-all duration-500 ease-out"></div>
       <div class="text-slate-600 dark:text-slate-300 ">
         <span class="absolute top-2 left-4">{{progress.toFixed(2)}}%</span>
         <div v-if="dataFetched" :style="{left: sunrisePercentage + '%'}" class="absolute top-1.5 h-2/3 w-1 bg-gray-400 rounded-full">
