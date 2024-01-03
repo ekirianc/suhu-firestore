@@ -1,2 +1,6 @@
 import moment from 'moment-timezone'
-export default moment.tz.setDefault('Asia/Singapore')
+import {defineNuxtPlugin} from "#app";
+
+export default defineNuxtPlugin(() => {
+  moment.tz.setDefault('Asia/Singapore')
+})

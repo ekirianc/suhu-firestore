@@ -42,6 +42,9 @@ import { ref, onMounted } from 'vue';
 import {useFirestore} from "vuefire";
 import {collection, getDocs, limit, query, orderBy} from "firebase/firestore";
 
+useHead({
+  title: 'List view',
+});
 interface Data {
   time: number;
   temp: string;

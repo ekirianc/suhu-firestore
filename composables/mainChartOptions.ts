@@ -67,7 +67,7 @@ export function customFormatter(value: number, ctx: Context) {
   }
 }
 
-export const chartOptions = ref({
+export const mainChartOptions = ref({
   // Chart options configuration
   animation: {},
   stacked: false,
@@ -93,9 +93,19 @@ export const chartOptions = ref({
       },
       ticks: {
         autoSkip: true,
-        autoSkipPadding: 20,
+        // autoSkipPadding: 20,
         maxRotation: 0,
-        color: ''
+        color: '',
+        major: {
+          enabled: true
+        },
+        font: function(context: any) {
+          if (context.tick && context.tick.major) {
+            return {
+              weight: 'bold',
+            };
+          }
+        }
       },
       grid: {},
     },

@@ -10,18 +10,20 @@
         dark:bg-[url('https://ik.imagekit.io/kariki/blur-dark-bg?updatedAt=1703169481124')]
         max-h-screen font-lato bg-fixed bg-cover
     }
+    h2{
+        @apply font-bold text-xl
+    }
 }
 
 @layer components{
-
+    .card{
+        @apply p-4 bg-white space-y-2 rounded-3xl overflow-y-scroll no-scrollbar md:block dark:bg-zinc-900 dark:text-white
+    }
 }
 
 @layer utilities{
     .ins{
-        @apply border-black border-2
-    }
-    .ins-d{
-        @apply border-gray-300 border-2
+        @apply border-black border-2 dark:border-gray-300
     }
     .shadow-text{
         filter: drop-shadow(0px 6.762px 4.459px rgba(219, 56, 155, 0.04)) drop-shadow(0px 11.561px 12.019px rgba(219, 56, 155, 0.06)) drop-shadow(0px 17.388px 27.948px rgba(219, 56, 155, 0.09)) drop-shadow(0px 36px 86px rgba(219, 56, 155, 0.14));

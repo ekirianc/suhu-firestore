@@ -2,6 +2,10 @@
 import {useDataStore} from "~/store";
 import {formatDistanceToNow} from "date-fns";
 
+useHead({
+  title: 'Monitor Suhu 2',
+});
+
 const dataStore = useDataStore()
 
 const isDark = useDark()
