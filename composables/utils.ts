@@ -8,16 +8,18 @@ export interface ChartDataset {
     spanGaps?: boolean
     segment?: object
     borderDash?: number[],
-    backgroundColor?: string,
-    showLine?: boolean
+    backgroundColor?: string | object,
+    showLine?: boolean,
+    fill?: boolean,
+}
+export interface HourlyData {
+    [hour: string]: number | null;
 }
 
-interface HourlyDatasets {
-    [hour: number]: number | null;
-}
 export function expandHourlyData(hourly_data: number[]){
+    // takes data from overall_hourly_average (24 data count) and adjusted (25 data count)
     // expand hpurly data to 288 data point with null in between
-    const expandedData: HourlyDatasets = {};
+    const expandedData: HourlyData = {};
 
     for (let hour = 0; hour < 24; hour++) {
         const existingValue = hourly_data[hour];
@@ -27,36 +29,14 @@ export function expandHourlyData(hourly_data: number[]){
             expandedData[startIndex + i] = i === 0 ? existingValue : null;
         }
     }
+
     // duplicate first entry to last
-    const lastData = hourly_data[24];
-    const keys = Object.keys(expandedData);
-    const secondLastIndex = keys.length - 2;
-    const numericKeys = keys.map(key => Number(key));
-    expandedData[numericKeys[secondLastIndex]] = lastData;
+    // jika tidak dilakukan, akan ada jarak dari jam 11 ke 12 di Series OFF
+    // 287 karena dimulai dari 0
+    // [24] will return undefined if series ON. jadi tidak akan terjadi overlap dengan hari selajutnya
+    expandedData[287] = hourly_data[24];
 
-    const expandedDataArray: (number | null)[] = Object.values(expandedData);
-
-    return expandedDataArray
-}
-
-export function reduceDatetimeToHourly(dates: Date[]): Date[] {
-    if (dates.length === 0) {
-        return [];
-    }
-
-    const result: Date[] = [dates[0]]; // Start with the first date
-
-    for (let i = 1; i < dates.length; i++) {
-        const current = dates[i];
-        const previous = result[result.length - 1];
-
-        // Check if the difference between the current and previous date is at least 1 hour
-        if (Math.abs(current.getTime() - previous.getTime()) >= 3600000) {
-            result.push(current);
-        }
-    }
-
-    return result;
+    return Object.values(expandedData)
 }
 
 export function formattedDate(docDate: string){
@@ -127,3 +107,49 @@ export function addMissingTimes(
     return result;
 }
 
+export function fillMissingHours(hourlyData: HourlyData) {
+    const filledHourlyTemp: (number | null)[] = [];
+
+    // Assuming the hours range from 0 to 23
+    for (let hour = 0; hour < 24; hour++) {
+        const hourKey = hour.toString();
+
+        if (hourlyData[hourKey] !== undefined) {
+            filledHourlyTemp[hour] = hourlyData[hourKey];
+        }
+    }
+
+    return filledHourlyTemp;
+}
+
+export function generateDateTimeWithHourlyInterval(date: Date[], hourlyTempObj: HourlyData): Date[] {
+    const result: Date[] = [];
+
+    // Sort datetime array in ascending order
+    const sortedDatetime = date.slice().sort((a, b) => a.getTime() - b.getTime());
+
+    // Get the oldest date and the first key from hourlyTempObj
+    const oldestDate = sortedDatetime[0];
+    const firstHour = Object.keys(hourlyTempObj).map(Number).sort((a, b) => a - b)[0];
+
+    // Iterate through datetime array and hourlyTempObj keys
+    let currentDateTime = new Date(oldestDate);
+    currentDateTime.setMinutes(0); // Start at minute 0 of each hour
+    let currentHour = firstHour;
+
+    while (currentDateTime <= sortedDatetime[sortedDatetime.length - 1] && hourlyTempObj.hasOwnProperty(currentHour)) {
+        const tempValue = hourlyTempObj[currentHour];
+
+        if (tempValue !== null) {
+            result.push(new Date(currentDateTime));
+        }
+
+        // Increment currentDateTime by 1 hour
+        currentDateTime.setHours(currentDateTime.getHours() + 1);
+
+        // Get the next hourlyTempObj key
+        currentHour = Object.keys(hourlyTempObj).map(Number).sort((a, b) => a - b).find(hour => hour > currentHour) || currentHour;
+    }
+
+    return result;
+}

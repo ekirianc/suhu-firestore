@@ -5,6 +5,21 @@ Chart.register(ChartDataLabels);
 const chartColor = ['#fa4183', '#8ADAB2', '#F7D060', '#FFC5C5', '#BEADFA', '#9BB8CD', '#B6BBC4'];
 const skipped = (ctx: any, value: any) => ctx.p0.skip || ctx.p1.skip ? value : undefined;
 
+const bgColor = (context: any) => {
+  const bgColor = [
+    'rgba(255,26,104,0.16)',
+    'rgba(255,255,255,0)',
+  ]
+  if(!context. chart. chartArea) {
+    return;
+  }
+  const {ctx, data, chartArea: {top, bottom}} = context.chart;
+  const gradientBg = ctx.createLinearGradient(0, top, 0, bottom);
+  gradientBg.addColorStop(0, bgColor[0])
+  gradientBg.addColorStop(1, bgColor[1])
+  return gradientBg;
+}
+
 // Single day / Series OFF
 export const assignHumidityDataset = (data: (number | null)[]) => {
   return {
@@ -23,7 +38,7 @@ export const assignTemperatureDataset = (label: string, data: (number | null)[] 
     label: label,
     data: data,
     borderColor: chartColor[index],
-    backgroundColor: chartColor[index],
+    backgroundColor: bgColor,
     borderWidth: 2,
     radius: 0,
     yAxisID: 'y',
@@ -52,7 +67,8 @@ export const assignSimpleTempDataset = (label: string, data: (number | null)[], 
     data: data,
     borderWidth: 2,
     borderColor: chartColor[index],
-    backgroundColor: chartColor[index],
+    // backgroundColor: chartColor[index],
+    backgroundColor: bgColor,
     radius: 2,
     yAxisID: 'y',
     spanGaps: true,
@@ -64,6 +80,7 @@ export const assignSimpleTempDataset = (label: string, data: (number | null)[], 
     segment: {
       borderDash: (ctx: any) => skipped(ctx, [6, 6]),
     },
+    fill: false
   }
 };
 
@@ -90,6 +107,7 @@ export const assignDatasets = (tempData: (number | null)[], humidData: (number |
       label: "temperature",
       data: tempData,
       borderColor: chartColor[0],
+      backgroundColor: bgColor,
       borderWidth: 2,
       radius: 0,
       yAxisID: 'y',
@@ -97,6 +115,7 @@ export const assignDatasets = (tempData: (number | null)[], humidData: (number |
       segment: {
         borderDash: (ctx: any) => skipped(ctx, [6, 6]),
       },
+      fill: true
     },
     {
       label: "humidity",

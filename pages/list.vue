@@ -17,19 +17,19 @@
               </th>
             </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-            <tr v-for="(data, index) in jsonData" :key="index">
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">{{ getRelativeTime(data.time) }}</div>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">{{ data.temp }}</div>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">{{ data.humid }}</div>
-              </td>
-            </tr>
-            </tbody>
+<!--            <tbody class="bg-white divide-y divide-gray-200">-->
+<!--            <tr v-for="(data, index) in jsonData" :key="index">-->
+<!--              <td class="px-6 py-4 whitespace-nowrap">-->
+<!--                <div class="text-sm text-gray-900">{{ data.date }}</div>-->
+<!--              </td>-->
+<!--              <td class="px-6 py-4 whitespace-nowrap">-->
+<!--                <div class="text-sm text-gray-900">{{ data.hourly_temp[Object.keys(data.hourly_temp).pop()] }}</div>-->
+<!--              </td>-->
+<!--              <td class="px-6 py-4 whitespace-nowrap">-->
+<!--                <div class="text-sm text-gray-900">{{ data.hourly_humid[Object.keys(data.hourly_temp).pop()] }}</div>-->
+<!--              </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
           </table>
         </div>
       </div>
@@ -46,26 +46,26 @@ useHead({
   title: 'List view',
 });
 interface Data {
-  time: number;
-  temp: string;
-  humid: string;
+  date: number;
+  hourly_temp: string;
+  hourly_humid: string;
 }
-
-const db = useFirestore()
-
-const jsonData = ref<Data[]>([]);
-
-onMounted(async () => {
-  try {
-    const q = query(collection(db, 'temperature'),
-        orderBy('time', 'desc'),
-        limit(10)
-    )
-    const querySnapshot  = await getDocs(q);
-
-    jsonData.value = querySnapshot.docs.map((doc) => doc.data() as Data);
-  } catch (error) {
-    console.error("Error fetching data from Firebase:", error);
-  }
-});
+//
+// const db = useFirestore()
+//
+// const jsonData = ref<Data[]>([]);
+//
+// onMounted(async () => {
+//   try {
+//     const q = query(collection(db, 'temperature'),
+//         orderBy('date', 'desc'),
+//         limit(3)
+//     )
+//     const querySnapshot  = await getDocs(q);
+//
+//     jsonData.value = querySnapshot.docs.map((doc) => doc.data() as Data);
+//   } catch (error) {
+//     console.error("Error fetching data from Firebase:", error);
+//   }
+// });
 </script>

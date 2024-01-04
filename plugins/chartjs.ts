@@ -10,6 +10,7 @@ import {
     PointElement,
     LineElement,
     TimeScale,
+    Filler
     // Colors
 } from 'chart.js'
 import annotationPlugin from 'chartjs-plugin-annotation';
@@ -77,7 +78,7 @@ const htmlLegendPlugin = {
 
             // Color box
             const boxSpan = document.createElement('span') as HTMLSpanElement;
-            boxSpan.style.background = item.fillStyle;
+            boxSpan.style.background = item.strokeStyle;
             boxSpan.style.borderColor = item.strokeStyle;
             boxSpan.style.borderWidth = item.lineWidth + 'px';
             boxSpan.style.display = 'inline-block';
@@ -117,6 +118,7 @@ export default defineNuxtPlugin(() => {
         TimeScale,
         annotationPlugin,
         htmlLegendPlugin,
+        Filler
         // Colors
     )
 })

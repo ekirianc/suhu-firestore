@@ -5,7 +5,7 @@ import {
 } from 'firebase/firestore';
 
 const appConfig = useAppConfig()
-const firebaseConfig = appConfig.config
+const firebaseConfig = appConfig.config // https://nuxt.com/docs/guide/directory-structure/app-config
 const app = initializeApp(firebaseConfig);
 const dbFirestore: Firestore = getFirestore(); // Explicitly define Firestore type
 

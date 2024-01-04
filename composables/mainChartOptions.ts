@@ -153,7 +153,7 @@ export const mainChartOptions = ref({
     },
     datalabels: {
       backgroundColor: function(context: any) {
-        return context.dataset.backgroundColor;
+        return context.dataset.borderColor;
       },
       borderRadius: 4,
       color: 'white',

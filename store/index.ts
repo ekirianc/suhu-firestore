@@ -10,6 +10,7 @@ import {
 import {
   formatDistanceToNow
 } from 'date-fns';
+import {fillMissingHours} from "~/composables/utils";
 
 const FETCH_LIMIT = 7
 
@@ -24,15 +25,15 @@ interface TemperatureEntry {
   expandedHumidity: (number | null)[]
   expandedDatetime: Date[]
 
-  adjHourlyTemperature: []
-  adjHourlyHumidity: []
-
-  hourlyTemperature: []
-  hourlyHumidity: []
-}
-
-interface HourlyData {
-  [hour: string]: number | null;
+  hourlyTemperature: {
+    filled: []
+    adjusted: []
+    object: {}
+  }
+  hourlyHumidity: {
+    filled: []
+    adjusted: []
+  }
 }
 
 export const useDataStore = defineStore('temperature', {
@@ -52,6 +53,8 @@ export const useDataStore = defineStore('temperature', {
     correlation_peak_low_temperature: 0,
     overall_hourly_average: [] as number[],
     adj_overall_hourly_average: [] as number[],
+
+    dataChanges: 0
   }),
   actions: {
     async fetchDataFromFirestore() {
@@ -79,25 +82,20 @@ export const useDataStore = defineStore('temperature', {
 
         const dailyListener = onSnapshot(qDaily, (snapshot) => {
           if (!snapshot.empty) {
-            // snapshot.docChanges().forEach((change) => {
-            //   if (change.type === 'added') {
-            //     // Document added
-            //     console.log('Document added:', change.doc.data().date);
-            //     // Trigger your custom event for document added
-            //   }
-            //
-            //   if (change.type === 'modified') {
-            //     // Document modified
-            //     console.log('Document modified:', change.doc.data().date);
-            //     // Trigger your custom event for document modified
-            //   }
-            //
-            //   if (change.type === 'removed') {
-            //     // Document removed
-            //     console.log('Document removed:', change.doc.data().date);
-            //     // Trigger your custom event for document removed
-            //   }
-            // });
+            snapshot.docChanges().forEach((change) => {
+              if (change.type === 'added') {
+                this.dataChanges += 1
+              }
+
+              if (change.type === 'modified') {
+                this.dataChanges += 1
+
+              }
+
+              if (change.type === 'removed') {
+                this.dataChanges += 1
+              }
+            });
             // ====================================================
             // get last data
             const lastDocument = snapshot.docs[0];
@@ -177,25 +175,8 @@ export const useDataStore = defineStore('temperature', {
                 }
               });
 
-              function fillMissingHours(hourlyData: HourlyData) {
-                const filledHourlyTemp: (number | null)[] = [];
-
-                // Assuming the hours range from 0 to 23
-                for (let hour = 0; hour < 24; hour++) {
-                  const hourKey = hour.toString();
-
-                  if (hourlyData[hourKey] !== undefined) {
-                    filledHourlyTemp[hour] = hourlyData[hourKey];
-                  }
-                }
-
-                return filledHourlyTemp;
-              }
-
-
               const filledHourlyTemp = fillMissingHours(data.hourly_temp);
               const filledHourlyHumid = fillMissingHours(data.hourly_humid);
-              // console.log(filledHourlyTemp)
 
               // assign first data instead avg value on index 0
               const adjHourlyTemp = [realTemperature[0], ...filledHourlyTemp];
@@ -207,15 +188,15 @@ export const useDataStore = defineStore('temperature', {
                 humidity: realHumidity,
                 datetime: realDatetime,
                 dataPointCount: data.data_point_count,
-
-                // hourlyTemperature: Object.values(data.hourly_temp),
-                // hourlyHumidity: Object.values(data.hourly_humid),
-                hourlyTemperature: filledHourlyTemp,
-                hourlyHumidity: filledHourlyHumid,
-
-                adjHourlyTemperature: adjHourlyTemp,
-                adjHourlyHumidity: adjHourlyHumid,
-
+                hourlyTemperature: {
+                  filled: filledHourlyTemp,
+                  adjusted: adjHourlyTemp,
+                  object: data.hourly_temp
+                },
+                hourlyHumidity: {
+                  filled: filledHourlyHumid,
+                  adjusted: adjHourlyHumid
+                },
                 expandedTemperature: temperatureContainer,
                 expandedHumidity: humidityContainer,
                 expandedDatetime: dummyDatetimeArray

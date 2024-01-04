@@ -5,10 +5,10 @@
       <div class="text-slate-600 dark:text-slate-300 ">
         <span class="absolute top-2 left-4">{{progress.toFixed(2)}}%</span>
         <div v-if="dataFetched" :style="{left: sunrisePercentage + '%'}" class="absolute top-1.5 h-2/3 w-1 bg-gray-400 rounded-full">
-          <Icon name="tabler:sun" class="ml-2 text-2xl"/>
+          <Icon name="line-md:sun-rising-loop" class="ml-2 text-xl"/>
         </div>
         <div v-if="dataFetched" :style="{left: sunsetPercentage + '%'}" class="absolute top-1.5 h-2/3 w-1 bg-gray-400 rounded-full">
-          <Icon name="tabler:moon" class="ml-2 text-xl"/>
+          <Icon name="line-md:moon-loop" class="ml-2 text-xl"/>
         </div>
       </div>
     </div>

@@ -10,34 +10,30 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import {ref, onMounted, onUnmounted} from 'vue';
+import {format} from 'date-fns';
 
 const currentTime = ref('');
 const currentDate = ref('');
 const ampm = ref('');
 
-const updateTime = () => {
-  const date = new Date();
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  ampm.value = hours >= 12 ? 'PM' : 'AM';
-  currentTime.value = `${hours % 12}:${minutes < 10 ? '0' : ''}${minutes}`;
-};
+const updateTimeAndDate = () => {
+  const now = new Date();
 
-const updateDate = () => {
-  const date = new Date();
-  const day = date.getDate();
-  const month = date.toLocaleString('default', { month: 'short' });
-  const year = date.getFullYear();
-  currentDate.value = `${day} ${month} ${year}`;
+  currentTime.value = format(now, 'h:mm');
+  ampm.value = format(now, 'a');
+
+  currentDate.value = format(now, 'd MMM yyyy');
 };
 
 // Update time and date on component mount
 onMounted(() => {
-  updateTime();
-  updateDate();
-  // Update time every second (adjust the interval as needed)
-  const intervalId = setInterval(updateTime, 1000);
+  updateTimeAndDate();
+
+  // Update time and date every second
+  const intervalId = setInterval(() => {
+    updateTimeAndDate();
+  }, 1000);
 
   // Clear the interval when the component is unmounted
   onUnmounted(() => {

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { usePreferences } from "~/store";
-import { watch } from "vue";
 
 interface TimeRange {
   value: string;
@@ -9,9 +8,10 @@ interface TimeRange {
 
 const props = defineProps({
   chartLoaded: Boolean,
-  initialTimerange: { type: String, required: true },
   timeRanges: { type: Array, required: true },
+  isSmallScreen: Boolean,
 });
+
 const userPreference = usePreferences();
 const emits = defineEmits();
 const selectedTimeRange = ref("");
@@ -30,6 +30,7 @@ watch([() => props.chartLoaded, refreshTrigger], ([isLoaded]) => {
       }
     }
   }
+
 });
 
 const selectTimeRange = (timeRange: string) => {
@@ -55,7 +56,8 @@ const selectTimeRange = (timeRange: string) => {
         { 'bg-gray-200 rounded-lg dark:bg-zinc-600 dark:text-white': timeRange.value === selectedTimeRange },
       ]"
     >
-      {{ timeRange.name }}
+      {{ timeRange.value === selectedTimeRange?timeRange.name:timeRange.initial }}
+
     </div>
   </div>
 </template>

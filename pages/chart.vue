@@ -17,13 +17,13 @@
           <p class="ml-2">daily high and low temp</p>
         </div>
         <div class="">
-          <p>daily high and low temp</p>
+          <p class="ml-2">daily temp difference relative to average</p>
         </div>
         <div class="">
-          <p>daily high and low temp</p>
+          <p class="ml-2">temp and humid deviation</p>
         </div>
         <div class="">
-          <p>daily high and low temp</p>
+          <p class="ml-2">correlation peak low history</p>
         </div>
       </div>
 
@@ -33,7 +33,8 @@
   <div class="p-4 flex justify-end">
     <a href="https://github.com/ekirianc/temperature-monitor-2 " target="_blank"
        class="dark:text-gray-400 dark:hover:text-gray-100 text-gray-600 hover:text-gray-900 block">
-      <Icon name ="mdi:github" class="relative bottom-0.5" /> Github
+      <Icon name ="mdi:github"/>
+      <span class="relative top-0.5 ml-1 -z-50">Github</span>
     </a>
   </div>
 </template>
