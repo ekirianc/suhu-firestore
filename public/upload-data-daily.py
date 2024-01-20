@@ -15,14 +15,14 @@ with open(json_file_path, 'r') as file:
     data = json.load(file)
 
 # Specify the number of entries to upload
-num_entries_to_upload = 7
+num_entries_to_upload = 2
 
 # Define Firestore collection and document ID
-collection_name = 'temperature'
+collection_name = 'dailyRecords'
 
 # Upload specified number of entries to Firestore
 for entry in data[-num_entries_to_upload:]:
-    date_value = entry['date']
+    date_value = entry['today_date']
     doc_ref = db.collection(collection_name).document(date_value)
     doc_ref.set(entry)
     print(f"Data uploaded to Firestore with document ID: {date_value}")

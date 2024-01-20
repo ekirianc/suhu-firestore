@@ -28,8 +28,8 @@
       />
     </label>
 <!--    <span class="relative -top-2 ml-3 text-gray-700">{{ isChecked ? 'Stacked' : 'Series' }}</span>-->
-    <span class="relative -top-2 ml-3" v-if="props.label"
-          :class="[{'text-zinc-400 dark:text-zinc-500': isDisabled}, 'dark:text-zinc-100']">{{ label }}</span>
+    <span class="relative -top-2 ml-3 text-gray-600" v-if="props.label"
+          :class="[{'text-zinc-400 dark:text-zinc-500': isDisabled}, 'dark:text-zinc-200']">{{ label }}</span>
   </div>
 </template>
 

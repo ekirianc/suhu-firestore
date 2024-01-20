@@ -52,11 +52,12 @@ const selectTimeRange = (timeRange: string) => {
         :key="timeRange.value"
         @click="selectTimeRange(timeRange.value)"
         :class="[
-        'px-2 sm:px-4 py-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-600 rounded-lg',
-        { 'bg-gray-200 rounded-lg dark:bg-zinc-600 dark:text-white': timeRange.value === selectedTimeRange },
+        'px-2 sm:px-4 py-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-600 rounded-lg text-gray-600 dark:text-gray-200',
+        { 'bg-gray-200 rounded-lg dark:bg-zinc-600 dark:text-white ': timeRange.value === selectedTimeRange },
       ]"
     >
-      {{ timeRange.value === selectedTimeRange?timeRange.name:timeRange.initial }}
+<!--      {{ timeRange.value === selectedTimeRange?timeRange.name:timeRange.initial }}-->
+      {{ timeRange.name }}
 
     </div>
   </div>

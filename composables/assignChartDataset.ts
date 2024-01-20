@@ -1,8 +1,4 @@
-import ChartDataLabels from 'chartjs-plugin-datalabels';
-import {Chart} from "chart.js";
-Chart.register(ChartDataLabels);
-
-const chartColor = ['#fa4183', '#8ADAB2', '#F7D060', '#FFC5C5', '#BEADFA', '#9BB8CD', '#B6BBC4'];
+const chartColor = ['#fa4183', '#F7D060', '#8ADAB2', '#FFC5C5', '#BEADFA', '#9BB8CD', '#B6BBC4'];
 const skipped = (ctx: any, value: any) => ctx.p0.skip || ctx.p1.skip ? value : undefined;
 
 const bgColor = (context: any) => {
@@ -30,6 +26,9 @@ export const assignHumidityDataset = (data: (number | null)[]) => {
     radius: 0,
     yAxisID: 'y1',
     spanGaps: true,
+    segment: {
+      borderDash: (ctx: any) => skipped(ctx, [6, 6]),
+    },
   }
 };
 

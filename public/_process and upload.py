@@ -4,8 +4,10 @@ import subprocess
 script_list = [
     '01 change-json.py',
     '02 daily-calculation.py',
-    'delete-data.py',
-    'upload-data-daily.py'
+    # 'delete-data.py',
+    'upload-data-daily.py',
+    'upload-data-overall.py',
+    'upload-data-overall-daily.py'
 ]
 
 # Run each script in sequence

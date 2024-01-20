@@ -8,13 +8,13 @@ const dataStore = useDataStore()
   <div class="px-4 py-8 flex space-x-4 justify-center text-gray-800 font-inter dark:text-white">
     <div class="grid">
       <span>Last Temp.</span>
-      <span class="text-4xl font-medium">{{dataStore.lastTemperature}}</span>
-      <span class="text-sm">{{ dataStore.relativeTime }}</span>
+      <span class="text-4xl font-medium">{{dataStore.last_temperature}}</span>
+      <span class="text-sm">{{ dataStore.relative_time }}</span>
     </div>
     <div class="grid">
-      <span>Humid: {{dataStore.lastHumidity}}%</span>
-      <span>Peak: {{dataStore.todayHighTempData}}°C <span class="text-gray-400">({{dataStore.todayHighTempTime}})</span></span>
-      <span>Low: {{dataStore.todayLowTempData}}°C <span class="text-gray-400">({{dataStore.todayLowTempTime}})</span></span>
+      <span>Humid: {{dataStore.last_humidity}}%</span>
+      <span>Peak: {{dataStore.today_high_temp_data}}°C <span class="text-gray-400">({{dataStore.today_high_temp_time}})</span></span>
+      <span>Low: {{dataStore.today_low_temp_data}}°C <span class="text-gray-400">({{dataStore.today_low_temp_time}})</span></span>
     </div>
   </div>
 </template>

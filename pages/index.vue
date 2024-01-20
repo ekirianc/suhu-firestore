@@ -10,19 +10,24 @@ const dataStore = useDataStore()
 
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
+const colorMode = useColorMode()
+const toggleColorModeHandler = () => {
+  toggleColorMode(colorMode);
+  toggleDark();
+};
 
 definePageMeta({
   layout: false,
 });
 
 onMounted(async () => {
-  if (!dataStore.lastTemperature) {
+  if (!dataStore.last_temperature) {
     await dataStore.fetchDataFromFirestore()
   }
 });
 
 function updateRelativeDatetime(){
-  dataStore.relativeTime = formatDistanceToNow(dataStore.lastDatetime, { addSuffix: true, includeSeconds: true })
+  dataStore.relative_time = formatDistanceToNow(dataStore.last_datetime, { addSuffix: true, includeSeconds: true })
 }
 
 const intervalId = setInterval(updateRelativeDatetime, 60000)
@@ -31,31 +36,33 @@ onBeforeUnmount(()=>{
   // Clear the interval to avoid memory leaks
   clearInterval(intervalId)
 })
+
+onKeyStroke(' ', () => { navigateTo('/chart') })
 </script>
 
 <template>
 
   <div class="min-h-screen grid place-content-center font-inter absolute overflow-hidden z-10 w-full">
     <div class="flex justify-center font-medium shadow-text text-bg-clip">
-      <span class="md:text-[12rem] text-8xl px-4 leading-none">{{ dataStore.lastTemperature.toFixed(1) }}</span>
+      <span class="md:text-[12rem] text-8xl px-4 leading-none">{{ dataStore.last_temperature.toFixed(1) }}</span>
       <div class="grid place-content-center md:text-right p-2">
         <span class="md:text-8xl text-3xl mb-4">°C</span>
-        <span class="md:text-5xl text-3xl">{{ dataStore.lastHumidity }}%</span>
+        <span class="md:text-5xl text-3xl">{{ dataStore.last_humidity }}%</span>
       </div>
     </div>
     <div class="md:flex justify-between">
       <div class="flex font-medium md:text-xl text-gray-500 justify-center dark:text-gray-200">
         <div class="mr-4"><Icon name="mdi:temperature" class="text-red-500 text-2xl"/>
-          {{ dataStore.todayHighTempData }} °C
+          {{ dataStore.today_high_temp_data }} °C
         </div>
         <div><Icon name="mdi:temperature" class="text-sky-500 text-2xl "/>
-          {{ dataStore.todayLowTempData }} °C
+          {{ dataStore.today_low_temp_data }} °C
         </div>
       </div>
       <div class="justify-center flex text-gray-600 dark:text-gray-200">
         <span class="font-bold mr-2 "><Icon name="mingcute:time-line"/></span>
-        <span class="font-bold mr-2 ">{{ dataStore.relativeTime }}</span>
-        <span class="text-gray-400">({{ dataStore.lastEntryTime }})</span>
+        <span class="font-bold mr-2 ">{{ dataStore.relative_time }}</span>
+        <span class="text-gray-400">({{ dataStore.last_entry_time }})</span>
       </div>
     </div>
     <div class="flex space-x-4 text-center justify-center mt-8">
@@ -63,13 +70,13 @@ onBeforeUnmount(()=>{
         <icon name="lucide:line-chart" class="mr-4 text-xl"/>
         <span>chart</span>
       </nuxt-link>
-      <nuxt-link to="/list" class="px-6 py-2 bg-white rounded-xl text-pink-600 border-b-4 border-pink-300 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:border-transparent dark:hover:border-b-pink-400 dark:text-white">
-        <icon name="fluent:apps-list-detail-20-regular" class="mr-4 text-2xl"/>
-        <span>List</span>
+      <nuxt-link to="/calendar" class="flex items-center px-6 py-2 bg-white rounded-xl text-pink-600 border-b-4 border-pink-300 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:border-transparent dark:hover:border-b-pink-400 dark:text-white">
+        <icon name="solar:calendar-linear" class="mr-4 text-xl"/>
+        <span>calendar</span>
       </nuxt-link>
     </div>
     <div class="relative top-5 flex justify-center ">
-      <button @click="toggleDark()" class="dark:text-gray-400 dark:hover:text-gray-100 text-gray-600 hover:text-gray-900">
+      <button @click="toggleColorModeHandler()" class="dark:text-gray-400 dark:hover:text-gray-100 text-gray-600 hover:text-gray-900">
         <span class="rounded-full border border-transparent hover:border-gray-400 transition-all px-3 py-1">
           <span v-if="isDark"> <icon name="tabler:moon" class="text-xl relative bottom-0.5"/> </span>
           <span v-else> <icon name="tabler:sun" class="text-xl relative bottom-0.5"/> </span>

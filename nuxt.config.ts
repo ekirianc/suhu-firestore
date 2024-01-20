@@ -3,10 +3,12 @@
 export default defineNuxtConfig({
   devtools: {
     enabled: true,
-
     timeline: {
       enabled: true,
     },
+  },
+  colorMode: {
+    classSuffix: '',
   },
   modules: [
     '@nuxtjs/tailwindcss',
@@ -14,6 +16,7 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@pinia/nuxt',
     '@vueuse/nuxt',
+    '@nuxtjs/color-mode'
   ],
   vuefire: {
     config: {
