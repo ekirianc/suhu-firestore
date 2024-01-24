@@ -1,5 +1,5 @@
 <template>
-  <div class="flex space-x-2 relative top-1.5 w-full">
+  <div class="flex space-x-2 w-full">
     <div>
       <span class="text-3xl dark:text-gray-200">{{ currentTime }} {{ ampm }}</span>
     </div>

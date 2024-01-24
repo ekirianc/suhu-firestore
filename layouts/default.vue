@@ -1,16 +1,22 @@
 <template>
 
-  <nav class="p-4 grid lg:grid-cols-8 xl:grid-cols-6">
+  <nav class="p-4 flex space-x-4 lg:grid lg:grid-cols-8 xl:grid-cols-6">
 
-    <div class="flex space-x-4 content-center mr-16 lg:col-span-2 xl:col-span-1">
-      <nuxt-link to="/" class="px-4 py-3 dark:text-white rounded-2xl border border-transparent dark:hover:border-gray-600"><icon name="ion:arrow-back"/></nuxt-link>
-      <nuxt-link to="/chart" class="px-4 py-3 bg-white rounded-2xl text-pink-600 dark:bg-gray-600 dark:text-white hover:bg-primary dark:hover:bg-primary hover:text-white">
-        <icon name="lucide:line-chart" class="text-xl"/>
-      </nuxt-link>
-      <nuxt-link to="/calendar" class="px-4 py-3 bg-white rounded-2xl text-pink-600 dark:bg-gray-600 dark:text-white hover:bg-primary dark:hover:bg-primary hover:text-white">
-        <icon name="solar:calendar-linear" class="text-2xl"/>
-      </nuxt-link>
-      <button @click="toggleColorModeHandler()" class="block xl:hidden dark:text-gray-400 dark:hover:text-gray-100 mr-4 text-gray-600 hover:text-gray-900">
+    <div class="content-center lg:col-span-2 xl:col-span-1 w-full md:w-auto justify-between flex ">
+      <div class="flex space-x-4">
+        <nuxt-link to="/" class="px-4 py-3 dark:text-white rounded-2xl border border-transparent dark:hover:border-gray-600"><icon name="ion:arrow-back"/></nuxt-link>
+        <nuxt-link to="/chart" class=" bg-white rounded-2xl text-pink-600 dark:bg-gray-600 dark:text-white hover:bg-primary dark:hover:bg-primary hover:text-white">
+        <span class="w-14 h-14 block">
+          <icon name="lucide:line-chart" class="text-xl w-full h-full p-4"/>
+        </span>
+        </nuxt-link>
+        <nuxt-link to="/calendar" class="bg-white rounded-2xl text-pink-600 dark:bg-gray-600 dark:text-white hover:bg-primary dark:hover:bg-primary hover:text-white">
+        <span class="w-14 h-14 block">
+          <icon name="solar:calendar-linear" class="text-2xl w-full h-full p-4"/>
+        </span>
+        </nuxt-link>
+      </div>
+      <button @click="toggleColorModeHandler()" class="block md:hidden dark:text-gray-400 dark:hover:text-gray-100 mr-4 text-gray-600 hover:text-gray-900">
             <span class="rounded-full border border-transparent hover:border-gray-400 transition-all p-3">
               <span v-if="isDark"> <icon name="tabler:moon" class="text-xl relative bottom-0.5"/> </span>
               <span v-else> <icon name="tabler:sun" class="text-xl relative bottom-0.5"/> </span>
@@ -19,10 +25,10 @@
       </button>
     </div>
 
-    <div class="w-full hidden lg:block lg:col-span-6 xl:col-span-5">
-      <div class="flex justify-between xl:ml-14">
+    <div class="w-full hidden md:block lg:col-span-6 xl:col-span-5 lg:pl-6 xl:pl-8 lg:pr-20">
+      <div class="flex justify-between h-full items-center">
         <time-section/>
-        <div class="flex w-full justify-end dark:text-gray-400 text-gray-600 ">
+        <div class="flex w-full justify-end dark:text-gray-400 text-gray-600">
 <!--          <button class="mr-4">Settings(WIP)</button>-->
           <button @click="toggleColorModeHandler()" class=" dark:hover:text-gray-100 mr-4 hover:text-gray-900">
             <span class="rounded-full border border-transparent hover:border-gray-600 p-3">
@@ -30,14 +36,14 @@
               <span v-else> <icon name="tabler:sun" class="text-xl relative bottom-0.5"/> </span>
             </span>
           </button>
-          <progress-bar class="w-2/3 mr-16"/>
+          <progress-bar class="w-2/3 hidden lg:block"/>
         </div>
       </div>
     </div>
 
   </nav>
 <!--  :style="{'margin-top':navH+'px'}"-->
-  <div class="md:mx-20 md:mt-0 mb-10">
+  <div class="md:mt-0 mb-10">
 
     <slot />
 

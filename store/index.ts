@@ -3,7 +3,7 @@ import { useFirestore } from 'vuefire'
 import { collection, query, orderBy, limit, getDocs, onSnapshot, doc } from 'firebase/firestore'
 import { format, formatDistanceToNow } from 'date-fns';
 import { fillMissingHours } from "~/composables/utils";
-import {object} from "firebase-functions/lib/v1/providers/storage";
+import type { Datasets } from "~/composables/types";
 
 const FETCH_LIMIT = 7
 
@@ -29,18 +29,6 @@ interface DailyEntry {
   }
 }
 
-interface overallDatasets {
-  date: Date,
-  is_valid: boolean,
-  high_low: number[][],
-  temp_high: number | null;
-  temp_low: number | null;
-  temp_diff_sum: number | null;
-  temp_deviation: number | null;
-  humid_deviation: number | null;
-  correlation_high_low: number | null;
-}
-
 export const useDataStore = defineStore('temperature', {
   state: () => ({
     last_temperature: 0,
@@ -60,7 +48,7 @@ export const useDataStore = defineStore('temperature', {
     overall_hourly_average_by_entries: [] as number[],
     overall_hourly_average_adj: [] as number[],
 
-    overall_datasets: [] as overallDatasets[],
+    overall_datasets: [] as Datasets[],
 
     dataChanges: 0,
     isDataLoaded: false,
@@ -79,7 +67,7 @@ export const useDataStore = defineStore('temperature', {
         );
 
         const qOverallData = doc(db, 'overall', 'data')
-        const overallDataListener = onSnapshot(qOverallData, (snapshot) => {
+        onSnapshot(qOverallData, (snapshot) => {
           const overallData = snapshot.data();
           if (overallData){
             this.correlation_high_low_temp = overallData.correlation_high_low_temp
@@ -92,7 +80,7 @@ export const useDataStore = defineStore('temperature', {
         });
 
         const qOverallDaily = doc(db, 'overall', 'daily')
-        const overallDailyListener = onSnapshot(qOverallDaily, (snapshot) => {
+        onSnapshot(qOverallDaily, (snapshot) => {
           const overallDaily = snapshot.data()
 
           if (overallDaily) {
@@ -103,17 +91,23 @@ export const useDataStore = defineStore('temperature', {
 
             this.overall_datasets = sortedDate.map(date => {
               const formattedDate = format(date, 'yyyy-MM-dd');
-              const { is_valid, highest_temp, lowest_temp, sum, deviation, correlation_high_low } = overallDaily[formattedDate]
+              const { is_valid, highest_temp, lowest_temp, sum, deviation, correlation_high_low, today_total_data, average } = overallDaily[formattedDate]
+              const averageTemp = is_valid ? parseFloat(average.temp.toFixed(2)) : null;
+              const averageHumid = is_valid ? parseFloat(average.humid.toFixed(2)) : null;
+
               return  {
                 date,
                 is_valid,
                 high_low: is_valid ? [highest_temp, lowest_temp] : [],
                 temp_high: is_valid ? highest_temp : null,
                 temp_low: is_valid ? lowest_temp : null,
-                temp_diff_sum: is_valid ? sum.temp_diff_sum : null,
+                temp_diff_sum: is_valid ? parseFloat(sum.temp_diff_sum.toFixed(2)) : null,
                 temp_deviation: is_valid ? deviation.temp : null,
                 humid_deviation: is_valid ? deviation.humid : null,
-                correlation_high_low
+                today_total_data,
+                correlation_high_low,
+                average_temp: averageTemp,
+                average_humid: averageHumid,
               }
             })
 
@@ -123,7 +117,7 @@ export const useDataStore = defineStore('temperature', {
           }
         })
 
-        const dailyListener = onSnapshot(qDaily, (snapshot) => {
+        onSnapshot(qDaily, (snapshot) => {
           if (!snapshot.empty) {
             snapshot.docChanges().forEach((change) => {
               if (change.type === 'added') {
@@ -184,6 +178,17 @@ export const useDataStore = defineStore('temperature', {
               const date = data.today_date;
               const realTemperature = data.today_entries.temp
               const realHumidity = data.today_entries.humid
+
+              // Extract time array
+              let times = data.today_entries.time;
+
+              // Check if "12:00 AM" exists at both the beginning and the end
+              if (times.length >= 2 && times[times.length - 1] === "12:00 AM") {
+                // Remove the last occurrence of "12:00 AM"
+                times.pop();
+                realTemperature.pop();
+                realHumidity.pop();
+              }
 
               // Combine date and time to create a valid JavaScript Date object
               const realDatetime: Date[] = data.today_entries.time.map((time: string) => {
@@ -255,7 +260,7 @@ export const useDataStore = defineStore('temperature', {
         });
 
         // Use the initial snapshot to get the current data
-        const dailySnapshot = await getDocs(qDaily);
+        await getDocs(qDaily);
         // const overallSnapshot = await getDocs(qOverallData);
 
       } catch (error) {

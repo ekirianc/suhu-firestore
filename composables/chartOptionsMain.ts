@@ -59,13 +59,33 @@ export function customFormatter(value: number, ctx: Context) {
   if (localStorage.getItem(SIMPLE_MODE) === 'true' &&
       localStorage.getItem(SHOW_LABEL) === 'true' &&
       ctx.datasetIndex === 1 &&
-      ctx.dataIndex % 2 !== 0 &&
+      ctx.dataIndex % 2 !== 0 && // show once every 2 point
       localStorage.getItem('timerangeIsOne') === 'true'
   ){
     return value.toFixed(1)
   } else {
     return null
   }
+}
+
+const zoomOptions = {
+  pan: {
+    enabled: true,
+    mode: 'x',
+  },
+  zoom: {
+    wheel: {
+      enabled: false,
+    },
+    pinch: {
+      enabled: false
+    },
+    mode: 'x',
+  },
+  limits: {
+    x: {min: 'original', max: 'original'},
+  },
+
 }
 
 export const chartOptionsMain = ref({
@@ -128,6 +148,7 @@ export const chartOptionsMain = ref({
     },
   } as any,
   plugins: {
+    zoom: zoomOptions,
     legend: {
       display: false,
     },
@@ -175,6 +196,13 @@ export const chartOptionsMain = ref({
       // padding: 6
     }
   },
+  onClick(e: any) {
+    const chart = e.chart;
+    chart.options.plugins.zoom.zoom.wheel.enabled = !chart.options.plugins.zoom.zoom.wheel.enabled;
+    chart.options.plugins.zoom.zoom.pinch.enabled = !chart.options.plugins.zoom.zoom.pinch.enabled;
+
+    chart.update();
+  }
 });
 
 

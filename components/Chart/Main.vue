@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {useDataStore, usePreferences} from "~/store";
-import { Line } from 'vue-chartjs';
+import {Line} from 'vue-chartjs';
 import 'chartjs-adapter-moment';
 import {
   addMissingTimes,
@@ -17,12 +17,26 @@ import {
 } from "~/composables/assignChartDataset";
 import {formatDistanceToNow} from "date-fns";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import type {ChartDataset} from "~/composables/utils";
 import ErrorBar from "~/components/ErrorBar.vue";
 
 useHead({
   title: 'Chart view',
 });
+
+interface ChartDataset {
+  label?: string
+  data?: (number | null)[]
+  borderColor?: string
+  borderWidth?: number
+  radius?: number
+  yAxisID?: string
+  spanGaps?: boolean
+  segment?: object
+  borderDash?: number[],
+  backgroundColor?: string | object,
+  showLine?: boolean,
+  fill?: boolean,
+}
 
 const errorMessage = ref('')
 const isError = ref(false)
@@ -50,10 +64,12 @@ const chartRefreshTrigger = ref(0);
 const isSmallScreen = ref(width.value < SMALL_SCREEN)
 const isLargeScreen = ref(width.value < XL_SCREEN)
 
-watch(width, () => {
+watch(width, (width) => {
   // to keep it responsive on window resize
-  isSmallScreen.value = width.value < SMALL_SCREEN
-  isLargeScreen.value = width.value < XL_SCREEN
+  // specialized for option menu
+  isSmallScreen.value = width < SMALL_SCREEN
+  isLargeScreen.value = width < XL_SCREEN
+
 })
 
 const disableSeriesToggle = ref(false)
@@ -114,6 +130,7 @@ const chartAnimationToggle = (isChecked: boolean) => {
   isChecked ? localStorage.setItem(CHART_ANIMATION, 'true') : localStorage.removeItem(CHART_ANIMATION);
 };
 
+const refreshChart = () => chartRefreshTrigger.value += 1;
 
 onMounted(() => {
   // Animation setting
@@ -133,6 +150,12 @@ onMounted(() => {
       isOptionHiddenRef.value = false;
     }
   }
+
+  if (localStorage.getItem('mainChartZoom')){
+    localStorage.removeItem('mainChartZoom')
+  }
+
+  updateRelativeDatetime()
 });
 
 onMounted(async () => {
@@ -171,28 +194,27 @@ const timeRanges = [
 // ==========================================================
 // ==========================================================
 
-watch([isOptionHiddenRef, isFullscreen], ([optionNew, fullscreenNew], [optionOld, fullscreenOld]) => {
-  // If isChartAnimationOnRef changes, increment chartRefreshTrigger
+watch([isOptionHiddenRef, isFullscreen], () => {
+  // If isChartAnimationOnRef changes, increase chartRefreshTrigger
   // put this to :key on chart component, so it will refresh on every option changes
-  if (!optionOld || fullscreenOld){
-    // dont update on setting open
-    chartRefreshTrigger.value += 1;
-  }
+  chartRefreshTrigger.value += 1;
 });
 
 watch([isChartAnimationOnRef, isSimpleOnRef, isShowLabelOnRef, useDark(), ], () => {
-  // If isChartAnimationOnRef changes, increment chartRefreshTrigger
-  // put this to :key on chart component, so it will refresh on every option changes
-  chartRefreshTrigger.value += 1;
-
+  // If isChartAnimationOnRef changes, increase chartRefreshTrigger
+  // put chartRefreshTrigger to :key on chart component, so it will refresh on every option changes
+  refreshChart()
 });
 
-// TODO update chart if there some data update
-// watch tidak akan bekerja jika ()=>dataStore.dataChanges mereturn data berulang banyak kali
-watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark(),], async ([timeRangeNew, isSeriesOn, isSimpleOn, isDark],[timeRangeOld]) => {
+watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark(), ()=>dataStore.last_datetime], async ([timeRangeNew, isSeriesOn, isSimpleOn, isDark],[timeRangeOld]) => {
   userPreference.timeRange = timeRangeNew
   chartLoaded.value = false
   dataCountLabel.value = dataStore.data_entries.length === 0 ? 'no data' : 'calculating...';
+
+  if (Boolean(localStorage.getItem('mainChartZoom'))){
+    // zoom limit not updated on timerange change. need refresh
+    refreshChart()
+  }
 
   // Clear the arrays before fetching new data
   realTemperatures.length = 0
@@ -204,7 +226,7 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark(),], async ([tim
 
   try {
     let totalDataPointCount = 0;
-    let averageDataset = {} as ChartDataset
+    let averageDataset = {}
 
     if (!isSeriesOn) {
       // averageDataset on Series OFF
@@ -242,12 +264,12 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark(),], async ([tim
           chartData.value.labels = []
           chartData.value.labels = generateHourlyIntervalDT()
 
-          const simpleTemperature = assignSimpleTempDataset(formattedDate(doc.date), hourlyTempAdj, index) as ChartDataset;
+          const simpleTemperature = assignSimpleTempDataset(formattedDate(doc.date), hourlyTempAdj, index);
           chartData.value.datasets.push(simpleTemperature);
 
           if (timeRangeNew === "1"){
             // Series OFF and Simple ON
-            const simpleHumidity: ChartDataset = assignSimpleHumidDataset(hourlyHumidAdj)
+            const simpleHumidity = assignSimpleHumidDataset(hourlyHumidAdj)
             chartData.value.datasets.push(simpleHumidity);
 
             const maxValue = Math.max(...hourlyTemp.filter(value => value !== null) as number[]);
@@ -255,16 +277,19 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark(),], async ([tim
             chartData.value.datasets[1].fill = true
 
             disableShowLabel.value = false
-            isShowLabelOnRef.value = true
-            localStorage.setItem(SHOW_LABEL, "true")
+            if (timeRangeOld !== ""){
+              // not gonna executed on first visit
+              isShowLabelOnRef.value = true
+              localStorage.setItem(SHOW_LABEL, "true")
+            }
           }else {
             disableShowLabel.value = true
             isShowLabelOnRef.value = false
             localStorage.removeItem(SHOW_LABEL)
             chartOptionsMain.value.scales.y.max = undefined
             if (timeRangeOld === '1'){
-              // scales.y.max not gonna updated if dont di this here
-              chartRefreshTrigger.value += 1
+              // scales.y.max not gonna updated if you don't do this here
+              refreshChart()
             }
           }
         }else {
@@ -275,11 +300,11 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark(),], async ([tim
 
           chartOptionsMain.value.scales.y.max = undefined
 
-          const temperatureDataset: ChartDataset = assignTemperatureDataset(formattedDate(doc.date), temp, index)
+          const temperatureDataset = assignTemperatureDataset(formattedDate(doc.date), temp, index)
           chartData.value.datasets.push(temperatureDataset);
           // just assign humidity when timerange = 1
           if (timeRangeNew === "1"){
-            const humidityDataset: ChartDataset = assignHumidityDataset(humidity)
+            const humidityDataset = assignHumidityDataset(humidity)
             chartData.value.datasets.push(humidityDataset);
             chartData.value.datasets[1].fill = true
           }
@@ -328,16 +353,17 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark(),], async ([tim
         // Series ON Simple OFF
         const filledData = addMissingTimes(realDatetime, realTemperatures, realHumidity);
         const sortedFilledData = filledData.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime());
+        // console.log(filledData)
 
         const sortedTemp = filledData.map(entry => entry.temperature);
         const sortedHumid = filledData.map(entry => entry.humidity);
 
         chartData.value.labels = sortedFilledData.map(entry => entry.timestamp);
         chartData.value.datasets = assignDatasets(
-            [filledData[0].temperature, ...sortedTemp],
-            [filledData[0].humidity, ...sortedHumid],
+            sortedTemp, sortedHumid,
         )
         chartData.value.datasets.push(assignAverageDataset(avgTemperatureSeries))
+
       }else {
         // Series ON Simple ON
         const sortedData = realDatetime.map((timestamp, index) => ({
@@ -412,12 +438,13 @@ onKeyStroke('Escape', () => {
   if (isFullscreen.value){
     fullscreenToggle()
   }
-  // isFullscreen.value ? fullscreenToggle() : optionToggle();
 })
 
 onKeyStroke('s', () => {
   isSimpleOnRef.value = !isSimpleOnRef.value
+  isSimpleOnRef.value ? localStorage.setItem(SIMPLE_MODE, 'true') : localStorage.removeItem(SIMPLE_MODE);
 })
+
 </script>
 
 <template>
@@ -431,59 +458,41 @@ onKeyStroke('s', () => {
                   'fixed top-0 left-0 w-full h-screen border-2 dark:border-pink-400 z-50': isFullscreen,
                   'card-effect': !isFullscreen,
                   'px-0': isSmallScreen}">
-      <div>
-        <!-- Option Hidden ON -->
-        <div v-if="isOptionHiddenRef" class="flex justify-between relative -top-1 mb-2" :class="{'px-4': isSmallScreen}">
-          <time-range-tabs :chart-loaded="chartLoaded"
-                           :time-ranges="timeRanges"
-                           @update:selectedTimeRange="handleSelectedTimeRange"
-          />
-          <div class="flex items-center space-x-2">
-            <!-- Setting -->
-            <button v-if="!isFullscreen" @click="optionToggle"
-                    class="rounded-lg px-2 h-full hover:bg-gray-200 dark:hover:bg-gray-600 group">
-              <Icon name ="solar:settings-linear" class="text-xl relative -top-0.5 group-hover:rotate-90 transition"/>
-            </button>
-            <!-- Fullscreen -->
-            <button @click="fullscreenToggle()" class="rounded-lg px-2 h-full hover:bg-gray-200 dark:hover:bg-gray-600">
-              <Icon name="humbleicons:expand" class="relative text-lg -top-0.5"/>
-            </button>
 
-          </div>
+    <div class="flex justify-between relative -top-1 mb-2" :class="{'px-4': isSmallScreen}">
+        <!-- Select  -->
+        <time-range-tabs :chart-loaded="chartLoaded"
+                         :time-ranges="timeRanges"
+                         @update:selectedTimeRange="handleSelectedTimeRange"
+        />
+
+        <div class="flex items-center space-x-2 dark:text-gray-200">
+          <!-- reset zoom -->
+          <button @click="refreshChart" class="rounded-lg px-2 h-full hover:bg-gray-200 dark:hover:bg-gray-600">
+            <Icon name="pepicons-pop:arrow-spin" class="text-lg"/>
+          </button>
+          <!-- Setting -->
+          <button v-if="!isFullscreen" @click="optionToggle"
+                  class="rounded-lg px-2 h-full hover:bg-gray-200 dark:hover:bg-gray-600"
+                  :class="{'bg-gray-200 dark:bg-gray-600': !isOptionHiddenRef}">
+            <Icon name ="solar:settings-linear" class="text-xl relative -top-0.5"/>
+          </button>
+          <!-- fullscreen -->
+          <button @click="fullscreenToggle(); " class="rounded-lg px-2 h-full hover:bg-gray-200 dark:hover:bg-gray-600">
+            <Icon name="humbleicons:expand" class="relative text-lg -top-0.5"/>
+          </button>
         </div>
-
-        <!-- Option Hidden OFF -->
-        <div v-else class="flex justify-between relative -top-1 mb-2" :class="{'px-4': isSmallScreen}">
-          <!-- Select Dropdown  -->
-          <time-range-tabs :chart-loaded="chartLoaded"
-                           :time-ranges="timeRanges"
-                           @update:selectedTimeRange="handleSelectedTimeRange"
-          />
-
-          <div class="flex items-center space-x-2">
-            <!-- Setting -->
-            <button v-if="!isFullscreen" @click="optionToggle"
-                    class="rounded-lg px-2 h-full hover:bg-gray-200 dark:hover:bg-gray-600"
-                    :class="{'bg-gray-200 dark:bg-gray-600': !isOptionHiddenRef}">
-              <Icon name ="solar:settings-linear" class="text-xl relative -top-0.5"/>
-            </button>
-            <!-- fullscreen -->
-<!--            <button @click="fullscreenToggle(); isSmallScreen?focusToggle():undefined" class="rounded-lg px-2 h-full hover:bg-gray-200 dark:hover:bg-gray-600">-->
-            <button @click="fullscreenToggle(); " class="rounded-lg px-2 h-full hover:bg-gray-200 dark:hover:bg-gray-600">
-              <Icon name="humbleicons:expand" class="relative text-lg -top-0.5"/>
-            </button>
-          </div>
-
-        </div>
-
-        <div class="h-64 mb-2" :class="[isFullscreen?'h-[calc(100vh-120px)]':'md:h-80']">
-            <Line v-if="chartLoaded" :data="computedChartData" :options="chartOptionsMain"
-                  :plugins="[htmlLegendPlugin, ChartDataLabels,]"
-                  :key="chartRefreshTrigger" />
-        </div>
-        <div id="legend-container" class="text-gray-600 dark:text-gray-200"></div> <!--config legend di plugins/chartjs.client.ts-->
 
       </div>
+
+      <div class="mb-2" :class="[isFullscreen?'h-[calc(100vh-120px)]' : 'aspect-[4/3] md:aspect-[2/1] xl:h-[50vh] w-full']">
+          <Line v-if="chartLoaded" ref="mainChart"
+                :data="computedChartData" :options="chartOptionsMain"
+                :plugins="[htmlLegendPlugin, ChartDataLabels, borderPlugin]"
+                :key="chartRefreshTrigger" />
+      </div>
+      <div id="legend-container" class="text-gray-600 dark:text-gray-200"></div> <!--config legend di plugins/chartjs.client.ts-->
+
     </div>
 
     <!-- chart data option-->

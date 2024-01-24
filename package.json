@@ -33,6 +33,7 @@
     "chartjs-plugin-annotation": "^3.0.1",
     "chartjs-plugin-datalabels": "^2.2.0",
     "chartjs-plugin-zoom": "^2.0.1",
+    "chroma.ts": "^1.0.10",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.0",
     "firebase-functions": "^4.5.0",

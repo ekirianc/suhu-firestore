@@ -47,7 +47,18 @@ export const htmlLegendPlugin = {
             li.style.cursor = 'pointer';
             li.style.display = 'flex';
             li.style.flexDirection = 'row';
-            li.style.marginLeft = '10px';
+            li.style.paddingLeft = '5px';
+            li.style.paddingRight = '5px';
+            li.style.borderRadius = '10px';
+
+            // Add hover styles
+            li.style.transition = 'background-color 0.1s';
+            li.addEventListener('mouseover', () => {
+                li.style.backgroundColor = 'rgba(117,117,117,0.22)';
+            });
+            li.addEventListener('mouseout', () => {
+                li.style.backgroundColor = ''; // Reset the background color on mouseout
+            });
 
             li.onclick = () => {
                 const { type } = chart.config;

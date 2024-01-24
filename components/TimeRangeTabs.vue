@@ -30,7 +30,6 @@ watch([() => props.chartLoaded, refreshTrigger], ([isLoaded]) => {
       }
     }
   }
-
 });
 
 const selectTimeRange = (timeRange: string) => {

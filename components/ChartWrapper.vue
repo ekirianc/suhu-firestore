@@ -53,7 +53,7 @@ onKeyStroke('Escape', () => {
         </button>
       </div>
     </div>
-    <div v-if="isCollapse" class="h-52 px-4 pb-4 relative -top-2" :class="[isFullscreen?'h-[calc(100vh-120px)]':'md:h-52']">
+    <div v-if="isCollapse" class="px-4 pb-4 relative -top-2" :class="[isFullscreen?'h-[calc(100vh-120px)]':'md:aspect-[7/2.5]']">
       <slot/>
     </div>
   </div>
