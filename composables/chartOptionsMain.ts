@@ -107,7 +107,7 @@ export const chartOptionsMain = ref({
         // Luxon format string
         tooltipFormat: 'DD MMM hh:mm a',
         displayFormats: {
-          day: 'DD MMM',
+          calendarDays: 'DD MMM',
           hour: 'hh A',
           minute: 'HH:mm',
         }

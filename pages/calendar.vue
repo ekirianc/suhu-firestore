@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import {useDataStore} from "~/store";
+import { useDataStore } from "~/store";
 import {
-  startOfMonth,
-  endOfMonth,
-  eachDayOfInterval,
-  format,
   addMonths,
-  subMonths,
+  eachDayOfInterval,
+  endOfMonth,
+  format,
   isSameDay,
   isSameMonth,
-  parse
+  parse,
+  startOfMonth,
+  subMonths
 } from 'date-fns';
 import Loading from "~/components/Loading.vue";
 import { Line } from 'vue-chartjs'
-import {updateMinMaxRefs} from "~/composables/utils";
+import { generateMinMaxRefsObject, propertyNames, updateMinMax, UpdateType } from "~/composables/utils";
 
 const dataStore = useDataStore()
+let overallDatasets = $ref(dataStore.overall_datasets)
+const isDark = ref(useDark())
 
-onMounted(() => {
-  if (dataStore.overall_datasets.length > 0) {
-    generateCalendarDays();
-  }
-});
+watch(useDark(), (_isDark) => {
+  isDark.value = _isDark
+})
 
 const isLoading = ref(true)
 onMounted(async () => {
@@ -29,6 +29,7 @@ onMounted(async () => {
     isLoading.value = true
     if (!dataStore.last_temperature) {
       await dataStore.fetchDataFromFirestore();
+      overallDatasets = dataStore.overall_datasets
     }
   }catch (e){
     console.log(e)
@@ -47,32 +48,14 @@ const calendarDays = ref<any[]>([]);
 
 const currentMonth = ref('');
 
-class MinMaxRefs{
-  min: number; max: number;
-  constructor() {
-    this.min = Infinity;
-    this.max = -Infinity;
-  }
-}
-
-const createMinMaxRefs = (): MinMaxRefs => new MinMaxRefs();
-
-const generateMinMaxRefsObject = () => ({
-  lowTemp: createMinMaxRefs(),
-  highTemp: createMinMaxRefs(),
-  tempAvg: createMinMaxRefs(),
-  humidAvg: createMinMaxRefs(),
-  tempDiffSum: createMinMaxRefs(),
-});
-
-const calData = generateMinMaxRefsObject();
+const calData = generateMinMaxRefsObject(propertyNames);
 
 const generateCalendarDays = () => {
   const start = startOfMonth(currentDate.value);
   const end = endOfMonth(currentDate.value);
 
-  const firstDataset = dataStore.overall_datasets[0]?.date;
-  const lastDataset = dataStore.overall_datasets.slice(-1)[0]?.date;
+  const firstDataset = overallDatasets[0]?.date;
+  const lastDataset = overallDatasets.slice(-1)[0]?.date;
 
   const startPoint = !firstDataset || start >= startOfMonth(firstDataset);
   const endPoint = !lastDataset || end <= endOfMonth(lastDataset);
@@ -80,20 +63,20 @@ const generateCalendarDays = () => {
   if (startPoint && endPoint) {
     const daysOfMonth = eachDayOfInterval({ start, end });
 
-    const _calData = generateMinMaxRefsObject();
+    const _calData = generateMinMaxRefsObject(propertyNames);
 
     calendarDays.value = daysOfMonth.map((date) => {
-      const dataset = dataStore.overall_datasets.find((ds) => isSameDay(ds.date, date));
+      const dataset = overallDatasets.find((ds) => isSameDay(ds.date, date));
       const today_total_data = dataset?.today_total_data ?? null;
 
-      if (dataset) updateMinMaxRefs(_calData, calData, dataset);
+      if (dataset?.is_valid) {
+        // set propery from composables/utils propertyNames
+        updateMinMax(dataset, UpdateType.Local, calData, _calData);
+      }
 
       return {
         dataset,
         datetime: date,
-        date: format(date, 'd'),
-        day: format(date, 'E'),
-        today_total_data,
       };
     });
   }
@@ -114,12 +97,12 @@ const goToPreviousMonth = () => {
 const columnTitles = ['date', 'data point', 'high', 'low', 'temp avg', 'humid avg', 'temp diff sum', ]
 
 const isBeforeFirstDatasetMonth = computed(() => {
-  const firstDatasetDate = dataStore.overall_datasets[0]?.date;
+  const firstDatasetDate = overallDatasets[0]?.date;
   return !firstDatasetDate || currentDate.value <= addMonths(startOfMonth(firstDatasetDate), 1);
 });
 
 const isAfterLastDatasetMonth = computed(() => {
-  const lastDatasetDate = dataStore.overall_datasets[dataStore.overall_datasets.length - 1]?.date;
+  const lastDatasetDate = overallDatasets[dataStore.overall_datasets.length - 1]?.date;
   return !lastDatasetDate || currentDate.value >= subMonths(endOfMonth(lastDatasetDate), 1);
 });
 
@@ -134,6 +117,7 @@ const jumpToCurrentMonth = () => {
 
 const slideIn = ref(false)
 const selectedData = ref();
+
 const handleSelectedEntries = (selectedEntries: any) => {
   slideIn.value = true
 
@@ -173,7 +157,7 @@ const chartOptions = ref({
 
 </script>
 <template>
-  <div class="mx-2">
+  <div :class="{'mx-2': !slideIn}">
     <div v-if="isLoading"><Loading class="h-3/4"/></div>
     <div v-else>
       <div :class="{'w-1/2' : slideIn}">
@@ -183,7 +167,7 @@ const chartOptions = ref({
             <button
                 @click="jumpToCurrentMonth"
                 v-if="!isCurrentMonth"
-                class="py-2 px-3 bg-neutral-300 dark:bg-neutral-600 rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700"
+                class="py-2 px-3 bg-zinc-300 dark:bg-zinc-600 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-700"
             >
               <icon name="ic:baseline-loop"/>
             </button>
@@ -191,7 +175,7 @@ const chartOptions = ref({
                 @click="goToPreviousMonth"
                 :disabled="isBeforeFirstDatasetMonth"
                 class="py-2 px-3 rounded-lg"
-                :class="[isBeforeFirstDatasetMonth ? 'bg-transparent':'bg-neutral-300 dark:bg-neutral-600 dark:hover:bg-neutral-700 hover:bg-neutral-200']"
+                :class="[isBeforeFirstDatasetMonth ? 'bg-transparent':'bg-zinc-300 dark:bg-zinc-600 dark:hover:bg-zinc-700 hover:bg-zinc-200']"
             >
               <icon name="mingcute:arrow-left-fill"/>
             </button>
@@ -199,7 +183,7 @@ const chartOptions = ref({
                 @click="goToNextMonth"
                 :disabled="isAfterLastDatasetMonth"
                 class="py-2 px-3 rounded-lg"
-                :class="[isAfterLastDatasetMonth ? 'bg-transparent':'bg-neutral-300 dark:bg-neutral-600 dark:hover:bg-neutral-700 hover:bg-neutral-200']"
+                :class="[isAfterLastDatasetMonth ? 'bg-transparent':'bg-zinc-300 dark:bg-zinc-600 dark:hover:bg-zinc-700 hover:bg-zinc-200']"
             >
               <icon name="mingcute:arrow-right-fill"/>
             </button>
@@ -207,26 +191,26 @@ const chartOptions = ref({
           </div>
         </div>
 
-        <div class="flex">
-          <div class="relative">
-            <div class="text-white dark:bg-neutral-700 bg-neutral-50 pl-4">
-              <div v-for="columnTitle in columnTitles" :key="columnTitle"  class="w-20 h-12 flex items-center content-center">
+        <div class="flex rounded-xl overflow-hidden border dark:border-neutral-700">
+          <div class="relative text-white dark:bg-zinc-800 bg-zinc-100 border-r border-r-zinc-300 dark:border-r-zinc-600">
+            <div class="divide-y divide-zinc-200 dark:divide-zinc-700">
+              <div v-for="columnTitle in columnTitles" :key="columnTitle"  class="w-24 h-12 flex items-center content-center px-4">
                 <div class="text-sm dark:text-white text-gray-700 w-full">{{ columnTitle }}</div>
               </div>
             </div>
           </div>
-          <div class="overflow-x-auto dark:bg-neutral-700 bg-neutral-50">
+          <div class="overflow-x-auto dark:bg-zinc-800 bg-zinc-50">
             <div class="flex">
-              <CalendarDay :day="calendarDays" @update:selectedEntries="handleSelectedEntries" />
+              <CalendarDay :calendarDays="calendarDays" @update:selectedEntries="handleSelectedEntries" />
             </div>
             <div class="flex">
-              <div v-for="day in calendarDays" :key="day.datetime" class="text-center">
-                <CalendarData :data="day" type="today_total_data"/>
-                  <CalendarData :data="day" type="temp_high" :max="calData.highTemp.max"/>
-                  <CalendarData :data="day" type="temp_low" :max="calData.lowTemp.max"/>
-                  <CalendarData :data="day" type="average_temp" :max="calData.tempAvg.max"/>
-                  <CalendarData :data="day" type="average_humid" :max="calData.humidAvg.max"/>
-                  <CalendarData :data="day" type="temp_diff_sum" :max="calData.tempDiffSum.max"/>
+              <div v-for="data in calendarDays" :key="data.datetime" class="text-center">
+                <CalendarData :data :isDark type="today_total_data"/>
+                <CalendarData :data :isDark type="temp_high" :max="calData.highTemp.max" :min="calData.highTemp.min"/>
+                <CalendarData :data :isDark type="temp_low" :max="calData.lowTemp.max" :min="calData.lowTemp.min"/>
+                <CalendarData :data :isDark type="average_temp" :max="calData.tempAvg.max" :min="calData.tempAvg.min"/>
+                <CalendarData :data :isDark type="average_humid" :max="calData.humidAvg.max" :min="calData.humidAvg.min"/>
+                <CalendarData :data :isDark type="temp_diff_sum" :max="calData.tempDiffSum.max" :min="calData.tempDiffSum.min"/>
               </div>
             </div>
           </div>
@@ -234,15 +218,15 @@ const chartOptions = ref({
       </div>
 
       <div v-if="slideIn"
-           class="absolute z-20 right-0 top-0 p-4 border-l bg-neutral-100 w-1/2 h-full overflow-y-auto shadow-xl
-                  dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100">
+           class="absolute z-20 right-0 top-0 p-4 border-l bg-zinc-100 w-1/2 h-full overflow-y-auto shadow-xl
+                  dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100">
         <div class=" mb-4">
           <button @click="closeSlide" class="p-2 hover:bg-red-500/40 rounded-xl">
             <icon name="charm:cross" class="text-2xl"/>
           </button>
           <span class="p-4"> {{ selectedData.date }} </span>
         </div>
-        <div class="dark:bg-neutral-700/50 p-4 rounded-lg">
+        <div class="dark:bg-zinc-700/50 p-4 rounded-lg">
           <div v-if="selectedData.exist">
             <Line :data="chartData" :options="chartOptions"/>
           </div>

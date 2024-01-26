@@ -143,10 +143,56 @@ export function generateDateTimeWithHourlyInterval(date: Date[], hourlyTempObj: 
     return result;
 }
 
-export const updateMinMaxRefs = (local: any, global: any, dataset: Datasets) => {
+// ##########################################
+// ###### Search for min and max value ######
+// ##########################################
+
+export const createMinMaxRefs = () => ({
+    min: Infinity,
+    max: -Infinity,
+});
+
+export const propertyNames = [
+    'lowTemp',
+    'highTemp',
+    'tempAvg',
+    'humidAvg',
+    'tempDiffSum'
+];
+
+export const generateMinMaxRefsObject = (propertyNames: string[]) => {
+    const minMaxRefsObject: Record<string, { min: number; max: number }> = {};
+
+    propertyNames.forEach(propertyName => {
+        minMaxRefsObject[propertyName] = createMinMaxRefs();
+    });
+
+    return minMaxRefsObject;
+};
+
+export const combineMinMax = (minMaxObject: { min: number; max: number }) => ({
+    min: minMaxObject.min,
+    max: minMaxObject.max,
+});
+
+export enum UpdateType {
+    Local,
+    Overall
+}
+
+export const updateMinMax = (
+    dataset: Datasets,
+    updateType: UpdateType,
+    global: any, local?: any,
+) => {
     const updateMinMax = (property: string, value: number) => {
-        local[property].min = global[property].min = Math.min(local[property].min, value);
-        local[property].max = global[property].max = Math.max(local[property].max, value);
+        if (updateType === UpdateType.Local) {
+            local[property].min = global[property].min = Math.min(local[property].min, value);
+            local[property].max = global[property].max = Math.max(local[property].max, value);
+        } else {
+            global[property].min = Math.min(global[property].min, value);
+            global[property].max = Math.max(global[property].max, value);
+        }
     };
 
     updateMinMax('lowTemp', dataset.temp_low!);

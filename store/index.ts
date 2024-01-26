@@ -1,9 +1,15 @@
-import { defineStore } from 'pinia';
-import { useFirestore } from 'vuefire'
-import { collection, query, orderBy, limit, getDocs, onSnapshot, doc } from 'firebase/firestore'
-import { format, formatDistanceToNow } from 'date-fns';
-import { fillMissingHours } from "~/composables/utils";
-import type { Datasets } from "~/composables/types";
+import {defineStore} from 'pinia';
+import {useFirestore} from 'vuefire'
+import {collection, doc, getDocs, limit, onSnapshot, orderBy, query} from 'firebase/firestore'
+import {eachDayOfInterval, format, formatDistanceToNow, isSameDay} from 'date-fns';
+import {
+  combineMinMax,
+  fillMissingHours,
+  generateMinMaxRefsObject, propertyNames,
+  updateMinMax,
+  UpdateType,
+} from "~/composables/utils";
+import type {Datasets} from "~/composables/types";
 
 const FETCH_LIMIT = 7
 
@@ -50,21 +56,17 @@ export const useDataStore = defineStore('temperature', {
 
     overall_datasets: [] as Datasets[],
 
-    dataChanges: 0,
-    isDataLoaded: false,
-    isLoading: true,
-    // errorMessage: '',
+    overall_min_max: generateMinMaxRefsObject(propertyNames)
+
   }),
   actions: {
     async fetchDataFromFirestore() {
       try {
         const db = useFirestore();
 
-        const qDaily = query(
-            collection(db, 'dailyRecords'),
-            orderBy('today_date', 'desc'),
-            limit(FETCH_LIMIT)
-        );
+        // ####################################
+        // ### Overall Data (avg, high-low) ###
+        // ####################################
 
         const qOverallData = doc(db, 'overall', 'data')
         onSnapshot(qOverallData, (snapshot) => {
@@ -75,9 +77,12 @@ export const useDataStore = defineStore('temperature', {
 
             const originalOverallHourlyAverage = Object.values(overallData.overall_hourly_average.by_entries);
             this.overall_hourly_average_adj = [...originalOverallHourlyAverage, originalOverallHourlyAverage[0]] as number[];
-            this.isDataLoaded = true;
           }
         });
+
+        // #######################################################
+        // ##### Overall Daily [ARRAY] (high, low, sum, ...) #####
+        // #######################################################
 
         const qOverallDaily = doc(db, 'overall', 'daily')
         onSnapshot(qOverallDaily, (snapshot) => {
@@ -111,31 +116,46 @@ export const useDataStore = defineStore('temperature', {
               }
             })
 
-            // console.log(this.overall_datasets.map(data=> data.high_low))
+            // #################### get overall min max ####################
+
+            const overallMinMax = this.overall_min_max
+            const overallDatasets = this.overall_datasets
+
+            const start = overallDatasets[0]?.date;
+            const end = overallDatasets.slice(-1)[0]?.date;
+            const allDate = eachDayOfInterval({start, end});
+
+            allDate.forEach((date) => {
+              const dataset = overallDatasets.find((ds) => isSameDay(ds.date, date));
+
+              if (dataset?.is_valid) {
+                // set propery from composables/utils propertyNames
+                updateMinMax(dataset, UpdateType.Overall, overallMinMax);
+
+                // Get all property names of generateMinMaxRefsObject
+                const propertyNames = Object.keys(overallMinMax);
+
+                // Combine min max for each property
+                propertyNames.forEach(propertyName => combineMinMax(overallMinMax[propertyName as keyof typeof overallMinMax]));
+              }
+            })
+
           } else {
             console.error('Document not found or empty.');
           }
         })
 
+        // ############################################
+        // ############# Daily Data Entry #############
+        // ############################################
+
+        const qDaily = query(
+            collection(db, 'dailyRecords'),
+            orderBy('today_date', 'desc'),
+            limit(FETCH_LIMIT)
+        );
         onSnapshot(qDaily, (snapshot) => {
           if (!snapshot.empty) {
-            snapshot.docChanges().forEach((change) => {
-              if (change.type === 'added') {
-                this.dataChanges += 1
-                // console.log('Document added:', change.doc.data().today_date);
-              }
-
-              if (change.type === 'modified') {
-                this.dataChanges += 1
-                // console.log('Document modified:', change.doc.data().today_date);
-
-              }
-
-              if (change.type === 'removed') {
-                this.dataChanges += 1
-                // console.log('Document added:', change.doc.data().today_date);
-              }
-            });
             // ====================================================
             // get last data
             const lastDocument = snapshot.docs[0];

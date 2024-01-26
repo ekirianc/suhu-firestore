@@ -486,7 +486,7 @@ onKeyStroke('s', () => {
       </div>
 
       <div class="mb-2" :class="[isFullscreen?'h-[calc(100vh-120px)]' : 'aspect-[4/3] md:aspect-[2/1] xl:h-[50vh] w-full']">
-          <Line v-if="chartLoaded" ref="mainChart"
+          <Line v-if="chartLoaded"
                 :data="computedChartData" :options="chartOptionsMain"
                 :plugins="[htmlLegendPlugin, ChartDataLabels, borderPlugin]"
                 :key="chartRefreshTrigger" />

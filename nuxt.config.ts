@@ -16,8 +16,10 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@pinia/nuxt',
     '@vueuse/nuxt',
-    '@nuxtjs/color-mode'
+    '@nuxtjs/color-mode',
+    '@vue-macros/nuxt',
   ],
+  // @ts-ignore
   vuefire: {
     config: {
       apiKey: process.env.FIREBASE_API_KEY,
@@ -29,7 +31,6 @@ export default defineNuxtConfig({
       measurementId: process.env.FIREBASE_MEASUREMENT_ID,
     },
   },
-  // @ts-ignore
   css: ['~/assets/css/main.css'],
   app:{
     head:{

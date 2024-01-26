@@ -5,8 +5,9 @@ import {collection, doc, getDoc, } from "firebase/firestore";
 import {format, isToday} from "date-fns";
 
 const props = defineProps({
-  day: Array,
+  calendarDays: Object,
 })
+
 const emits = defineEmits();
 
 const handleClick = async (day: any) => {
@@ -50,12 +51,12 @@ const handleClick = async (day: any) => {
 </script>
 
 <template>
-  <div v-for="day in props.day" :key="day.datetime" class="text-center text-gray-800 dark:text-gray-100">
+  <div v-for="day in props.calendarDays" :key="day.datetime" class="text-center text-gray-800 dark:text-gray-100 dark:bg-zinc-800 bg-zinc-100 border-b dark:border-b-zinc-600">
     <div  @click="handleClick(day)" class="relative w-12 h-12 flex flex-col border border-transparent dark:hover:bg-neutral-600 hover:bg-neutral-200 cursor-pointer">
       <div v-if="isToday(day.datetime)" class="w-full h-[calc(100%+3rem*6)] absolute shadow-2xl bg-gray-100/10 z-20 scale-x-105 hover:bg-gray-400/10"/>
-      <div v-else class="w-full h-[calc(100%+3rem*6)] absolute scale-x-105 hover:bg-gray-400/10 z-20"></div>
-      <span>{{ day.date }}</span>
-      <span class="text-sm ">{{ day.day }}</span>
+      <div v-else class="w-full h-[calc(100%+3rem*6)] absolute scale-x-105 hover:bg-gray-400/10 z-30"></div>
+      <span>{{ format(day.datetime, 'd') }}</span>
+      <span class="text-sm ">{{ format(day.datetime, 'E') }}</span>
     </div>
   </div>
 </template>
