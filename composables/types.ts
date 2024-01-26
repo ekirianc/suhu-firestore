@@ -13,3 +13,8 @@ export interface Datasets {
   average_temp: number | null;
   average_humid: number | null;
 }
+
+export interface CalendarDays{
+  dataset?: object
+  datetime: Date
+}

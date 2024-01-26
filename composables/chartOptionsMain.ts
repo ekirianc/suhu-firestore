@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 import type {Context} from "chartjs-plugin-datalabels";
 
 const totalDuration = 200;
@@ -164,7 +166,7 @@ export const chartOptionsMain = ref({
       },
       callbacks: {
         // footer: footer,
-        labelPointStyle: function(context: any) {
+        labelPointStyle: function() {
           return {
             pointStyle: 'circle',
             rotation: 0

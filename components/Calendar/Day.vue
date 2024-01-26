@@ -3,21 +3,22 @@
 import {useFirestore} from "vuefire";
 import {collection, doc, getDoc, } from "firebase/firestore";
 import {format, isToday} from "date-fns";
+import type {CalendarDays} from "~/composables/types";
 
-const props = defineProps({
-  calendarDays: Object,
-})
+const props = defineProps<CalendarDays>()
+const dataset = ref(props.dataset)
+const datetime = ref(props.datetime)
 
 const emits = defineEmits();
 
-const handleClick = async (day: any) => {
-  const formattedDateEmit = ref(format(day.datetime, "dd MMMM yyyy"))
+const handleClick = async (_dataset:any ,_datetime: any) => {
+  const formattedDateEmit = ref(format(_datetime, "dd MMMM yyyy"))
 
-  if (day.dataset){
+  if (_dataset){
     try {
       const db = useFirestore();
 
-      const formattedDate = format(day.datetime, 'yyyy-MM-dd');
+      const formattedDate = format(_datetime, 'yyyy-MM-dd');
 
       const dailyRef = doc(collection(db, 'dailyRecords'), formattedDate);
 
@@ -51,12 +52,12 @@ const handleClick = async (day: any) => {
 </script>
 
 <template>
-  <div v-for="day in props.calendarDays" :key="day.datetime" class="text-center text-gray-800 dark:text-gray-100 dark:bg-zinc-800 bg-zinc-100 border-b dark:border-b-zinc-600">
-    <div  @click="handleClick(day)" class="relative w-12 h-12 flex flex-col border border-transparent dark:hover:bg-neutral-600 hover:bg-neutral-200 cursor-pointer">
-      <div v-if="isToday(day.datetime)" class="w-full h-[calc(100%+3rem*6)] absolute shadow-2xl bg-gray-100/10 z-20 scale-x-105 hover:bg-gray-400/10"/>
+  <div class="text-center text-gray-800 dark:text-gray-100 dark:bg-zinc-800 bg-zinc-100 border-b dark:border-b-zinc-600">
+    <div  @click="handleClick(dataset, datetime)" class="relative w-12 h-12 flex flex-col border border-transparent dark:hover:bg-neutral-600 hover:bg-neutral-200 cursor-pointer">
+      <div v-if="isToday(datetime)" class="w-full h-[calc(100%+3rem*6)] absolute shadow-2xl bg-gray-100/10 z-20 scale-x-105 hover:bg-gray-400/10"/>
       <div v-else class="w-full h-[calc(100%+3rem*6)] absolute scale-x-105 hover:bg-gray-400/10 z-30"></div>
-      <span>{{ format(day.datetime, 'd') }}</span>
-      <span class="text-sm ">{{ format(day.datetime, 'E') }}</span>
+      <span>{{ format(datetime, 'd') }}</span>
+      <span class="text-sm ">{{ format(datetime, 'E') }}</span>
     </div>
   </div>
 </template>

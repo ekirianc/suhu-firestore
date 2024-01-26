@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import * as chroma from "chroma.ts";
-import {luminance} from "~/composables/luminance";
 import type { Datasets } from "~/composables/types";
 import {useDataStore} from "~/store";
 
@@ -17,18 +16,30 @@ interface TemperatureProps {
   isDark?: boolean;
 }
 
+const MAX_DATAPOINT = 288
 const props = defineProps<TemperatureProps>();
 const dataStore = useDataStore()
 
 const getTemperatureColor = (type: ScaleType, value: number | undefined): string => {
   const overall = dataStore.overall_min_max;
+  let colors = {
+    warm: ['#f1dee3', '#fcabc2', '#c94866'],
+    cold: ['#c6cdd0', '#8ac7d5', '#3a94b4']
+  }
 
-  const scales: Record<ScaleType, chroma.Scale> = {
-    temp_high: chroma.scale(['#f1dee3', '#912d49', '#3f0316']).domain(overall.highTemp.min, overall.highTemp.max),
-    temp_low: chroma.scale(['#c6cdd0', '#518d87', '#18353f']).domain(overall.lowTemp.min, overall.lowTemp.max),
-    average_temp: chroma.scale(['#f1dee3', '#912d49', '#3f0316']).domain(overall.tempAvg.min, overall.tempAvg.max),
-    average_humid: chroma.scale(['#18353f', '#518d87', '#c6cdd0']).domain(overall.humidAvg.min, overall.humidAvg.max),
-    temp_diff_sum: chroma.scale(['#f1dee3', '#912d49', '#3f0316']).domain(overall.tempDiffSum.min, overall.tempDiffSum.max),
+  if (props.isDark){
+    colors = {
+      warm: ['#f1dee3', '#912d49', '#3f0316'],
+      cold: ['#c6cdd0', '#51788d', '#18353f']
+    }
+  }
+
+  let scales: Record<ScaleType, chroma.Scale> = {
+    temp_high: chroma.scale(colors.warm).domain(overall.highTemp.min, overall.highTemp.max),
+    temp_low: chroma.scale(colors.cold).domain(overall.lowTemp.min, overall.lowTemp.max),
+    average_temp: chroma.scale(colors.warm).domain(overall.tempAvg.min, overall.tempAvg.max),
+    average_humid: chroma.scale(colors.cold.reverse()).domain(overall.humidAvg.min, overall.humidAvg.max),
+    temp_diff_sum: chroma.scale(colors.warm).domain(overall.tempDiffSum.min, overall.tempDiffSum.max),
   };
 
   const scale = scales[type];
@@ -53,7 +64,7 @@ const getBackgroundColor = (
       return getTemperatureColor(type, (eval(type)));
     case 'today_total_data':
       // return today_total_data === 288 ? '#4d4949' : '#333333';
-      return today_total_data === 288 ? (props.isDark ? '#494949' : '#e5e5e5') : '';
+      return today_total_data === MAX_DATAPOINT ? (props.isDark ? '#494949' : '#e5e5e5') : '';
     default:
       return ''
   }
@@ -84,22 +95,23 @@ const borderStyle = () => {
 }
 
 const getContrastColor = (backgroundColor: string): string => {
-  const luminanceVal = luminance(backgroundColor);
+  const luminanceVal = chroma.color(backgroundColor).luminance();
   // Choose a threshold value to determine when to switch to light or dark text
-  const threshold = 0.4;
-  return luminanceVal > threshold ? '#000000' : '#ffffff';
+  const threshold = 0.3;
+  return luminanceVal > threshold ? '#000' : '#FFF';
 };
 
 const dataStyle = () => {
   let color = ''
 
-  if (props.isDark){
-    if (isType.today_total_data) color = calData.value < 230 ?  '#838383' : '#ffffff'
-  } else {
-    if (isType.today_total_data) color = calData.value < 230 ?  '#a9a9a9' : ''
+  // dim datapoint if not valid
+  if (isType.today_total_data) {
+    color = props.isDark ?
+        (!dataset?.is_valid ? '#838383' : '#ffffff') :
+        (!dataset?.is_valid ? '#a9a9a9' : '');
   }
 
-  if (!isType.today_total_data) color = getContrastColor(backgroundColorStyle())
+  if (!isType.today_total_data && dataset?.is_valid) color = getContrastColor(backgroundColorStyle())
 
   return {
     color,
