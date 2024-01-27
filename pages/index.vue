@@ -53,33 +53,37 @@ onKeyStroke(' ', () => { navigateTo('/chart') })
   <div v-if="isLoading"><Loading class="h-screen"/></div>
   <div v-else class="min-h-screen grid place-content-center font-inter absolute overflow-hidden z-10 w-full">
     <div class="flex justify-center font-medium shadow-text text-bg-clip">
-      <span class="md:text-[12rem] text-8xl px-4 leading-none">{{ dataStore.last_temperature.toFixed(1) }}</span>
-      <div class="grid place-content-center md:text-right p-2">
+      <span class="md:text-[12rem] text-8xl px-4">{{ dataStore.last_temperature.toFixed(1) }}</span>
+      <div class="grid place-content-center md:text-right px-2">
         <span class="md:text-8xl text-3xl mb-4">°C</span>
         <span class="md:text-5xl text-3xl">{{ dataStore.last_humidity }}%</span>
       </div>
     </div>
-    <div class="md:flex justify-between">
-      <div class="flex font-medium md:text-xl text-gray-500 justify-center dark:text-gray-200">
-        <div class="mr-4"><Icon name="mdi:temperature" class="text-red-500 text-2xl"/>
-          {{ dataStore.today_high_temp_data }} °C
-        </div>
+    <div class="md:flex md:justify-between">
+      <div class="justify-center flex text-gray-600 dark:text-gray-200 mb-4 md:mb-0">
+        <span class="font-bold mr-2 "><Icon name="mingcute:time-line"/></span>
+        <span class="md:font-bold mr-2 ">{{ dataStore.relative_time }}</span>
+        <span class="text-gray-400">({{ dataStore.last_entry_time }})</span>
+      </div>
+      <div class="flex font-medium md:text-xl text-gray-500 justify-center space-x-4 dark:text-gray-200">
         <div><Icon name="mdi:temperature" class="text-sky-500 text-2xl "/>
           {{ dataStore.today_low_temp_data }} °C
         </div>
-      </div>
-      <div class="justify-center flex text-gray-600 dark:text-gray-200">
-        <span class="font-bold mr-2 "><Icon name="mingcute:time-line"/></span>
-        <span class="font-bold mr-2 ">{{ dataStore.relative_time }}</span>
-        <span class="text-gray-400">({{ dataStore.last_entry_time }})</span>
+        <div class="mr-4"><Icon name="mdi:temperature" class="text-red-500 text-2xl"/>
+          {{ dataStore.today_high_temp_data }} °C
+        </div>
       </div>
     </div>
-    <div class="flex space-x-4 text-center justify-center mt-8">
-      <nuxt-link to="/chart" class="px-6 py-2 bg-white rounded-xl text-pink-600 border-b-4 border-pink-300 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:border-transparent dark:hover:border-b-pink-400 dark:text-white">
+    <div class="flex space-x-4 text-center justify-center mt-4">
+      <nuxt-link to="/chart"
+                 class="px-6 py-2 bg-white rounded-xl text-pink-600 border-b-4 border-pink-300 hover:bg-primary hover:text-white
+                        dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:border-transparent dark:hover:border-b-pink-400 dark:text-white">
         <icon name="lucide:line-chart" class="mr-4 text-xl"/>
         <span>chart</span>
       </nuxt-link>
-      <nuxt-link to="/calendar" class="flex items-center px-6 py-2 bg-white rounded-xl text-pink-600 border-b-4 border-pink-300 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:border-transparent dark:hover:border-b-pink-400 dark:text-white">
+      <nuxt-link to="/calendar"
+                 class="flex items-center px-6 py-2 bg-white rounded-xl text-pink-600 border-b-4 border-pink-300 hover:bg-primary hover:text-white
+                        dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:border-transparent dark:hover:border-b-pink-400 dark:text-white">
         <icon name="solar:calendar-linear" class="mr-4 text-xl"/>
         <span>calendar</span>
       </nuxt-link>
