@@ -1,4 +1,21 @@
-import {Datasets} from "~/composables/types";
+import type {Datasets} from "~/types";
+import {chartOptionsMain} from "~/composables/chartOptionsMain";
+
+export function setChartTicksAndGridColor(isDark: boolean){
+    chartOptionsMain.value.scales.y.grid.color = (ctx: any) => {
+        const threshold = ctx.tick.value === 30 || ctx.tick.value === 34;
+        return isDark ? (threshold ? '#aba6a6' : '#4b4b4b') : (threshold ? '#2f2f2f' : '#d5d5d5');
+    };
+    chartOptionsMain.value.scales.x.grid.color = () => (isDark ? '#4b4b4b' : '#d5d5d5')
+
+    const darkModeScaleColor = () => (isDark ? '#bebebe' : '#525252');
+    chartOptionsMain.value.scales.y.ticks.color = darkModeScaleColor;
+    chartOptionsMain.value.scales.y1.ticks.color = darkModeScaleColor;
+    // chartOptions.value.scales.x.ticks.color = darkModeScaleColor;
+    chartOptionsMain.value.scales.x.ticks.color = function(context: any) {
+        return context.tick.major ? '#ff3874' : darkModeScaleColor();
+    };
+}
 
 interface HourlyData {
     [hour: string]: number | null;
@@ -143,6 +160,102 @@ export function generateDateTimeWithHourlyInterval(date: Date[], hourlyTempObj: 
     return result;
 }
 
+export function extendAvgTemperatureSeries(
+    entries: HourlyData,
+    start: number,
+    numberOfDays: number,
+): number[] {
+    const result: HourlyData = {};
+
+    let currentHour = start;
+    for (let day = 0; day < numberOfDays; day++) {
+        for (let hour = 0; hour <= 23; hour++) {
+            const key = (day * 24 + hour).toString();
+            result[key] = entries[currentHour.toString()];
+            currentHour = (currentHour + 1) % 24; // Wrap around to 0 after reaching 23
+        }
+    }
+    return Object.values(result) as number[];
+}
+
+// ##########################################
+// ##########################################
+// ##########################################
+
+export const getTimeOnly = (date: Date): number => date.getHours() * 60 + date.getMinutes();
+
+export const dataNullContainer = new Array(288).fill(null).map(() => ({
+    temperature: null,
+    humidity: null
+}))
+
+export function generateDatetime(date: string, times: string[]): Date[]{
+    let dateTimeString: Date[] = []
+    times.map((time: string) => {
+        dateTimeString.push(new Date(`${date} ${time}`))
+    });
+    return dateTimeString;
+}
+
+export function generateDummyDatetimeArray(): Date[] {
+    const dummyDatetimeArray: Date[] = [];
+    for (let i = 0; i < 24 * 60; i += 5) {
+        const dummyDate = new Date();
+        dummyDate.setHours(Math.floor(i / 60));
+        dummyDate.setMinutes(i % 60);
+        dummyDatetimeArray.push(dummyDate);
+    }
+    return dummyDatetimeArray;
+}
+
+export function processDataEntries(data: any){
+    const date = data.today_date;
+    const realTemperature = data.today_entries.temp
+    const realHumidity = data.today_entries.humid
+    const times = data.today_entries.time;
+
+    // Check if "12:00 AM" exists at both the beginning and the end
+    if (times.length >= 2 && times.at(-1) === "12:00 AM") {
+        // Remove the last occurrence of "12:00 AM"
+        times.pop();
+        realTemperature.pop();
+        realHumidity.pop();
+    }
+
+    // Combine date and time to create a valid JavaScript Date object
+    const realDatetime: Date[] = generateDatetime(date, times)
+
+    // generate null array
+    const temperatureContainer = dataNullContainer.map(entry => entry.temperature);
+    const humidityContainer = dataNullContainer.map(entry => entry.humidity);
+
+    // variabel ini digunakan untuk menyamakan jumlah data point setiap harinya walaupn ada yang kosong di tenaah
+    // return 288 data point from today datetime
+    // khusus ketika Series OFF
+    const dummyDatetimeArray: Date[] = generateDummyDatetimeArray()
+
+    dummyDatetimeArray.forEach((dummyDatetime, index) => {
+        const dummyTime = getTimeOnly(dummyDatetime);
+        const realIndex = realDatetime.findIndex((realDatetime) => {
+            return getTimeOnly(realDatetime) === dummyTime;
+        });
+
+        // If a match is found, copy the temperature value; otherwise, set it to null
+        if (realIndex !== -1) {
+            temperatureContainer[index] = realTemperature[realIndex];
+            humidityContainer[index] = realHumidity[realIndex];
+        } else {
+            temperatureContainer[index] = null;
+            humidityContainer[index] = null;
+        }
+    });
+
+    return {
+        realTemperature, realHumidity, realDatetime,
+        temperatureContainer, humidityContainer, dummyDatetimeArray
+    }
+}
+
 // ##########################################
 // ###### Search for min and max value ######
 // ##########################################
@@ -195,6 +308,7 @@ export const updateMinMax = (
         }
     };
 
+    // dataset props follows the prop name on firestore
     updateMinMax('lowTemp', dataset.temp_low!);
     updateMinMax('highTemp', dataset.temp_high!);
     updateMinMax('tempAvg', dataset.average_temp!);

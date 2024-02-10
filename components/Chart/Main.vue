@@ -4,9 +4,9 @@ import {Line} from 'vue-chartjs';
 import 'chartjs-adapter-moment';
 import {
   addMissingTimes,
-  expandHourlyData,
+  expandHourlyData, extendAvgTemperatureSeries,
   formattedDate, generateDateTimeWithHourlyInterval,
-  generateHourlyIntervalDT,
+  generateHourlyIntervalDT, setChartTicksAndGridColor,
 } from "~/composables/utils";
 import {animation, annotation, chartOptionsMain} from "~/composables/chartOptionsMain";
 import {
@@ -15,43 +15,31 @@ import {
   assignHumidityDataset,
   assignTemperatureDataset, assignSimpleHumidDataset
 } from "~/composables/assignChartDataset";
-import {formatDistanceToNow} from "date-fns";
+import {differenceInDays, eachMinuteOfInterval, formatDistanceToNow, parseISO} from "date-fns";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import ErrorBar from "~/components/ErrorBar.vue";
-
-useHead({
-  title: 'Chart view',
-});
-
-interface ChartDataset {
-  label?: string
-  data?: (number | null)[]
-  borderColor?: string
-  borderWidth?: number
-  radius?: number
-  yAxisID?: string
-  spanGaps?: boolean
-  segment?: object
-  borderDash?: number[],
-  backgroundColor?: string | object,
-  showLine?: boolean,
-  fill?: boolean,
-}
+import type {ChartDataset} from "~/types";
+import {windowSize} from "~/composables/windowSize";
 
 const errorMessage = ref('')
 const isError = ref(false)
 
-// for refresh chart when change
 const chartLoaded = ref(false);
 const dataStore = useDataStore()
 const userPreference = usePreferences()
-const { width } = useWindowSize()
-const SMALL_SCREEN = 480
-const XL_SCREEN = 1280
 const HUMIDITY_DARK_BORDER_COLOR = "#444444"
+
+interface realTemperaturesHour{
+  date: string
+  temp: number[]
+  humid: number[]
+  datetime: Date[]
+  firstTemp: number | null
+  firstHumid: number | null
+}
 
 let realDatetime: Date[] = [];
 let realTemperatures: (number | null)[] = []
+let seriesDataHourly: realTemperaturesHour[] =[]
 let realHumidity: (number | null)[] = []
 let avgTemperatureSeries: (number | null)[] = []
 
@@ -61,15 +49,14 @@ const isOptionHiddenRef = ref()
 const isShowLabelOnRef = ref()
 const isChartAnimationOnRef = ref()
 const chartRefreshTrigger = ref(0);
-const isSmallScreen = ref(width.value < SMALL_SCREEN)
-const isLargeScreen = ref(width.value < XL_SCREEN)
+
+const { width, isSmallScreen, isLargeScreen, SMALL_SCREEN, XL_SCREEN } = windowSize()
 
 watch(width, (width) => {
   // to keep it responsive on window resize
   // specialized for option menu
   isSmallScreen.value = width < SMALL_SCREEN
   isLargeScreen.value = width < XL_SCREEN
-
 })
 
 const disableSeriesToggle = ref(false)
@@ -121,7 +108,6 @@ const optionToggle = () => {
   isOptionHiddenRef.value = !isOptionHiddenRef.value;
 
   isOptionHiddenRef.value ? localStorage.setItem(HIDE_OPTION, 'true') : localStorage.removeItem(HIDE_OPTION);
-
 };
 
 const chartAnimationToggle = (isChecked: boolean) => {
@@ -134,9 +120,13 @@ const refreshChart = () => chartRefreshTrigger.value += 1;
 
 onMounted(() => {
   // Animation setting
-  const storedAnimationSetting = localStorage.getItem(CHART_ANIMATION);
-  chartOptionsMain.value.animation = storedAnimationSetting === 'true' ? animation : false;
-  isChartAnimationOnRef.value = storedAnimationSetting === 'true';
+  const getStoredAnimationSetting = localStorage.getItem(CHART_ANIMATION);
+  const isAnimationOn = getStoredAnimationSetting === 'true'
+  chartOptionsMain.value.animation = isAnimationOn ? animation : false;
+  isChartAnimationOnRef.value = isAnimationOn;
+
+  // chartOptionsMain.value.scales.x.ticks.autoSkipPadding = undefined
+  chartOptionsMain.value.scales.x.time.tooltipFormat = 'DD MMM hh:mm a'
 
   // chart Option setting
   const storedHideOption = localStorage.getItem(HIDE_OPTION);
@@ -186,9 +176,9 @@ const selectedTimeRange = ref('')
 const dataCountLabel = ref('loading...') // show data count for selected time range
 
 const timeRanges = [
-  { name: 'Today', initial: 'T',  value: '1' },
-  { name: '3 days', initial: '3d', value: '3' },
-  { name: '1 week', initial: '1w', value: '7' }
+  { name: 'Today',  value: '1' },
+  { name: '3 days', value: '3' },
+  { name: '1 week', value: '7' }
 ]
 // ==========================================================
 // ==========================================================
@@ -221,11 +211,12 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark(), ()=>dataStore
   realHumidity.length = 0
   realDatetime.length = 0
   avgTemperatureSeries.length = 0
+  seriesDataHourly.length = 0
+
   chartData.value.datasets = []
   chartData.value.labels = []
 
   try {
-    let totalDataPointCount = 0;
     let averageDataset = {}
 
     if (!isSeriesOn) {
@@ -248,12 +239,8 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark(), ()=>dataStore
 
         const temp = doc.expanded_temperature
         const humidity = doc.expanded_humidity
-        const datetime = doc.expanded_datetime
 
-        totalDataPointCount += doc.data_point_count;
-        dataCountLabel.value = totalDataPointCount.toString()
-
-        chartData.value.labels = datetime; // X axis label
+        chartData.value.labels = doc.expanded_datetime; // X axis label
 
         if (isSimpleOn){
           // Series OFF and Simple ON, assign hourly data
@@ -325,20 +312,32 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark(), ()=>dataStore
 
       }else {
         // Series ON
-        // Simple On / Simple OFF
-
         const generatedDateTime = generateDateTimeWithHourlyInterval(doc.datetime, hourlyTempObj);
 
-        realTemperatures = realTemperatures.concat(isSimpleOn ? hourlyTemp : doc.temperatures);
-        realHumidity = realHumidity.concat(isSimpleOn ? hourlyHumid : doc.humidity);
-        realDatetime = realDatetime.concat(isSimpleOn ? generatedDateTime : doc.datetime);
+        if (!isSimpleOn){
+          // Simple OFF
+          realTemperatures = realTemperatures.concat(doc.temperatures);
+          realHumidity = realHumidity.concat(doc.humidity);
+          realDatetime = realDatetime.concat(doc.datetime);
 
-        avgTemperatureSeries = avgTemperatureSeries.concat(
-            isSimpleOn ? dataStore.overall_hourly_average_by_entries : expandHourlyData(dataStore.overall_hourly_average_by_entries)
-        );
+        } else {
+          // Simple ON
+          realTemperatures = realTemperatures.concat(hourlyTemp);
+          realHumidity = realHumidity.concat(hourlyHumid);
+          realDatetime = realDatetime.concat(generatedDateTime);
 
-        totalDataPointCount += doc.data_point_count;
-        dataCountLabel.value = totalDataPointCount.toString()
+          seriesDataHourly.push({
+            date: doc.date,
+            temp: hourlyTemp,
+            humid: hourlyHumid,
+            datetime: generatedDateTime,
+            firstTemp: doc.temperatures[0],
+            firstHumid: doc.humidity[0]
+          })
+        }
+
+        if (!isSimpleOn)
+          avgTemperatureSeries = avgTemperatureSeries.concat(expandHourlyData(dataStore.overall_hourly_average_by_entries));
       }
     })
 
@@ -351,46 +350,76 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark(), ()=>dataStore
 
       if (!isSimpleOn){
         // Series ON Simple OFF
+
         const filledData = addMissingTimes(realDatetime, realTemperatures, realHumidity);
         const sortedFilledData = filledData.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime());
-        // console.log(filledData)
 
-        const sortedTemp = filledData.map(entry => entry.temperature);
-        const sortedHumid = filledData.map(entry => entry.humidity);
+        const sortedDatetime = sortedFilledData.map(entry => entry.timestamp)
+        const sortedTemp = sortedFilledData.map(entry => entry.temperature)
+        const sortedHumid = sortedFilledData.map(entry => entry.humidity)
 
-        chartData.value.labels = sortedFilledData.map(entry => entry.timestamp);
+        const filledDataFix = addMissingTimes(
+            sortedDatetime, sortedTemp, sortedHumid
+        );
+
+        const fixedTemp = filledDataFix.map(entry => entry.temperature);
+        const fixedHumid = filledDataFix.map(entry => entry.humidity);
+
+        chartData.value.labels = filledDataFix.map(entry => entry.timestamp);
         chartData.value.datasets = assignDatasets(
-            sortedTemp, sortedHumid,
+            fixedTemp, fixedHumid,
         )
-        chartData.value.datasets.push(assignAverageDataset(avgTemperatureSeries))
 
-      }else {
+        const firstIndex = findIndexForTime(sortedDatetime[0])
+
+        chartData.value.datasets.push(assignAverageDataset(avgTemperatureSeries.slice(firstIndex)))
+
+      } else {
         // Series ON Simple ON
-        const sortedData = realDatetime.map((timestamp, index) => ({
-          timestamp,
-          temperature: realTemperatures[index],
-          humidity: realHumidity[index],
-        })).sort((a, b) => (a.timestamp.getTime() - b.timestamp.getTime()));
+        const sortedSeriesData = seriesDataHourly.sort((a, b) =>
+            (parseISO(a.date).getTime() - parseISO(b.date).getTime())
+        );
 
-        const sortedTemp = sortedData.map(entry => entry.temperature)
-        const sortedHumid = sortedData.map(entry => entry.humidity)
+        const combineData = (dataArray: (number | null)[][] | undefined) =>
+            dataArray?.reduce((acc, curr) => {
+              let startIndex = curr.findIndex((val) => val !== undefined && val !== null);
+              if (startIndex === -1) startIndex = curr.length;
+              return [...acc, ...curr.slice(startIndex)];
+            }, []);
+
+        const combinedTemp = combineData(sortedSeriesData.map(e => e.temp)) || [];
+        const combinedHumid = combineData(sortedSeriesData.map(e => e.humid)) || [];
+
+        const combinedDatetime = ([] as Date[]).concat(...sortedSeriesData.map(e => e.datetime));
+
+        const hourlyAverageSingleDay = dataStore.overall_hourly_average_by_entries_obj
+        const numberOfDays = differenceInDays(
+            combinedDatetime.at(-1)!,
+            combinedDatetime[0]
+        ) + 1;
+
+        const firstTemp = sortedSeriesData.map(e => e.firstTemp)[0]
+        const firstHumid = sortedSeriesData.map(e => e.firstHumid)[0]
 
         // add new 1 hour at the end
-        const lastTimestamp = sortedData[sortedData.length - 1].timestamp;
-        const newTimestamp = new Date(lastTimestamp.getTime() + 60 * 60 * 1000); // Add 1 hour (in milliseconds)
-        const newEntry = {
-          timestamp: newTimestamp,
-          temperature: null,
-          humidity: null,
-        };
-        const updatedSortedData = [...sortedData, newEntry].sort((a, b) => (a.timestamp.getTime() - b.timestamp.getTime()));
+        const lastTimestamp = combinedDatetime.at(-1)
+        const newTimestamp = new Date(lastTimestamp!.getTime() + 60 * 60 * 1000); // Add 1 hour (in milliseconds)
 
-        chartData.value.labels = updatedSortedData.map(entry => entry.timestamp);
+        const filledData = fillMissingValues(combinedDatetime, combinedTemp, combinedHumid);
+        const filledDatetime = filledData.map(e => e.datetime)
+        const filledTemp = filledData.map(e => e.combinedTemp)
+        const filledHumid = filledData.map(e => e.combinedHumid)
+
+        chartData.value.labels = [...filledDatetime, newTimestamp!]
         chartData.value.datasets = assignDatasets(
-            [sortedData[0].temperature, ...sortedTemp],
-            [sortedData[0].humidity, ...sortedHumid],
+            [firstTemp, ...filledTemp],
+            [firstHumid, ...filledHumid],
         )
-        chartData.value.datasets.push(assignAverageDataset(avgTemperatureSeries))
+
+        const adjAvgTemperatureSeries = extendAvgTemperatureSeries(
+            hourlyAverageSingleDay, combinedDatetime[0].getHours(), numberOfDays
+        )
+        chartData.value.datasets.push(assignAverageDataset(adjAvgTemperatureSeries))
       }
 
       if (isDark){
@@ -410,27 +439,12 @@ watch([selectedTimeRange, isSeriesOnRef, isSimpleOnRef, useDark(), ()=>dataStore
     isSeriesOnRef.value = false
     userPreference.seriesToggle = false
     localStorage.setItem('timerangeIsOne', 'true')
-    if (isDark){
-      chartData.value.datasets[2].borderColor = HUMIDITY_DARK_BORDER_COLOR
-    }
+    if (isDark) chartData.value.datasets[2].borderColor = HUMIDITY_DARK_BORDER_COLOR
   }else {
     localStorage.removeItem('timerangeIsOne')
   }
 
-  chartOptionsMain.value.scales.y.grid.color = (ctx: any) => {
-    const threshold = ctx.tick.value === 30 || ctx.tick.value === 34;
-    return isDark ? (threshold ? '#aba6a6' : '#4b4b4b') : (threshold ? '#2f2f2f' : '#d5d5d5');
-  };
-  chartOptionsMain.value.scales.x.grid.color = () => (isDark ? '#4b4b4b' : '#d5d5d5')
-  // chartOptions.value.scales.x.grid.display = () => !(width.value < 480 && isOptionOnRef.value)
-
-  const darkModeScaleColor = () => (isDark ? '#bebebe' : '#525252');
-  chartOptionsMain.value.scales.y.ticks.color = darkModeScaleColor;
-  chartOptionsMain.value.scales.y1.ticks.color = darkModeScaleColor;
-  // chartOptions.value.scales.x.ticks.color = darkModeScaleColor;
-  chartOptionsMain.value.scales.x.ticks.color = function(context: any) {
-    return context.tick.major ? '#ff3874' : darkModeScaleColor();
-  };
+  setChartTicksAndGridColor(isDark)
 
 })
 
@@ -443,7 +457,68 @@ onKeyStroke('Escape', () => {
 onKeyStroke('s', () => {
   isSimpleOnRef.value = !isSimpleOnRef.value
   isSimpleOnRef.value ? localStorage.setItem(SIMPLE_MODE, 'true') : localStorage.removeItem(SIMPLE_MODE);
-})
+}, { dedupe: true })
+
+interface Measurement {
+  datetime: Date;
+  combinedTemp: number | null;
+  combinedHumid: number | null;
+}
+
+function fillMissingValues(combinedDatetime: Date[], combinedTemp: (number|null)[], combinedHumid: (number|null)[]): Measurement[] {
+  const filledArray: Measurement[] = [];
+
+  for (let i = 0; i < combinedDatetime.length; i++) {
+    const measurement: Measurement = {
+      datetime: combinedDatetime[i],
+      combinedTemp: combinedTemp[i],
+      combinedHumid: combinedHumid[i]
+    };
+
+    filledArray.push(measurement);
+
+    if (i < combinedDatetime.length - 1) {
+      const current = combinedDatetime[i].getTime();
+      const next = combinedDatetime[i + 1].getTime();
+      const diff = next - current;
+
+      if (diff > 3600000) { // 1 hour in milliseconds
+        const numMissingValues = Math.floor(diff / 3600000) - 1;
+        for (let j = 1; j <= numMissingValues; j++) {
+          const missingTimestamp = current + j * 3600000;
+          const missingDate = new Date(missingTimestamp);
+          filledArray.push({
+            datetime: missingDate,
+            combinedTemp: null,
+            combinedHumid: null
+          });
+        }
+      }
+    }
+  }
+
+  return filledArray;
+}
+
+function findIndexForTime(start: Date) {
+  // Define the start and end times
+  const startTime = new Date();
+  startTime.setHours(0, 0, 0, 0);
+
+  const endTime = new Date();
+  endTime.setHours(23, 55, 0, 0);
+
+  // Generate array of dates with 5-minute intervals
+  const dateArray = eachMinuteOfInterval({ start: startTime, end: endTime }, { step: 5 });
+
+  for (let i = 0; i < dateArray.length; i++) {
+    if (dateArray[i].getHours() === start.getHours() &&
+        dateArray[i].getMinutes() === start.getMinutes()) {
+      return i;
+    }
+  }
+  return -1; // If not found
+}
 
 </script>
 
@@ -459,7 +534,7 @@ onKeyStroke('s', () => {
                   'card-effect': !isFullscreen,
                   'px-0': isSmallScreen}">
 
-    <div class="flex justify-between relative -top-1 mb-2" :class="{'px-4': isSmallScreen}">
+      <div class="flex justify-between relative -top-1 mb-2" :class="{'px-4': isSmallScreen}">
         <!-- Select  -->
         <time-range-tabs :chart-loaded="chartLoaded"
                          :time-ranges="timeRanges"
@@ -485,7 +560,10 @@ onKeyStroke('s', () => {
 
       </div>
 
-      <div class="mb-2" :class="[isFullscreen?'h-[calc(100vh-120px)]' : 'aspect-[4/3] md:aspect-[2/1] xl:h-[50vh] w-full']">
+      <div class="mb-2"
+           :class="[isFullscreen?'h-[calc(100vh-120px)]' :
+                    isOptionHiddenRef? 'xl:aspect-[5/1.82] aspect-[4/3] md:aspect-[2/1] w-full' :
+                                       'xl:aspect-[5/2.5] aspect-[4/3] md:aspect-[2/1] w-full']" >
           <Line v-if="chartLoaded"
                 :data="computedChartData" :options="chartOptionsMain"
                 :plugins="[htmlLegendPlugin, ChartDataLabels, borderPlugin]"
@@ -497,7 +575,7 @@ onKeyStroke('s', () => {
 
     <!-- chart data option-->
     <div v-if="!isOptionHiddenRef"
-         class="basis-1/4 card card-effect space-y-2"
+         class="basis-1/4 card card-effect space-y-3"
          :class="{'absolute right-4 -top-1': isSmallScreen || isLargeScreen}">
       <div class="flex justify-between items-center">
         <h2 class="ml-1" >Option</h2>
@@ -520,5 +598,6 @@ onKeyStroke('s', () => {
                      :is-disabled="disableShowLabel"
                      :default-toggle="isShowLabelOnRef"/>
     </div>
+
   </div>
 </template>

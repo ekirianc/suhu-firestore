@@ -1,11 +1,6 @@
 <script lang="ts" setup>
 import {useDataStore} from "~/store";
 import {formatDistanceToNow} from "date-fns";
-import Loading from "~/components/Loading.vue";
-
-useHead({
-  title: 'Monitor Suhu 2',
-});
 
 const dataStore = useDataStore()
 
@@ -21,19 +16,19 @@ definePageMeta({
   layout: false,
 });
 
-const isLoading = ref(true)
-onMounted(async () => {
-  try {
-    isLoading.value = true
-    if (!dataStore.last_temperature) {
-      await dataStore.fetchDataFromFirestore();
-    }
-  }catch (e){
-    console.log(e)
-  }finally {
-    isLoading.value = false
-  }
-})
+// const isLoading = ref(true)
+// onMounted(async () => {
+//   try {
+//     isLoading.value = true
+//     if (!dataStore.last_temperature) {
+//       await dataStore.fetchDataFromFirestore();
+//     }
+//   }catch (e){
+//     console.log(e)
+//   }finally {
+//     isLoading.value = false
+//   }
+// })
 
 function updateRelativeDatetime(){
   dataStore.relative_time = formatDistanceToNow(dataStore.last_datetime, { addSuffix: true, includeSeconds: true })
@@ -50,8 +45,7 @@ onKeyStroke(' ', () => { navigateTo('/chart') })
 </script>
 
 <template>
-  <div v-if="isLoading"><Loading class="h-screen"/></div>
-  <div v-else class="min-h-screen grid place-content-center font-inter absolute overflow-hidden z-10 w-full">
+  <div class="min-h-screen grid place-content-center font-inter absolute overflow-hidden z-10 w-full">
     <div class="flex justify-center font-medium shadow-text text-bg-clip">
       <span class="md:text-[12rem] text-8xl px-4">{{ dataStore.last_temperature.toFixed(1) }}</span>
       <div class="grid place-content-center md:text-right px-2">
@@ -90,20 +84,18 @@ onKeyStroke(' ', () => { navigateTo('/chart') })
     </div>
     <div class="relative top-5 flex justify-center ">
       <button @click="toggleColorModeHandler()" class="dark:text-gray-400 dark:hover:text-gray-100 text-gray-600 hover:text-gray-900">
-      <span class="rounded-full border border-transparent hover:border-gray-400 transition-all px-3 py-1">
-        <span v-if="isDark"> <icon name="tabler:moon" class="text-xl relative bottom-0.5"/> </span>
-        <span v-else> <icon name="tabler:sun" class="text-xl relative bottom-0.5"/> </span>
-        <span class="ml-2 ">{{ isDark ? 'Dark' : 'Light' }}</span>
-      </span>
+      <client-only>
+        <span class="rounded-full border border-transparent hover:border-gray-400 transition-all px-3 py-1">
+          <span v-if="isDark"> <icon name="tabler:moon" class="text-xl relative bottom-0.5"/> </span>
+          <span v-else> <icon name="tabler:sun" class="text-xl relative bottom-0.5"/> </span>
+          <span class="ml-2 ">{{ isDark ? 'Dark' : 'Light' }}</span>
+        </span>
+      </client-only>
       </button>
     </div>
   </div>
-
-  <div class="absolute bottom-2 w-full justify-center flex space-x-4 z-20">
-    <a href="https://github.com/ekirianc/temperature-monitor-2 " target="_blank"
-       class="dark:text-gray-400 dark:hover:text-gray-100 text-gray-600 hover:text-gray-900 block">
-      <Icon name ="mdi:github" class="relative bottom-0.5" /> Github
-    </a>
+  <div class="absolute bottom-2 w-full justify-center flex z-20">
+   <GithubLink/>
   </div>
 
 

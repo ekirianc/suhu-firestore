@@ -7,6 +7,7 @@ import pytz
 # Heat index (Fischer and Schär 2010)
 C = [-8.7847, 1.6114, -0.012308, 2.3385, -0.14612, 2.2117e-3, -0.016425, 7.2546e-4, -3.582e-6]
 TIMEZONE = 'Asia/Singapore'
+DATA_POINT_PER_HOUR = 12
 
 
 def get_heat_index(temperature, humidity):
@@ -52,7 +53,7 @@ def calculate_slope(hourly_data):
     return slopes
 
 
-def get_temperature_values_highest_low(data):
+def get_high_low_temperature_values(data):
     """
     dapatkan nilai peak dan low dari semua hari dan dijadikan satu
 
@@ -76,9 +77,8 @@ def calculate_hourly_temp_differences(day_data_list, overall_avg_temps_each_hour
 
         for hour, temp in hourly_temps.items():
             if hour not in hourly_temp_differences:
-                hourly_temp_differences[hour] = temp - overall_avg_temps_each_hour.get(hour, 0)
-            else:
-                hourly_temp_differences[hour] += temp - overall_avg_temps_each_hour.get(hour, 0)
+                hourly_temp_differences[hour] = 0
+            hourly_temp_differences[hour] = temp - overall_avg_temps_each_hour.get(hour, 0)
 
     return hourly_temp_differences
 
@@ -151,3 +151,26 @@ def calculate_overall_avg_representative_temps(grouped_temp_by_hour):
 
     # Sort and return the result
     return dict(sorted(overall_avg_representative_temps_by_hour.items()))
+
+
+def expand_and_sum_avg(_avg_data):
+    """
+    Hitung jumlah dari nilai average yang telah di-expand
+
+    @param _avg_data: nilai hourly average
+            {'0': average, '1': average, ... '23': average }
+    @return: jumlah dari keseluruhan hourly average yang telah di-expand
+    """
+    values = list(_avg_data.values())
+
+    # Linear interpolation to generate new values
+    interpolated_values = []
+    for i in range(len(values) - 1):
+        start_value = values[i]
+        end_value = values[i + 1]
+        interpolated_values.extend(np.linspace(start_value, end_value, num=DATA_POINT_PER_HOUR))
+
+    # Set the end value of the last key with the first index of values
+    interpolated_values.extend(np.linspace(values[-1], values[0], num=DATA_POINT_PER_HOUR))
+
+    return sum(interpolated_values)

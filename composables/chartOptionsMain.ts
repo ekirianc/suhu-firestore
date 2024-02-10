@@ -37,7 +37,10 @@ export const annotation = (mode?: number, color?: string)=>{
     scaleID: 'x',
     value: (ctx: any) => {
       // return datetime (label)
-      const data = ctx.chart.data.datasets[1].data;
+      let data = []
+      if (ctx.chart.data.datasets[1]){
+        data = ctx.chart.data.datasets[1].data;
+      }
       const currentDate = new Date();
 
       for (let i = data.length - 1; i >= 0; i--) {
@@ -107,7 +110,7 @@ export const chartOptionsMain = ref({
       display: true,
       time: {
         // Luxon format string
-        tooltipFormat: 'DD MMM hh:mm a',
+        tooltipFormat: '', // seted on onMounted in chart and calendar
         displayFormats: {
           calendarDays: 'DD MMM',
           hour: 'hh A',
@@ -116,7 +119,7 @@ export const chartOptionsMain = ref({
       },
       ticks: {
         autoSkip: true,
-        // autoSkipPadding: 20,
+        autoSkipPadding: 20,
         maxRotation: 0,
         color: '',
         major: {

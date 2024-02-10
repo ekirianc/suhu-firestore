@@ -1,13 +1,21 @@
 <script setup lang="ts">
+import {useDataStore} from "~/store";
+
 const emits = defineEmits();
 const props = defineProps({
   chartName: String,
   defaultCollapse: Boolean,
 })
 
+const dataStore = useDataStore()
+
 const [isFullscreen, fullscreenToggle] = useToggle()
 const isCollapse = ref(props.defaultCollapse)
 // const collapseChart = useToggle(isCollapse)
+
+watch(isFullscreen, (isFullscr)=>{
+  dataStore.isFullscreen = isFullscr
+})
 
 const collapseChart = () => {
   if (isFullscreen.value){ return }

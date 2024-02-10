@@ -5,11 +5,11 @@ import {eachDayOfInterval, format, formatDistanceToNow, isSameDay} from 'date-fn
 import {
   combineMinMax,
   fillMissingHours,
-  generateMinMaxRefsObject, propertyNames,
+  generateMinMaxRefsObject, processDataEntries, propertyNames,
   updateMinMax,
   UpdateType,
 } from "~/composables/utils";
-import type {Datasets} from "~/composables/types";
+import type {Datasets, HourlyData} from "~/types";
 
 const FETCH_LIMIT = 7
 
@@ -54,10 +54,21 @@ export const useDataStore = defineStore('temperature', {
     overall_hourly_average_by_entries: [] as number[],
     overall_hourly_average_adj: [] as number[],
 
+    overall_hourly_average_by_entries_obj: {} as HourlyData,
+
+    sum_of_overall_hourly_average_by_entries: 0,
+
     overall_datasets: [] as Datasets[],
+    overall_min_max: generateMinMaxRefsObject(propertyNames),
+    overall_temp_average: 0,
+    overall_humid_average: 0,
+    overall_high_temp_average: 0,
+    overall_low_temp_average: 0,
+    overall_hourly_temp_diff_average: 0,
 
-    overall_min_max: generateMinMaxRefsObject(propertyNames)
-
+    activeRouter: '',
+    isFullscreen: false,
+    isSelectedDataValid: false
   }),
   actions: {
     async fetchDataFromFirestore() {
@@ -73,10 +84,22 @@ export const useDataStore = defineStore('temperature', {
           const overallData = snapshot.data();
           if (overallData){
             this.correlation_high_low_temp = overallData.correlation_high_low_temp
-            this.overall_hourly_average_by_entries = Object.values(overallData.overall_hourly_average.by_entries)
 
-            const originalOverallHourlyAverage = Object.values(overallData.overall_hourly_average.by_entries);
+            const originalOverallHourlyAverage: number[] = Object.values(overallData.overall_hourly_average.by_entries)
+            this.overall_hourly_average_by_entries = originalOverallHourlyAverage
+            this.overall_hourly_average_by_entries_obj = overallData.overall_hourly_average.by_entries
+
             this.overall_hourly_average_adj = [...originalOverallHourlyAverage, originalOverallHourlyAverage[0]] as number[];
+
+            this.sum_of_overall_hourly_average_by_entries = overallData.overall_hourly_average.sum_by_entries
+
+            this.overall_temp_average = overallData.overall_average.temp
+            this.overall_humid_average = overallData.overall_average.humid
+
+            this.overall_high_temp_average = overallData.overall_average.high_temp
+            this.overall_low_temp_average = overallData.overall_average.low_temp
+
+            this.overall_hourly_temp_diff_average = overallData.overall_average.hourly_temp_diff
           }
         });
 
@@ -158,102 +181,71 @@ export const useDataStore = defineStore('temperature', {
           if (!snapshot.empty) {
             // ====================================================
             // get last data
-            const lastDocument = snapshot.docs[0];
-            const tempArray = lastDocument.data().today_entries.temp;
-            const humidArray = lastDocument.data().today_entries.humid;
-            const heatIndexArray = lastDocument.data().today_entries.heat_index;
-            const timeArray = lastDocument.data().today_entries.time;
+            const lastDocument = snapshot.docs[0].data();
+            const tempArray = lastDocument.today_entries.temp;
+            const humidArray = lastDocument.today_entries.humid;
+            const heatIndexArray = lastDocument.today_entries.heat_index;
+            const timeArray = lastDocument.today_entries.time;
 
-            this.last_temperature = tempArray[tempArray.length - 1];
-            this.last_humidity = humidArray[humidArray.length - 1];
-            this.last_heat_index = heatIndexArray[heatIndexArray.length - 1];
-            this.last_entry_time = timeArray[timeArray.length - 1]; // HH:mm
+            this.last_temperature = tempArray.at(-1);
+            this.last_humidity = humidArray.at(-1);
+            this.last_heat_index = heatIndexArray.at(-1);
+            this.last_entry_time = timeArray.at(-1); // HH:mm
 
             // get last entry relative time
-            const lastTimeEntry = timeArray[timeArray.length - 1];
-            const dateTimeString = `${lastDocument.data().today_date} ${lastTimeEntry}`;
+            const lastTimeEntry = timeArray.at(-1);
+            const dateTimeString = `${lastDocument.today_date} ${lastTimeEntry}`;
             const dateTime = new Date(dateTimeString);
             this.relative_time = formatDistanceToNow(dateTime, { addSuffix: true, includeSeconds: true });
             this.last_datetime = dateTime;
 
             // get today high and low
-            this.today_high_temp_data = lastDocument.data().today_highest_temp.value;
-            this.today_high_temp_time = lastDocument.data().today_highest_temp.time;
-            this.today_low_temp_data = lastDocument.data().today_lowest_temp.value;
-            this.today_low_temp_time = lastDocument.data().today_lowest_temp.time;
+            this.today_high_temp_data = lastDocument.today_highest_temp.value;
+            this.today_high_temp_time = lastDocument.today_highest_temp.time;
+            this.today_low_temp_data = lastDocument.today_lowest_temp.value;
+            this.today_low_temp_time = lastDocument.today_lowest_temp.time;
 
-            this.today_data_point_count = lastDocument.data().today_data_point_count;
+            this.today_data_point_count = lastDocument.today_data_point_count;
 
             // ============================================
 
-            const getTimeOnly = (date: Date) => date.getHours() * 60 + date.getMinutes();
-
-            const dataCNullContainer = new Array(288).fill(null).map(() => ({
-              temperature: null,
-              humidity: null
-            }));
-
             this.data_entries = snapshot.docs.map((doc) => {
               const data = doc.data();
-              const date = data.today_date;
-              const realTemperature = data.today_entries.temp
-              const realHumidity = data.today_entries.humid
-
-              // Extract time array
-              let times = data.today_entries.time;
-
-              // Check if "12:00 AM" exists at both the beginning and the end
-              if (times.length >= 2 && times[times.length - 1] === "12:00 AM") {
-                // Remove the last occurrence of "12:00 AM"
-                times.pop();
-                realTemperature.pop();
-                realHumidity.pop();
-              }
-
-              // Combine date and time to create a valid JavaScript Date object
-              const realDatetime: Date[] = data.today_entries.time.map((time: string) => {
-                const dateTimeString = `${date} ${time}`;
-                return new Date(dateTimeString);
-              });
-
-              // generate null array of temperature
-              const temperatureContainer = dataCNullContainer.map(entry => entry.temperature);
-              const humidityContainer = dataCNullContainer.map(entry => entry.humidity);
-
-              // variabel ini digunakan untuk menyamakan jumlah data point setiap harinya walaupn ada yang kosong di tenaah
-              // return 288 data point from today datetime
-              // khusus ketika Series OFF
-              const dummyDatetimeArray: Date[] = [];
-              for (let i = 0; i < 24 * 60; i += 5) {
-                const dummyDate = new Date();
-                dummyDate.setHours(Math.floor(i / 60));
-                dummyDate.setMinutes(i % 60);
-                dummyDatetimeArray.push(dummyDate);
-              }
-
-
-              dummyDatetimeArray.forEach((dummyDatetime, index) => {
-                const dummyTime = getTimeOnly(dummyDatetime);
-                const realIndex = realDatetime.findIndex((realDatetime) => {
-                  return getTimeOnly(realDatetime) === dummyTime;
-                });
-
-                // If a match is found, copy the temperature value; otherwise, set it to null
-                if (realIndex !== -1) {
-                  temperatureContainer[index] = realTemperature[realIndex];
-                  humidityContainer[index] = realHumidity[realIndex];
-                } else {
-                  temperatureContainer[index] = null;
-                  humidityContainer[index] = null;
-                }
-              });
+              const {
+                realTemperature, realHumidity, realDatetime,
+                temperatureContainer, humidityContainer, dummyDatetimeArray
+              } = processDataEntries(data)
 
               const filledHourlyTemp = fillMissingHours(data.today_hourly.temp);
               const filledHourlyHumid = fillMissingHours(data.today_hourly.humid);
 
-              // assign first data instead avg value on index 0
-              const adjHourlyTemp = [realTemperature[0], ...filledHourlyTemp];
-              const adjHourlyHumid = [realHumidity[0], ...filledHourlyHumid];
+              const temp = { ...data.today_hourly.temp };
+              const humid = { ...data.today_hourly.humid };
+
+              // Extracting the keys of the 'temp' object
+              const keys = Object.keys(temp);
+              keys.sort((a, b) => Number(a) - Number(b));
+              const firstKey = keys[0];
+              const keyBeforeFirst = String(Number(firstKey) - 1);
+
+              let adjHourlyTemp: any[] = []
+              let adjHourlyHumid: any[] = []
+
+              if (firstKey === '0'){
+                // if hourly temp start at 0, add realtemp to begining
+                adjHourlyTemp = [realTemperature[0], ...filledHourlyTemp];
+                adjHourlyHumid = [realHumidity[0], ...filledHourlyHumid];
+              } else {
+                temp[keyBeforeFirst] = realTemperature[0]
+                humid[keyBeforeFirst] = realHumidity[0]
+                adjHourlyTemp = fillMissingHours(temp)
+                adjHourlyHumid = fillMissingHours(humid)
+                // shift values to +1 keys
+                for (let i = adjHourlyTemp.length - 1; i >= 0; i--) {
+                  adjHourlyTemp[i + 1] = adjHourlyTemp[i];
+                  adjHourlyHumid[i + 1] = adjHourlyHumid[i];
+                }
+              }
 
               return {
                 date: data.today_date,
@@ -293,11 +285,16 @@ export const useDataStore = defineStore('temperature', {
 export const usePreferences = defineStore("preferences", {
   state: () => ({
     seriesToggle: false,
-    timeRange: "1"
+    timeRange: "1",
+
+    percentageToggle: false,
   }),
   actions: {
     setSeriesToggle(toggle: boolean){
       this.seriesToggle = toggle
+    },
+    setPercentageToggle(toggle: boolean){
+      this.percentageToggle = toggle
     },
   }
 })

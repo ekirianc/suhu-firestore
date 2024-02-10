@@ -50,6 +50,9 @@ const dataStore = useDataStore()
           <span class="text-gray-400 text-sm"> | {{( (dataStore.today_data_point_count/288)*100).toFixed(2) }}%</span>
         </span>
       </div>
+      <div class="flex">
+        <GithubLink/>
+      </div>
     </div>
 </template>
 

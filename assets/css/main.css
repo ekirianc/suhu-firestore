@@ -20,9 +20,16 @@
         @apply p-4 bg-white rounded-3xl overflow-y-scroll no-scrollbar
                md:block dark:bg-zinc-900 dark:text-white
     }
-    .card-effect{
-        @apply border dark:border-gray-700 dark:hover:border-gray-500
+    .card-2{
+        @apply card-effect dark:bg-zinc-700/20 bg-white rounded-xl
     }
+    .card-effect{
+        @apply border dark:border-gray-700 dark:hover:border-gray-500 hover:border-gray-400/70
+    }
+    .btn{
+        @apply p-2 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-xl
+    }
+
     /* HTML: <div class="loader"></div> */
     .loader {
         width: 40px;

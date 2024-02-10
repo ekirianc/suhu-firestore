@@ -92,15 +92,15 @@ def calculate_daily_data(data):
         dt_local = Utils.get_local_datetime(timestamp)
         date = Utils.format_date(dt_local)
 
-        # bulatkan waktu ke 5 menit terdekat
+        # bulatkan waktu ke 5 menit terendah
+        # rounded_time = 5 * (dt_local.minute // 5)
         rounded_time = int(5 * round(float(dt_local.minute) / 5))
         rounded_dt_local = dt_local.replace(minute=0, second=0, microsecond=0) + timedelta(minutes=rounded_time)
 
         # store daily data entries
-        if rounded_dt_local.hour != 0 or rounded_dt_local.minute != 0:
-            daily_data[date]['time_entries'].append(Utils.format_time(rounded_dt_local))
-            daily_data[date]['temp_entries'].append(temperature)
-            daily_data[date]['humid_entries'].append(humidity)
+        daily_data[date]['time_entries'].append(Utils.format_time(rounded_dt_local))
+        daily_data[date]['temp_entries'].append(temperature)
+        daily_data[date]['humid_entries'].append(humidity)
 
         # daily peak/low temp
         if temperature > daily_data[date]['highest_temp']:
@@ -189,9 +189,10 @@ def store_daily_data(daily_data, grouped_temp_by_hour):
     """
     today_data = []
     high_low_temperature_values = []
+    hourly_temp_diff_sum_entries = []
 
+    overall_avg_temps_each_hour = Utils.calculate_overall_avg_temps_each_hour(grouped_temp_by_hour)
     for date, day_data in daily_data.items():
-        overall_avg_temps_each_hour = Utils.calculate_overall_avg_temps_each_hour(grouped_temp_by_hour)
         hourly_temp_differences = Utils.calculate_hourly_temp_differences([day_data], overall_avg_temps_each_hour)
 
         highest_temp = day_data['highest_temp']
@@ -207,7 +208,9 @@ def store_daily_data(daily_data, grouped_temp_by_hour):
             for hour, temp_difference in hourly_temp_differences.items():
                 hourly_temp_diff_sum += temp_difference
 
-            # highest low correlation # accumulated for each day
+            hourly_temp_diff_sum_entries.append(hourly_temp_diff_sum)
+
+            # high low correlation # accumulated for each day
             high_low_temperature_values.append((day_data['highest_temp'], day_data['lowest_temp']))
             if len(high_low_temperature_values) > 1:
                 high_low_daily_correlation = np.corrcoef(*zip(*high_low_temperature_values))[0, 1]
@@ -256,14 +259,20 @@ def store_daily_data(daily_data, grouped_temp_by_hour):
                 'average': day_data['hourly_avg_temps']
             }
         })
-    return today_data
+
+    hourly_temp_diff_sum_average = sum(hourly_temp_diff_sum_entries) / len(hourly_temp_diff_sum_entries)
+
+    return today_data, hourly_temp_diff_sum_average
 
 
-def store_overall_data(data, daily_data, overall_avg_temps_each_hour, overall_avg_temps_each_hour_by_slope):
+def store_overall_data(data, daily_data, overall_avg_temps_each_hour, overall_avg_temps_each_hour_by_slope, hourly_temp_diff_sum_average):
     overall_highest_temp = float('-inf')
     overall_low_temp = float('inf')
     max_temp_datetime = None
     low_temp_datetime = None
+
+    overall_avg_temps_each_hour_sum = Utils.expand_and_sum_avg(overall_avg_temps_each_hour)
+    overall_avg_temps_each_hour_by_slope_sum = Utils.expand_and_sum_avg(overall_avg_temps_each_hour_by_slope)
 
     for entry_index, entry in tqdm(enumerate(data['data']), desc='Processing Data', total=len(data['data'])):
         timestamp = entry['time']
@@ -283,7 +292,9 @@ def store_overall_data(data, daily_data, overall_avg_temps_each_hour, overall_av
     total_valid_days = 0
     overall_total_valid_temp = 0
     overall_total_valid_humidity = 0
-    daily_highest_temp_entries = []
+    overall_total_valid_high_temp = 0
+    overall_total_valid_low_temp = 0
+    daily_high_temp_entries = []
     daily_low_temp_entries = []
     total_recorded_days = len(daily_data)
 
@@ -295,13 +306,15 @@ def store_overall_data(data, daily_data, overall_avg_temps_each_hour, overall_av
         total_valid_data_points += data_point_count if is_valid else 0
         total_valid_days += 1 if is_valid else 0
 
-        # accumulate entries
-        daily_highest_temp_entries.append(highest_temp)
-        daily_low_temp_entries.append(lowest_temp)
-
         if is_valid:
             overall_total_valid_temp += day_data['total_temp']
             overall_total_valid_humidity += day_data['total_humidity']
+            # accumulate entries
+            daily_high_temp_entries.append(highest_temp)
+            daily_low_temp_entries.append(lowest_temp)
+            # sum
+            overall_total_valid_high_temp += highest_temp
+            overall_total_valid_low_temp += lowest_temp
 
     output_overall_data = {}
     output_overall_data.update({
@@ -312,7 +325,10 @@ def store_overall_data(data, daily_data, overall_avg_temps_each_hour, overall_av
 
         'overall_average': {
             'temp': overall_total_valid_temp / max(total_valid_data_points, 1),
-            'humidity': overall_total_valid_humidity / max(total_valid_data_points, 1),
+            'humid': overall_total_valid_humidity / max(total_valid_data_points, 1),
+            'high_temp': overall_total_valid_high_temp / len(daily_high_temp_entries),
+            'low_temp': overall_total_valid_low_temp / len(daily_low_temp_entries),
+            'hourly_temp_diff': hourly_temp_diff_sum_average
         },
 
         'total_recorded_days': total_recorded_days,
@@ -323,12 +339,15 @@ def store_overall_data(data, daily_data, overall_avg_temps_each_hour, overall_av
         'overall_hourly_average': {
             'by_entries': overall_avg_temps_each_hour,
             'by_slope': overall_avg_temps_each_hour_by_slope,
+            'sum_by_entries': overall_avg_temps_each_hour_sum,
+            'sum_by_slope': overall_avg_temps_each_hour_by_slope_sum
         }
     })
 
     # overall correlation high low temperature
-    temperature_values_highest_low = Utils.get_temperature_values_highest_low(daily_data)
-    correlation_highest_low = np.corrcoef(*zip(*temperature_values_highest_low))[0, 1]
+    high_low_temperature_values = Utils.get_high_low_temperature_values(daily_data)
+
+    correlation_highest_low = np.corrcoef(*zip(*high_low_temperature_values))[0, 1]
     output_overall_data['correlation_high_low_temp'] = correlation_highest_low
 
     return output_overall_data
@@ -337,6 +356,7 @@ def store_overall_data(data, daily_data, overall_avg_temps_each_hour, overall_av
 def store_daily_data_list(daily_data, overall_avg_temps_each_hour):
     output_daily_data_list = {}
     high_low_temperature_values = []
+    hourly_temp_diff_sum_entries = []
 
     for date, day_data in daily_data.items():
         hourly_temp_differences = Utils.calculate_hourly_temp_differences([day_data], overall_avg_temps_each_hour)
@@ -347,6 +367,9 @@ def store_daily_data_list(daily_data, overall_avg_temps_each_hour):
             # sum temperature difference
             for hour, temp_difference in hourly_temp_differences.items():
                 hourly_temp_diff_sum += temp_difference
+
+            hourly_temp_diff_sum_entries.append(hourly_temp_diff_sum)
+            # print('diff average', sum(hourly_temp_diff_sum_entries) / len(hourly_temp_diff_sum_entries))
 
             # highest low correlation # accumulated for each day
             high_low_temperature_values.append((day_data['highest_temp'], day_data['lowest_temp']))
@@ -364,6 +387,7 @@ def store_daily_data_list(daily_data, overall_avg_temps_each_hour):
             'highest_temp': day_data['highest_temp'],
             'lowest_temp': day_data['lowest_temp'],
             'correlation_high_low': high_low_daily_correlation,
+            'accumulated_hourly_temp_diff_sum': sum(hourly_temp_diff_sum_entries),
             'deviation': {
                 'temp': day_data['temp_std_dev'],
                 'humid': day_data['humid_std_dev']
@@ -422,12 +446,12 @@ def main(input_file, output_file_daily, output_file_calculated, output_file_dail
     daily_data = calculate_daily_data(data)
     grouped_temp_by_hour = group_temp_by_hour(data)
 
-    output_daily_data = store_daily_data(daily_data, grouped_temp_by_hour)
+    output_daily_data, hourly_temp_diff_sum_average = store_daily_data(daily_data, grouped_temp_by_hour)
 
     overall_avg_temps_each_hour = Utils.calculate_overall_avg_temps_each_hour(grouped_temp_by_hour)
     overall_avg_temps_each_hour_by_slope = Utils.calculate_overall_avg_representative_temps(grouped_temp_by_hour)
 
-    output_overall_data = store_overall_data(data, daily_data, overall_avg_temps_each_hour, overall_avg_temps_each_hour_by_slope)
+    output_overall_data = store_overall_data(data, daily_data, overall_avg_temps_each_hour, overall_avg_temps_each_hour_by_slope, hourly_temp_diff_sum_average)
     output_daily_data_list = store_daily_data_list(daily_data, overall_avg_temps_each_hour)
 
     save_json(output_daily_data, output_file_daily)
@@ -446,7 +470,7 @@ if __name__ == "__main__":
     input_file_path = ".\\01 data-real.json"
     output_file_main_path = ".\\02a data-daily-calculated.json"
     output_file_calculated_path = ".\\02b data-overall-calculated.json"
-    output_file_daily_list = ".\\02c data-daily_list.json"
+    output_file_daily_list_path = ".\\02c data-daily_list.json"
 
     # Process data and save the results in separate files
-    main(input_file_path, output_file_main_path, output_file_calculated_path, output_file_daily_list)
+    main(input_file_path, output_file_main_path, output_file_calculated_path, output_file_daily_list_path)

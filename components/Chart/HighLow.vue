@@ -5,6 +5,7 @@ import {useDataStore} from "~/store";
 import {subMonths} from "date-fns";
 import colorLib from "@kurkle/color";
 import {borderPlugin} from "~/composables/chartCustomPlugin";
+import {windowSize} from "~/composables/windowSize";
 
 const dataStore = useDataStore()
 
@@ -252,9 +253,7 @@ const handleToggleCollapse = () => {
   initialZoom()
 }
 
-const { width } = useWindowSize()
-const SMALL_SCREEN = 480
-const isSmallScreen = ref(width.value < SMALL_SCREEN)
+const { width, isSmallScreen } = windowSize()
 
 </script>
 <template>

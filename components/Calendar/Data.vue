@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import * as chroma from "chroma.ts";
-import type { Datasets } from "~/composables/types";
+import type { Datasets } from "~/types";
 import {useDataStore} from "~/store";
 
 type ScaleType = string;
@@ -22,6 +22,7 @@ const dataStore = useDataStore()
 
 const getTemperatureColor = (type: ScaleType, value: number | undefined): string => {
   const overall = dataStore.overall_min_max;
+  // console.log(overall)
   let colors = {
     warm: ['#f1dee3', '#fcabc2', '#c94866'],
     cold: ['#c6cdd0', '#8ac7d5', '#3a94b4']

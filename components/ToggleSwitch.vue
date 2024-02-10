@@ -1,9 +1,34 @@
-<!-- components/ToggleSwitch.vue -->
+<script setup lang="ts">
+
+interface Props {
+  label: string,
+  isDisabled?: boolean,
+  defaultToggle?: boolean,
+  isReverse?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  isDisabled: false,
+  defaultToggle: false,
+  isReverse: false
+})
+
+const isChecked = ref(false);
+
+onMounted(()=>{
+  isChecked.value = props.defaultToggle
+})
+
+watch([() => props.defaultToggle], ([defaultToggle]) => {
+  isChecked.value = defaultToggle
+})
+
+</script>
 
 <template>
-  <div :class="{'cursor-not-allowed': isDisabled}">
-    <label class="inline-flex items-center cursor-pointer">
-      <span class="relative top-1 group">
+  <div class="flex items-center" :class="{'cursor-not-allowed': isDisabled, 'flex-row-reverse': isReverse}">
+    <label class="inline-flex items-center cursor-pointer" :class="[isReverse ? 'ml-4' : 'mr-4' ]">
+      <span class="relative top-0.5 group">
         <!--  switch body  -->
         <span
             class="block w-14 h-8 bg-gray-200 rounded-full transition-shadow transform dark:bg-gray-600"
@@ -27,28 +52,9 @@
           @change="$emit('toggle', isChecked)"
       />
     </label>
-<!--    <span class="relative -top-2 ml-3 text-gray-700">{{ isChecked ? 'Stacked' : 'Series' }}</span>-->
-    <span class="relative -top-2 ml-3 text-gray-600" v-if="props.label"
+    <span class="text-gray-600 leading-none" v-if="props.label"
           :class="[{'text-zinc-400 dark:text-zinc-500': isDisabled}, 'dark:text-zinc-200']">{{ label }}</span>
   </div>
 </template>
 
-<script setup>
-// Define the reactive property
-const isChecked = ref(false);
 
-const props = defineProps({
-  label: String,
-  isDisabled: Boolean,
-  defaultToggle: Boolean
-});
-
-onMounted(()=>{
-  isChecked.value = props.defaultToggle
-})
-
-watch([() => props.defaultToggle], ([defaultToggle]) => {
-  isChecked.value = defaultToggle
-})
-
-</script>

@@ -1,4 +1,7 @@
-const chartColor = ['#fa4183', '#F7D060', '#8ADAB2', '#FFC5C5', '#BEADFA', '#9BB8CD', '#B6BBC4'];
+const chartColor = [
+  '#fa4183', '#F7D060', '#8ADAB2', '#6e8fe1',
+  '#e0adfa', '#9BB8CD', '#B6BBC4'
+];
 const skipped = (ctx: any, value: any) => ctx.p0.skip || ctx.p1.skip ? value : undefined;
 
 const bgColor = (context: any) => {
@@ -100,7 +103,7 @@ export const assignSimpleHumidDataset = (data: (number | null)[]) => {
 };
 
 // Series ON
-export const assignDatasets = (tempData: (number | null)[], humidData: (number | null)[], ) => {
+export const assignDatasets = (tempData: (number | null)[] | undefined, humidData: (number | null)[] | undefined, ) => {
   return [
     {
       label: "temperature",
@@ -114,7 +117,7 @@ export const assignDatasets = (tempData: (number | null)[], humidData: (number |
       segment: {
         borderDash: (ctx: any) => skipped(ctx, [6, 6]),
       },
-      fill: true
+      // fill: true
     },
     {
       label: "humidity",

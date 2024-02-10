@@ -4,6 +4,7 @@ import type {ChartComponentRef} from 'vue-chartjs'
 import {useDataStore} from "~/store";
 import {subMonths} from "date-fns";
 import {borderPlugin} from "~/composables/chartCustomPlugin";
+import {windowSize} from "~/composables/windowSize";
 
 const dataStore = useDataStore()
 
@@ -221,9 +222,11 @@ function initialZoom(){
 const handleToggleCollapse = () => {
   initialZoom()
 }
+
+const { width, isSmallScreen } = windowSize()
 </script>
 <template>
-  <chart-wrapper chart-name="High-low correlation" @show-all-clicked="showAllButton"
+  <chart-wrapper chart-name="High-low correlation" @show-all-clicked="showAllButton" :default-collapse="!isSmallScreen"
                  @reset-clicked="resetGraph" @fullscreen-clicked="handleFullscreenToggle"
                  @toggle-collapse="handleToggleCollapse">
     <Line ref="theChart" :data="computedChartData" :options="chartOptions_Corr" :plugins="[borderPlugin]" :key="barRefreshTrigger"/>
