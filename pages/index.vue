@@ -16,20 +16,6 @@ definePageMeta({
   layout: false,
 });
 
-// const isLoading = ref(true)
-// onMounted(async () => {
-//   try {
-//     isLoading.value = true
-//     if (!dataStore.last_temperature) {
-//       await dataStore.fetchDataFromFirestore();
-//     }
-//   }catch (e){
-//     console.log(e)
-//   }finally {
-//     isLoading.value = false
-//   }
-// })
-
 function updateRelativeDatetime(){
   dataStore.relative_time = formatDistanceToNow(dataStore.last_datetime, { addSuffix: true, includeSeconds: true })
 }
@@ -99,11 +85,11 @@ onKeyStroke(' ', () => { navigateTo('/chart') })
   </div>
 
 
-  <!--  <div class="absolute w-full overflow-hidden h-screen top-0 left-0 hidden sm:block">-->
-  <!--    <img src="https://ik.imagekit.io/kariki/F01Xc3JaQAIArIC.jpeg?updatedAt=1703177272003" alt=""-->
-  <!--          class="mix-blend-darken dark:mix-blend-soft-light h-screen absolute top-0 -right-24"/>-->
-  <!--    <img src="https://ik.imagekit.io/kariki/F5JDop-X0AAczcH.jpeg?updatedAt=1703178037029" alt=""-->
-  <!--          class="mix-blend-multiply dark:mix-blend-soft-light h-screen absolute top-0 -left-20">-->
-  <!--  </div>-->
+<!--    <div class="absolute w-full overflow-hidden h-screen top-0 left-0 hidden sm:block">-->
+<!--      <img src="https://ik.imagekit.io/kariki/F01Xc3JaQAIArIC.jpeg?updatedAt=1703177272003" alt=""-->
+<!--            class="mix-blend-darken dark:mix-blend-soft-light h-screen absolute top-0 -right-24"/>-->
+<!--      <img src="https://ik.imagekit.io/kariki/F5JDop-X0AAczcH.jpeg?updatedAt=1703178037029" alt=""-->
+<!--            class="mix-blend-multiply dark:mix-blend-soft-light h-screen absolute top-0 -left-20">-->
+<!--    </div>-->
 
 </template>

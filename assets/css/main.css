@@ -6,8 +6,9 @@
 
 @layer base{
     body{
-        @apply bg-[url('https://ik.imagekit.io/kariki/bg-white?updatedAt=1703171021395')]
-        dark:bg-[url('https://ik.imagekit.io/kariki/blur-dark-bg?updatedAt=1703169481124')]
+        @apply
+        bg-[url('https://ik.imagekit.io/kariki/bg-white?updatedAt=1703171021395')]
+        dark:bg-[url('https://ik.imagekit.io/kariki/dark%20bg.png?updatedAt=1707590988597')]
         max-h-screen font-lato bg-fixed bg-cover
     }
     h2{
@@ -91,4 +92,5 @@
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;  /* Firefox */
     }
+
 }

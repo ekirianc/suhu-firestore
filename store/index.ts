@@ -119,7 +119,14 @@ export const useDataStore = defineStore('temperature', {
 
             this.overall_datasets = sortedDate.map(date => {
               const formattedDate = format(date, 'yyyy-MM-dd');
-              const { is_valid, highest_temp, lowest_temp, sum, deviation, correlation_high_low, today_total_data, average } = overallDaily[formattedDate]
+              const {
+                is_valid,
+                highest_temp, lowest_temp,
+                sum, deviation, average,
+                correlation_high_low,
+                today_total_data,
+                accumulated_hourly_temp_diff_sum,
+              } = overallDaily[formattedDate]
               const averageTemp = is_valid ? parseFloat(average.temp.toFixed(2)) : null;
               const averageHumid = is_valid ? parseFloat(average.humid.toFixed(2)) : null;
 
@@ -134,6 +141,7 @@ export const useDataStore = defineStore('temperature', {
                 humid_deviation: is_valid ? deviation.humid : null,
                 today_total_data,
                 correlation_high_low,
+                accumulated_hourly_temp_diff_sum,
                 average_temp: averageTemp,
                 average_humid: averageHumid,
               }

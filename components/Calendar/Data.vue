@@ -127,7 +127,7 @@ const dataStyle = () => {
 <template>
   <div class="w-12 h-12 flex items-center content-center relative"
        :style="{ ...dataStyle() }">
-    <div v-if="props.data?.dataset" class="text-sm w-full relative z-10">{{ calData }}</div>
+    <div v-if="props.data?.dataset" class="text-sm w-full relative">{{ calData }}</div>
   </div>
 </template>
 

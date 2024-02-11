@@ -136,12 +136,21 @@ function transparentize(value: string, opacity: (number|undefined)) {
 }
 
 function colorize(opaque: boolean) {
+  let c
   return (ctx: any) => {
     const v = ctx.parsed.y;
-    const c = v < -20 ? '#3383fc'
-        : v < 0 ? '#51b3f8'
-            : v < 20 ? 'rgb(255,133,34)'
-                : 'rgb(255,34,99)';
+    if (isDark.value){
+      c = v < -20 ? '#487b9f'
+          : v < 0 ? '#2557a9'
+              : v < 20 ? 'rgb(208,116,43)'
+                  : 'rgb(194,33,84)';
+    }else {
+      c = v < -20 ? '#83d0d0'
+          : v < 0 ? '#5b93bd'
+              : v < 20 ? 'rgb(248,173,113)'
+                  : 'rgb(245,89,135)';
+    }
+
 
     return opaque ? c : transparentize(c, 1 - Math.abs(v / 30));
   };

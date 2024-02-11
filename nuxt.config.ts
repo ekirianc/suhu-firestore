@@ -19,7 +19,6 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@vue-macros/nuxt',
   ],
-  // @ts-ignore
   vuefire: {
     config: {
       apiKey: process.env.FIREBASE_API_KEY,

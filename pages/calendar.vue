@@ -27,6 +27,7 @@ import {chartOptionsMain} from "~/composables/chartOptionsMain";
 import {assignAverageDataset, assignHumidityDataset, assignTemperatureDataset} from "~/composables/assignChartDataset";
 import {collection, doc, getDoc} from "firebase/firestore";
 import {da} from "date-fns/locale";
+import {windowSize} from "~/composables/windowSize";
 
 useHead({
   title: 'Calendar View',
@@ -256,19 +257,13 @@ onKeyStroke('Escape', () => {
   }
 })
 
-const userPreference = usePreferences()
-const isPercentageOnRef = ref(userPreference.percentageToggle)
-
-const percentageToggle = (isChecked: boolean) => {
-  isPercentageOnRef.value = isChecked;
-  userPreference.setPercentageToggle(isChecked);
-};
+const { width, isSmallScreen, isLargeScreen, SMALL_SCREEN, XL_SCREEN } = windowSize()
 
 </script>
 <template>
   <div v-if="isLoading"><Loading class="h-3/4"/></div>
   <div v-else>
-    <div class="px-2 transition-all duration-500" :class="[slideIn?'w-2/3':'w-full']">
+    <div class="px-2 transition-all duration-500" :class="[slideIn && !isSmallScreen ? 'w-2/3' : 'w-full']">
       <div class="p-4 mb-4 flex space-x-4 items-center justify-between transition-all" :class="[slideIn?'md:w-full':'md:w-96']" >
         <h2>{{ currentMonth }}</h2>
         <div class="flex text-gray-500 dark:text-gray-50 space-x-4 leading-none">
@@ -326,13 +321,13 @@ const percentageToggle = (isChecked: boolean) => {
         </div>
       </div>
     </div>
-
   </div>
 
-  <div class="w-0 h-full absolute top-0 right-0 overflow-x-hidden transition-all" :class="{'w-1/3' : slideIn}">
+  <div class="w-0 h-full absolute top-0 right-0 overflow-x-hidden transition-all"
+       :class="{'w-1/3' : slideIn, 'w-full': slideIn && isSmallScreen}">
     <div class="absolute p-4 top-0 border-l border-zinc-300 w-full h-full overflow-y-auto overflow-x-hidden shadow-xl bg-white transition-all duration-500
-                dark:border-zinc-700 dark:bg-zinc-800/70 backdrop-blur dark:text-zinc-100"
-         :class="[slideIn ? 'right-0' : '-right-full']">
+                dark:border-zinc-700 backdrop-blur dark:text-zinc-100"
+         :class="[slideIn ? 'right-0' : '-right-full', isSmallScreen ? 'dark:bg-zinc-800' : 'dark:bg-zinc-800/70']">
 
       <div class="flex justify-between space-x-4 items-center text-neutral-600 dark:text-neutral-200 mb-4">
         <div class="flex space-x-4 items-center">

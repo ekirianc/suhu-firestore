@@ -52,11 +52,11 @@ onKeyStroke('Escape', () => {
         <span class="font-medium lg:text-lg text-sm dark:text-gray-200 text-gray-700">{{ props.chartName }}</span>
       </div>
       <div v-if="isCollapse" class="flex space-x-2 lg:opacity-0 group-hover:opacity-100 transition-opacity">
-        <button @click="triggerShowAllButton" class="rounded-lg px-2 text-sm hover:bg-gray-200 dark:hover:bg-gray-600">Show All</button>
-        <button @click="triggerResetButton" class="rounded-lg px-2 text-sm hover:bg-gray-200 dark:hover:bg-gray-600">
+        <button @click="triggerShowAllButton" class="rounded-lg px-2 text-sm hover:bg-gray-200 dark:hover:bg-gray-700/40">Show All</button>
+        <button @click="triggerResetButton" class="rounded-lg px-2 text-sm hover:bg-gray-200 dark:hover:bg-gray-700/40">
           <Icon name="pepicons-pop:arrow-spin" class="text-lg"/>
         </button>
-        <button @click="triggerFullscreen" class="rounded-lg px-2 py-1 h-full hover:bg-gray-200 dark:hover:bg-gray-600">
+        <button @click="triggerFullscreen" class="rounded-lg px-2 py-1 h-full hover:bg-gray-200 dark:hover:bg-gray-700/40">
           <Icon name="humbleicons:expand" class="text-lg"/>
         </button>
       </div>

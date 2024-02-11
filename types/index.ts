@@ -12,6 +12,7 @@ export interface Datasets {
     today_total_data: number | null;
     average_temp: number | null;
     average_humid: number | null;
+    accumulated_hourly_temp_diff_sum: number | null;
 }
 
 export interface ChartDataset {

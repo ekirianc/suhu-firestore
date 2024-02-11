@@ -7,9 +7,9 @@ const dataStore = useDataStore()
 <template>
     <div class="py-4 text-xl space-y-5 dark:text-gray-100">
       <div class="grid md:text-left">
-        <span class="label dark:text-gray-400">Current</span>
+        <span class="label dark:text-gray-400">Latest</span>
         <div>
-          <div class="text-6xl font-medium font-inter text-gray-800 dark:text-white">
+          <div class="text-6xl font-medium font-inter text-gray-800 dark:text-white ">
             <span>{{ dataStore.last_temperature }}</span>
             <span class="ml-2 text-2xl relative -top-6">°C</span>
           </div>
@@ -57,5 +57,7 @@ const dataStore = useDataStore()
 </template>
 
 <style scoped>
-
+#latest-temperature{
+  view-transition-name: latest-temperature;
+}
 </style>

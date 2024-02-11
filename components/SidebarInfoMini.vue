@@ -5,9 +5,9 @@ const dataStore = useDataStore()
 </script>
 
 <template>
-  <div class="px-4 py-8 flex space-x-4 justify-center text-gray-800 font-inter dark:text-white">
+  <div class="px-4 py-8 flex space-x-4 justify-center text-gray-800 font-inter dark:text-white card-2 mb-4">
     <div class="grid">
-      <span>Last Temp.</span>
+      <span>Latest Temp.</span>
       <span class="text-4xl font-medium">{{dataStore.last_temperature}}</span>
       <span class="text-sm">{{ dataStore.relative_time }}</span>
     </div>

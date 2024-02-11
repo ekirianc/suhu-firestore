@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue';
 import { useDataStore } from '~/store';
 import {windowSize} from "~/composables/windowSize";
+import AccumulatedTempDiff from "~/components/Chart/AccumulatedTempDiff.vue";
 
 useHead({
   title: 'Chart View',
@@ -31,11 +32,14 @@ const { width, isSmallScreen } = windowSize()
       <sidebar-info-mini class="lg:hidden"/>
       <chart-main/>
 
-      <div class="mt-4 overflow-x-auto ">
-        <div class="lg:flex lg:space-x-4 lg:space-y-0 space-y-4 mb-4">
-          <div> <chart-temp-diff :class="[dataStore.isFullscreen? '' :'lg:w-[500px]']"/> </div>
-          <div> <chart-high-low :class="[dataStore.isFullscreen? '' :'lg:w-[500px]']"/> </div>
-          <div> <chart-correlation :class="[dataStore.isFullscreen? '' :'lg:w-[500px]']"/> </div>
+      <div class="xl:flex mt-4 space-y-4 xl:space-y-0 xl:space-x-4 w-full">
+        <div class="xl:basis-1/2">
+          <chart-high-low class="mb-4"/>
+          <chart-correlation />
+        </div>
+        <div class="xl:basis-1/2">
+          <chart-temp-diff class="mb-4"/>
+          <accumulated-temp-diff/>
         </div>
       </div>
 

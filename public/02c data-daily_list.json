@@ -1,0 +1,5210 @@
+{
+  "2023-06-02": {
+    "is_valid": false,
+    "today_total_data": 33,
+    "highest_temp": 31.6,
+    "lowest_temp": 31.1,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": 0,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 1034.4999999999998,
+      "humid_sum": 2638.0
+    },
+    "average": {
+      "temp": 31.34848484848484,
+      "humid": 79.93939393939394
+    }
+  },
+  "2023-06-03": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.8,
+    "lowest_temp": 30.1,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": 0.49984686092668795,
+    "deviation": {
+      "temp": 0.6592289822817614,
+      "humid": 2.1600208573452866
+    },
+    "sum": {
+      "temp_diff_sum": 0.49984686092668795,
+      "temp_sum": 8982.2,
+      "humid_sum": 23193.0
+    },
+    "average": {
+      "temp": 31.18819444444445,
+      "humid": 80.53125
+    }
+  },
+  "2023-06-04": {
+    "is_valid": false,
+    "today_total_data": 229,
+    "highest_temp": 32.8,
+    "lowest_temp": 29.9,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": 0.49984686092668795,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 7065.800000000008,
+      "humid_sum": 18532.0
+    },
+    "average": {
+      "temp": 30.855021834061173,
+      "humid": 80.92576419213974
+    }
+  },
+  "2023-06-05": {
+    "is_valid": false,
+    "today_total_data": 184,
+    "highest_temp": 30.6,
+    "lowest_temp": 28.5,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": 0.49984686092668795,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 5452.900000000006,
+      "humid_sum": 15250.0
+    },
+    "average": {
+      "temp": 29.635326086956553,
+      "humid": 82.8804347826087
+    }
+  },
+  "2023-06-06": {
+    "is_valid": true,
+    "today_total_data": 284,
+    "highest_temp": 32.7,
+    "lowest_temp": 27.6,
+    "correlation_high_low": 0.9999999999999999,
+    "accumulated_hourly_temp_diff_sum": -31.750306278146617,
+    "deviation": {
+      "temp": 1.6427802090103374,
+      "humid": 4.655077398518011
+    },
+    "sum": {
+      "temp_diff_sum": -32.250153139073305,
+      "temp_sum": 8458.10000000001,
+      "humid_sum": 25575.0
+    },
+    "average": {
+      "temp": 29.78204225352116,
+      "humid": 90.05281690140845
+    }
+  },
+  "2023-06-07": {
+    "is_valid": true,
+    "today_total_data": 257,
+    "highest_temp": 32.5,
+    "lowest_temp": 29.1,
+    "correlation_high_low": 0.21677749238101288,
+    "accumulated_hourly_temp_diff_sum": -56.44948413098264,
+    "deviation": {
+      "temp": 0.8151246699297275,
+      "humid": 5.0782190460750565
+    },
+    "sum": {
+      "temp_diff_sum": -24.699177852836023,
+      "temp_sum": 7765.7000000000135,
+      "humid_sum": 22597.0
+    },
+    "average": {
+      "temp": 30.21673151750978,
+      "humid": 87.92607003891051
+    }
+  },
+  "2023-06-08": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 31.8,
+    "lowest_temp": 29.0,
+    "correlation_high_low": 0.02876507049623584,
+    "accumulated_hourly_temp_diff_sum": -86.54963727005594,
+    "deviation": {
+      "temp": 0.6997505618185899,
+      "humid": 2.561848287345787
+    },
+    "sum": {
+      "temp_diff_sum": -30.100153139073303,
+      "temp_sum": 8618.000000000007,
+      "humid_sum": 24889.0
+    },
+    "average": {
+      "temp": 29.923611111111136,
+      "humid": 86.42013888888889
+    }
+  },
+  "2023-06-09": {
+    "is_valid": true,
+    "today_total_data": 247,
+    "highest_temp": 33.0,
+    "lowest_temp": 29.1,
+    "correlation_high_low": 0.06431716772175204,
+    "accumulated_hourly_temp_diff_sum": -106.75174649365414,
+    "deviation": {
+      "temp": 1.041101756921646,
+      "humid": 2.5318376277930668
+    },
+    "sum": {
+      "temp_diff_sum": -20.202109223598207,
+      "temp_sum": 7463.199999999996,
+      "humid_sum": 21029.0
+    },
+    "average": {
+      "temp": 30.2153846153846,
+      "humid": 85.13765182186235
+    }
+  },
+  "2023-06-10": {
+    "is_valid": true,
+    "today_total_data": 238,
+    "highest_temp": 31.8,
+    "lowest_temp": 28.9,
+    "correlation_high_low": 0.07592505369576845,
+    "accumulated_hourly_temp_diff_sum": -133.612251314548,
+    "deviation": {
+      "temp": 0.6950214881616439,
+      "humid": 1.4473554971651121
+    },
+    "sum": {
+      "temp_diff_sum": -26.86050482089386,
+      "temp_sum": 7095.199999999999,
+      "humid_sum": 20638.0
+    },
+    "average": {
+      "temp": 29.81176470588235,
+      "humid": 86.71428571428571
+    }
+  },
+  "2023-06-11": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.0,
+    "lowest_temp": 28.8,
+    "correlation_high_low": 0.09968765854842594,
+    "accumulated_hourly_temp_diff_sum": -158.1124044536213,
+    "deviation": {
+      "temp": 0.9703498214776292,
+      "humid": 2.3612745041503787
+    },
+    "sum": {
+      "temp_diff_sum": -24.500153139073312,
+      "temp_sum": 8690.100000000015,
+      "humid_sum": 24688.0
+    },
+    "average": {
+      "temp": 30.173958333333385,
+      "humid": 85.72222222222223
+    }
+  },
+  "2023-06-12": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.0,
+    "lowest_temp": 29.2,
+    "correlation_high_low": 0.05870050709525581,
+    "accumulated_hourly_temp_diff_sum": -184.01255759269463,
+    "deviation": {
+      "temp": 0.6647018753850723,
+      "humid": 2.223738089753599
+    },
+    "sum": {
+      "temp_diff_sum": -25.900153139073325,
+      "temp_sum": 8680.099999999997,
+      "humid_sum": 24871.0
+    },
+    "average": {
+      "temp": 30.1392361111111,
+      "humid": 86.35763888888889
+    }
+  },
+  "2023-06-13": {
+    "is_valid": false,
+    "today_total_data": 114,
+    "highest_temp": 29.9,
+    "lowest_temp": 28.5,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -184.01255759269463,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 3338.8000000000015,
+      "humid_sum": 9921.0
+    },
+    "average": {
+      "temp": 29.287719298245626,
+      "humid": 87.02631578947368
+    }
+  },
+  "2023-06-14": {
+    "is_valid": false,
+    "today_total_data": 11,
+    "highest_temp": 30.5,
+    "lowest_temp": 30.3,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -184.01255759269463,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 334.9,
+      "humid_sum": 922.0
+    },
+    "average": {
+      "temp": 30.44545454545454,
+      "humid": 83.81818181818181
+    }
+  },
+  "2023-06-15": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 31.1,
+    "lowest_temp": 29.7,
+    "correlation_high_low": -0.19700570101989498,
+    "accumulated_hourly_temp_diff_sum": -209.86271073176795,
+    "deviation": {
+      "temp": 0.335351960632408,
+      "humid": 2.3991598283450073
+    },
+    "sum": {
+      "temp_diff_sum": -25.850153139073303,
+      "temp_sum": 8676.600000000011,
+      "humid_sum": 24633.0
+    },
+    "average": {
+      "temp": 30.127083333333374,
+      "humid": 85.53125
+    }
+  },
+  "2023-06-16": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.5,
+    "lowest_temp": 28.9,
+    "correlation_high_low": -0.20648082730997935,
+    "accumulated_hourly_temp_diff_sum": -230.11286387084127,
+    "deviation": {
+      "temp": 0.9812593378497266,
+      "humid": 5.068101753314
+    },
+    "sum": {
+      "temp_diff_sum": -20.250153139073316,
+      "temp_sum": 8732.600000000015,
+      "humid_sum": 24021.0
+    },
+    "average": {
+      "temp": 30.32152777777783,
+      "humid": 83.40625
+    }
+  },
+  "2023-06-17": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 31.1,
+    "lowest_temp": 28.9,
+    "correlation_high_low": -0.13976519973835297,
+    "accumulated_hourly_temp_diff_sum": -267.1130170099146,
+    "deviation": {
+      "temp": 0.47101651119620497,
+      "humid": 1.9497416683505713
+    },
+    "sum": {
+      "temp_diff_sum": -37.00015313907331,
+      "temp_sum": 8546.100000000004,
+      "humid_sum": 25031.0
+    },
+    "average": {
+      "temp": 29.673958333333346,
+      "humid": 86.91319444444444
+    }
+  },
+  "2023-06-18": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 31.3,
+    "lowest_temp": 28.5,
+    "correlation_high_low": -0.036386541784273155,
+    "accumulated_hourly_temp_diff_sum": -303.0131701489879,
+    "deviation": {
+      "temp": 0.7472322257694693,
+      "humid": 3.2719757971727037
+    },
+    "sum": {
+      "temp_diff_sum": -35.90015313907331,
+      "temp_sum": 8543.800000000014,
+      "humid_sum": 25012.0
+    },
+    "average": {
+      "temp": 29.66597222222227,
+      "humid": 86.84722222222223
+    }
+  },
+  "2023-06-19": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 33.6,
+    "lowest_temp": 29.1,
+    "correlation_high_low": 0.0012996469162458535,
+    "accumulated_hourly_temp_diff_sum": -320.0133232880612,
+    "deviation": {
+      "temp": 1.1469761965552348,
+      "humid": 5.570677833899093
+    },
+    "sum": {
+      "temp_diff_sum": -17.00015313907331,
+      "temp_sum": 8752.199999999995,
+      "humid_sum": 23717.0
+    },
+    "average": {
+      "temp": 30.495470383275244,
+      "humid": 82.63763066202091
+    }
+  },
+  "2023-06-20": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 30.1,
+    "lowest_temp": 28.4,
+    "correlation_high_low": 0.16517513432225323,
+    "accumulated_hourly_temp_diff_sum": -370.9634764271345,
+    "deviation": {
+      "temp": 0.5022882239493307,
+      "humid": 1.5803919370662898
+    },
+    "sum": {
+      "temp_diff_sum": -50.9501531390733,
+      "temp_sum": 8354.200000000015,
+      "humid_sum": 24461.0
+    },
+    "average": {
+      "temp": 29.10871080139378,
+      "humid": 85.22996515679442
+    }
+  },
+  "2023-06-21": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 31.8,
+    "lowest_temp": 28.0,
+    "correlation_high_low": 0.17682260885421172,
+    "accumulated_hourly_temp_diff_sum": -410.5636295662078,
+    "deviation": {
+      "temp": 1.0798445872262028,
+      "humid": 2.1595072910201383
+    },
+    "sum": {
+      "temp_diff_sum": -39.60015313907332,
+      "temp_sum": 8491.4,
+      "humid_sum": 24653.0
+    },
+    "average": {
+      "temp": 29.484027777777776,
+      "humid": 85.60069444444444
+    }
+  },
+  "2023-06-22": {
+    "is_valid": true,
+    "today_total_data": 282,
+    "highest_temp": 32.8,
+    "lowest_temp": 28.6,
+    "correlation_high_low": 0.14383298379903373,
+    "accumulated_hourly_temp_diff_sum": -432.3637827052811,
+    "deviation": {
+      "temp": 1.2125835062459562,
+      "humid": 5.131057406926313
+    },
+    "sum": {
+      "temp_diff_sum": -21.800153139073306,
+      "temp_sum": 8537.700000000008,
+      "humid_sum": 23046.0
+    },
+    "average": {
+      "temp": 30.275531914893644,
+      "humid": 81.72340425531915
+    }
+  },
+  "2023-06-23": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.7,
+    "lowest_temp": 29.2,
+    "correlation_high_low": 0.1650456946731103,
+    "accumulated_hourly_temp_diff_sum": -444.81393584435443,
+    "deviation": {
+      "temp": 1.0404881643620312,
+      "humid": 3.9374433539919096
+    },
+    "sum": {
+      "temp_diff_sum": -12.450153139073311,
+      "temp_sum": 8836.900000000016,
+      "humid_sum": 23327.0
+    },
+    "average": {
+      "temp": 30.68368055555561,
+      "humid": 80.99652777777777
+    }
+  },
+  "2023-06-24": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.1,
+    "lowest_temp": 29.6,
+    "correlation_high_low": 0.27776729990489013,
+    "accumulated_hourly_temp_diff_sum": -446.3140889834277,
+    "deviation": {
+      "temp": 1.0579267386615203,
+      "humid": 3.711505093857261
+    },
+    "sum": {
+      "temp_diff_sum": -1.5001531390733085,
+      "temp_sum": 8953.500000000011,
+      "humid_sum": 23428.0
+    },
+    "average": {
+      "temp": 31.088541666666703,
+      "humid": 81.34722222222223
+    }
+  },
+  "2023-06-25": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 33.0,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.3169635439544505,
+    "accumulated_hourly_temp_diff_sum": -447.51424212250106,
+    "deviation": {
+      "temp": 0.9438468091591338,
+      "humid": 3.33106876743964
+    },
+    "sum": {
+      "temp_diff_sum": -1.200153139073315,
+      "temp_sum": 8942.700000000013,
+      "humid_sum": 23409.0
+    },
+    "average": {
+      "temp": 31.159233449477398,
+      "humid": 81.56445993031359
+    }
+  },
+  "2023-06-26": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.0,
+    "lowest_temp": 29.9,
+    "correlation_high_low": 0.35369130705910007,
+    "accumulated_hourly_temp_diff_sum": -447.3643952615744,
+    "deviation": {
+      "temp": 0.7817162189142428,
+      "humid": 3.07515808085084
+    },
+    "sum": {
+      "temp_diff_sum": 0.14984686092670074,
+      "temp_sum": 8984.000000000016,
+      "humid_sum": 23652.0
+    },
+    "average": {
+      "temp": 31.1944444444445,
+      "humid": 82.125
+    }
+  },
+  "2023-06-27": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 31.3,
+    "lowest_temp": 29.3,
+    "correlation_high_low": 0.31926616535490343,
+    "accumulated_hourly_temp_diff_sum": -468.7145484006477,
+    "deviation": {
+      "temp": 0.4112775036301936,
+      "humid": 2.298841881668589
+    },
+    "sum": {
+      "temp_diff_sum": -21.350153139073313,
+      "temp_sum": 8733.500000000011,
+      "humid_sum": 24158.0
+    },
+    "average": {
+      "temp": 30.324652777777814,
+      "humid": 83.88194444444444
+    }
+  },
+  "2023-06-28": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.6,
+    "lowest_temp": 29.2,
+    "correlation_high_low": 0.32269128327869184,
+    "accumulated_hourly_temp_diff_sum": -480.014701539721,
+    "deviation": {
+      "temp": 1.119028594441388,
+      "humid": 5.185355564123727
+    },
+    "sum": {
+      "temp_diff_sum": -11.300153139073313,
+      "temp_sum": 8844.500000000007,
+      "humid_sum": 23481.0
+    },
+    "average": {
+      "temp": 30.71006944444447,
+      "humid": 81.53125
+    }
+  },
+  "2023-06-29": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.4,
+    "lowest_temp": 29.4,
+    "correlation_high_low": 0.34437768277863384,
+    "accumulated_hourly_temp_diff_sum": -479.2148546787943,
+    "deviation": {
+      "temp": 1.1225582211522673,
+      "humid": 4.125197280636002
+    },
+    "sum": {
+      "temp_diff_sum": 0.7998468609266851,
+      "temp_sum": 8971.600000000013,
+      "humid_sum": 23133.0
+    },
+    "average": {
+      "temp": 31.151388888888935,
+      "humid": 80.32291666666667
+    }
+  },
+  "2023-06-30": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 33.0,
+    "lowest_temp": 29.9,
+    "correlation_high_low": 0.36539326116868337,
+    "accumulated_hourly_temp_diff_sum": -477.11500781786765,
+    "deviation": {
+      "temp": 0.9303125448584101,
+      "humid": 4.340657975297328
+    },
+    "sum": {
+      "temp_diff_sum": 2.099846860926693,
+      "temp_sum": 8981.700000000008,
+      "humid_sum": 22900.0
+    },
+    "average": {
+      "temp": 31.29512195121954,
+      "humid": 79.79094076655052
+    }
+  },
+  "2023-07-01": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.6,
+    "lowest_temp": 29.9,
+    "correlation_high_low": 0.40674310469443614,
+    "accumulated_hourly_temp_diff_sum": -484.61516095694094,
+    "deviation": {
+      "temp": 0.7605419100309859,
+      "humid": 2.0873918801008857
+    },
+    "sum": {
+      "temp_diff_sum": -7.500153139073298,
+      "temp_sum": 8901.200000000017,
+      "humid_sum": 23778.0
+    },
+    "average": {
+      "temp": 30.906944444444505,
+      "humid": 82.5625
+    }
+  },
+  "2023-07-02": {
+    "is_valid": false,
+    "today_total_data": 228,
+    "highest_temp": 33.9,
+    "lowest_temp": 29.6,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -484.61516095694094,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 7039.300000000009,
+      "humid_sum": 19050.0
+    },
+    "average": {
+      "temp": 30.874122807017585,
+      "humid": 83.55263157894737
+    }
+  },
+  "2023-07-03": {
+    "is_valid": false,
+    "today_total_data": 64,
+    "highest_temp": 29.7,
+    "lowest_temp": 29.3,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -484.61516095694094,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 1886.0000000000002,
+      "humid_sum": 5467.0
+    },
+    "average": {
+      "temp": 29.468750000000004,
+      "humid": 85.421875
+    }
+  },
+  "2023-07-04": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.1,
+    "lowest_temp": 28.8,
+    "correlation_high_low": 0.41041772044482017,
+    "accumulated_hourly_temp_diff_sum": -509.8153140960143,
+    "deviation": {
+      "temp": 0.9701952456191042,
+      "humid": 3.254441113290659
+    },
+    "sum": {
+      "temp_diff_sum": -25.20015313907331,
+      "temp_sum": 8671.299999999996,
+      "humid_sum": 24070.0
+    },
+    "average": {
+      "temp": 30.10868055555554,
+      "humid": 83.57638888888889
+    }
+  },
+  "2023-07-05": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.7,
+    "lowest_temp": 29.3,
+    "correlation_high_low": 0.41254040431304423,
+    "accumulated_hourly_temp_diff_sum": -525.0654672350876,
+    "deviation": {
+      "temp": 0.8896391690344163,
+      "humid": 3.081260251529286
+    },
+    "sum": {
+      "temp_diff_sum": -15.250153139073305,
+      "temp_sum": 8798.200000000013,
+      "humid_sum": 24106.0
+    },
+    "average": {
+      "temp": 30.549305555555602,
+      "humid": 83.70138888888889
+    }
+  },
+  "2023-07-06": {
+    "is_valid": false,
+    "today_total_data": 212,
+    "highest_temp": 31.6,
+    "lowest_temp": 29.2,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -525.0654672350876,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 6353.000000000005,
+      "humid_sum": 18122.0
+    },
+    "average": {
+      "temp": 29.966981132075492,
+      "humid": 85.48113207547169
+    }
+  },
+  "2023-07-07": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.8,
+    "lowest_temp": 29.1,
+    "correlation_high_low": 0.39661250461114017,
+    "accumulated_hourly_temp_diff_sum": -540.6656203741609,
+    "deviation": {
+      "temp": 1.1722452604371167,
+      "humid": 1.961126357353389
+    },
+    "sum": {
+      "temp_diff_sum": -15.600153139073313,
+      "temp_sum": 8783.199999999997,
+      "humid_sum": 24778.0
+    },
+    "average": {
+      "temp": 30.497222222222213,
+      "humid": 86.03472222222223
+    }
+  },
+  "2023-07-08": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.8,
+    "lowest_temp": 29.4,
+    "correlation_high_low": 0.40571643087329706,
+    "accumulated_hourly_temp_diff_sum": -548.7657735132342,
+    "deviation": {
+      "temp": 1.2086804558077138,
+      "humid": 4.570561698519027
+    },
+    "sum": {
+      "temp_diff_sum": -8.100153139073306,
+      "temp_sum": 8888.899999999998,
+      "humid_sum": 24289.0
+    },
+    "average": {
+      "temp": 30.864236111111104,
+      "humid": 84.33680555555556
+    }
+  },
+  "2023-07-09": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.3,
+    "lowest_temp": 29.6,
+    "correlation_high_low": 0.41886183632925855,
+    "accumulated_hourly_temp_diff_sum": -559.2159266523075,
+    "deviation": {
+      "temp": 0.894251874435025,
+      "humid": 4.846932447164551
+    },
+    "sum": {
+      "temp_diff_sum": -10.450153139073315,
+      "temp_sum": 8861.100000000004,
+      "humid_sum": 23755.0
+    },
+    "average": {
+      "temp": 30.767708333333346,
+      "humid": 82.48263888888889
+    }
+  },
+  "2023-07-10": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.1,
+    "lowest_temp": 29.1,
+    "correlation_high_low": 0.3990562736344351,
+    "accumulated_hourly_temp_diff_sum": -570.2160797913808,
+    "deviation": {
+      "temp": 1.0304642418926746,
+      "humid": 4.053081437104671
+    },
+    "sum": {
+      "temp_diff_sum": -11.000153139073316,
+      "temp_sum": 8868.300000000003,
+      "humid_sum": 23528.0
+    },
+    "average": {
+      "temp": 30.792708333333344,
+      "humid": 81.69444444444444
+    }
+  },
+  "2023-07-11": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.4,
+    "lowest_temp": 29.6,
+    "correlation_high_low": 0.3893967102987011,
+    "accumulated_hourly_temp_diff_sum": -582.2162329304541,
+    "deviation": {
+      "temp": 0.817499973453958,
+      "humid": 3.113170124077805
+    },
+    "sum": {
+      "temp_diff_sum": -12.000153139073312,
+      "temp_sum": 8844.900000000001,
+      "humid_sum": 23669.0
+    },
+    "average": {
+      "temp": 30.71145833333334,
+      "humid": 82.18402777777777
+    }
+  },
+  "2023-07-12": {
+    "is_valid": true,
+    "today_total_data": 273,
+    "highest_temp": 33.1,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.3975776496506831,
+    "accumulated_hourly_temp_diff_sum": -585.1663860695274,
+    "deviation": {
+      "temp": 1.0177170352705274,
+      "humid": 5.658576000121645
+    },
+    "sum": {
+      "temp_diff_sum": -2.9501531390733184,
+      "temp_sum": 8465.900000000007,
+      "humid_sum": 21201.0
+    },
+    "average": {
+      "temp": 31.010622710622737,
+      "humid": 77.65934065934066
+    }
+  },
+  "2023-07-13": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 32.8,
+    "lowest_temp": 29.9,
+    "correlation_high_low": 0.3949891397505965,
+    "accumulated_hourly_temp_diff_sum": -588.5165392086008,
+    "deviation": {
+      "temp": 0.8216446041496115,
+      "humid": 2.906403757111893
+    },
+    "sum": {
+      "temp_diff_sum": -3.350153139073317,
+      "temp_sum": 8910.300000000001,
+      "humid_sum": 21889.0
+    },
+    "average": {
+      "temp": 31.046341463414638,
+      "humid": 76.26829268292683
+    }
+  },
+  "2023-07-14": {
+    "is_valid": true,
+    "today_total_data": 271,
+    "highest_temp": 33.5,
+    "lowest_temp": 29.8,
+    "correlation_high_low": 0.41211263898745415,
+    "accumulated_hourly_temp_diff_sum": -583.9559559135655,
+    "deviation": {
+      "temp": 0.9880571133530487,
+      "humid": 2.9691202683323206
+    },
+    "sum": {
+      "temp_diff_sum": 4.560583295035212,
+      "temp_sum": 8472.50000000001,
+      "humid_sum": 21115.0
+    },
+    "average": {
+      "temp": 31.26383763837642,
+      "humid": 77.91512915129151
+    }
+  },
+  "2023-07-15": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.5,
+    "lowest_temp": 30.2,
+    "correlation_high_low": 0.3879171748132248,
+    "accumulated_hourly_temp_diff_sum": -587.7561090526389,
+    "deviation": {
+      "temp": 0.5704665623552638,
+      "humid": 2.615390166199035
+    },
+    "sum": {
+      "temp_diff_sum": -3.800153139073309,
+      "temp_sum": 8945.599999999997,
+      "humid_sum": 22895.0
+    },
+    "average": {
+      "temp": 31.0611111111111,
+      "humid": 79.49652777777777
+    }
+  },
+  "2023-07-16": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 31.3,
+    "lowest_temp": 29.9,
+    "correlation_high_low": 0.32838509736145177,
+    "accumulated_hourly_temp_diff_sum": -606.6562621917121,
+    "deviation": {
+      "temp": 0.3878207988611765,
+      "humid": 2.0132182791506175
+    },
+    "sum": {
+      "temp_diff_sum": -18.900153139073314,
+      "temp_sum": 8758.300000000014,
+      "humid_sum": 23284.0
+    },
+    "average": {
+      "temp": 30.410763888888937,
+      "humid": 80.84722222222223
+    }
+  },
+  "2023-07-17": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.8,
+    "lowest_temp": 29.4,
+    "correlation_high_low": 0.3293502117649894,
+    "accumulated_hourly_temp_diff_sum": -617.2564153307854,
+    "deviation": {
+      "temp": 1.0098664500386076,
+      "humid": 5.630003561647778
+    },
+    "sum": {
+      "temp_diff_sum": -10.60015313907331,
+      "temp_sum": 8857.600000000002,
+      "humid_sum": 22761.0
+    },
+    "average": {
+      "temp": 30.755555555555564,
+      "humid": 79.03125
+    }
+  },
+  "2023-07-18": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 31.9,
+    "lowest_temp": 29.4,
+    "correlation_high_low": 0.32201010011163084,
+    "accumulated_hourly_temp_diff_sum": -632.6565684698587,
+    "deviation": {
+      "temp": 0.7564751220965444,
+      "humid": 2.3656509537378723
+    },
+    "sum": {
+      "temp_diff_sum": -15.40015313907331,
+      "temp_sum": 8767.500000000011,
+      "humid_sum": 22592.0
+    },
+    "average": {
+      "temp": 30.548780487804915,
+      "humid": 78.71777003484321
+    }
+  },
+  "2023-07-19": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.2,
+    "lowest_temp": 29.8,
+    "correlation_high_low": 0.3079025288228836,
+    "accumulated_hourly_temp_diff_sum": -643.356721608932,
+    "deviation": {
+      "temp": 0.6197549008703183,
+      "humid": 1.971830947102367
+    },
+    "sum": {
+      "temp_diff_sum": -10.700153139073308,
+      "temp_sum": 8856.300000000007,
+      "humid_sum": 24128.0
+    },
+    "average": {
+      "temp": 30.75104166666669,
+      "humid": 83.77777777777777
+    }
+  },
+  "2023-07-20": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.9,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.3117981719524442,
+    "accumulated_hourly_temp_diff_sum": -656.8568747480053,
+    "deviation": {
+      "temp": 0.8543597342779888,
+      "humid": 3.5540615757768723
+    },
+    "sum": {
+      "temp_diff_sum": -13.500153139073312,
+      "temp_sum": 8834.400000000012,
+      "humid_sum": 24073.0
+    },
+    "average": {
+      "temp": 30.675000000000043,
+      "humid": 83.58680555555556
+    }
+  },
+  "2023-07-21": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 32.1,
+    "lowest_temp": 29.2,
+    "correlation_high_low": 0.3126168673308966,
+    "accumulated_hourly_temp_diff_sum": -675.3570278870786,
+    "deviation": {
+      "temp": 0.8502508961821201,
+      "humid": 1.713697811431765
+    },
+    "sum": {
+      "temp_diff_sum": -18.50015313907332,
+      "temp_sum": 8727.200000000006,
+      "humid_sum": 24296.0
+    },
+    "average": {
+      "temp": 30.408362369338,
+      "humid": 84.65505226480836
+    }
+  },
+  "2023-07-22": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.6,
+    "lowest_temp": 29.2,
+    "correlation_high_low": 0.3124072028428025,
+    "accumulated_hourly_temp_diff_sum": -683.9571810261519,
+    "deviation": {
+      "temp": 1.056449730915114,
+      "humid": 3.1938405226232915
+    },
+    "sum": {
+      "temp_diff_sum": -8.60015313907332,
+      "temp_sum": 8873.200000000008,
+      "humid_sum": 23536.0
+    },
+    "average": {
+      "temp": 30.80972222222225,
+      "humid": 81.72222222222223
+    }
+  },
+  "2023-07-23": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.9,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.3281381253302254,
+    "accumulated_hourly_temp_diff_sum": -684.8073341652253,
+    "deviation": {
+      "temp": 1.1460124018326854,
+      "humid": 3.927166223705219
+    },
+    "sum": {
+      "temp_diff_sum": -0.8501531390733064,
+      "temp_sum": 8962.600000000011,
+      "humid_sum": 23655.0
+    },
+    "average": {
+      "temp": 31.120138888888928,
+      "humid": 82.13541666666667
+    }
+  },
+  "2023-07-24": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.8,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.32956158548259257,
+    "accumulated_hourly_temp_diff_sum": -685.5074873042986,
+    "deviation": {
+      "temp": 0.8698408724161092,
+      "humid": 3.678950121558266
+    },
+    "sum": {
+      "temp_diff_sum": -0.7001531390733149,
+      "temp_sum": 8969.300000000014,
+      "humid_sum": 23294.0
+    },
+    "average": {
+      "temp": 31.143402777777826,
+      "humid": 80.88194444444444
+    }
+  },
+  "2023-07-25": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.2,
+    "lowest_temp": 29.9,
+    "correlation_high_low": 0.3394484107082156,
+    "accumulated_hourly_temp_diff_sum": -684.9576404433719,
+    "deviation": {
+      "temp": 0.9014509480434281,
+      "humid": 4.310430707690644
+    },
+    "sum": {
+      "temp_diff_sum": 0.5498468609267029,
+      "temp_sum": 8990.000000000007,
+      "humid_sum": 22790.0
+    },
+    "average": {
+      "temp": 31.215277777777803,
+      "humid": 79.13194444444444
+    }
+  },
+  "2023-07-26": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.5,
+    "lowest_temp": 29.8,
+    "correlation_high_low": 0.33393093095315485,
+    "accumulated_hourly_temp_diff_sum": -690.0577935824452,
+    "deviation": {
+      "temp": 0.782011588665474,
+      "humid": 4.365128855238927
+    },
+    "sum": {
+      "temp_diff_sum": -5.100153139073306,
+      "temp_sum": 8920.300000000001,
+      "humid_sum": 22618.0
+    },
+    "average": {
+      "temp": 30.973263888888894,
+      "humid": 78.53472222222223
+    }
+  },
+  "2023-07-27": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.7,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.33359000300504466,
+    "accumulated_hourly_temp_diff_sum": -694.0579467215185,
+    "deviation": {
+      "temp": 0.9461539241919833,
+      "humid": 5.181649236655102
+    },
+    "sum": {
+      "temp_diff_sum": -4.0001531390733085,
+      "temp_sum": 8933.100000000006,
+      "humid_sum": 22238.0
+    },
+    "average": {
+      "temp": 31.017708333333353,
+      "humid": 77.21527777777777
+    }
+  },
+  "2023-07-28": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.3,
+    "lowest_temp": 29.6,
+    "correlation_high_low": 0.33864847624325645,
+    "accumulated_hourly_temp_diff_sum": -693.6080998605919,
+    "deviation": {
+      "temp": 1.1347647210863678,
+      "humid": 5.426913385054979
+    },
+    "sum": {
+      "temp_diff_sum": 0.4498468609266908,
+      "temp_sum": 8984.399999999998,
+      "humid_sum": 21552.0
+    },
+    "average": {
+      "temp": 31.195833333333326,
+      "humid": 74.83333333333333
+    }
+  },
+  "2023-07-29": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.6,
+    "lowest_temp": 29.6,
+    "correlation_high_low": 0.3446349034396651,
+    "accumulated_hourly_temp_diff_sum": -690.4082529996653,
+    "deviation": {
+      "temp": 1.1835678481102154,
+      "humid": 5.237610997601039
+    },
+    "sum": {
+      "temp_diff_sum": 3.1998468609266872,
+      "temp_sum": 9014.600000000019,
+      "humid_sum": 21323.0
+    },
+    "average": {
+      "temp": 31.30069444444451,
+      "humid": 74.03819444444444
+    }
+  },
+  "2023-07-30": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.8,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.34525590280564045,
+    "accumulated_hourly_temp_diff_sum": -691.5584061387385,
+    "deviation": {
+      "temp": 0.8806841799459659,
+      "humid": 3.3198493912691096
+    },
+    "sum": {
+      "temp_diff_sum": -1.150153139073307,
+      "temp_sum": 8972.500000000015,
+      "humid_sum": 21433.0
+    },
+    "average": {
+      "temp": 31.15451388888894,
+      "humid": 74.42013888888889
+    }
+  },
+  "2023-07-31": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 33.8,
+    "lowest_temp": 29.6,
+    "correlation_high_low": 0.3508600012072166,
+    "accumulated_hourly_temp_diff_sum": -686.0085592778119,
+    "deviation": {
+      "temp": 1.202278226026783,
+      "humid": 3.680732405091474
+    },
+    "sum": {
+      "temp_diff_sum": 5.549846860926696,
+      "temp_sum": 9006.199999999993,
+      "humid_sum": 21909.0
+    },
+    "average": {
+      "temp": 31.380487804878026,
+      "humid": 76.33797909407666
+    }
+  },
+  "2023-08-01": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 33.2,
+    "lowest_temp": 29.9,
+    "correlation_high_low": 0.3578739580091715,
+    "accumulated_hourly_temp_diff_sum": -680.2087124168852,
+    "deviation": {
+      "temp": 0.9447968901010086,
+      "humid": 3.6722358417795786
+    },
+    "sum": {
+      "temp_diff_sum": 5.799846860926678,
+      "temp_sum": 9019.599999999993,
+      "humid_sum": 22263.0
+    },
+    "average": {
+      "temp": 31.42717770034841,
+      "humid": 77.57142857142857
+    }
+  },
+  "2023-08-02": {
+    "is_valid": true,
+    "today_total_data": 281,
+    "highest_temp": 34.2,
+    "lowest_temp": 30.0,
+    "correlation_high_low": 0.3815459033065938,
+    "accumulated_hourly_temp_diff_sum": -667.3088655559585,
+    "deviation": {
+      "temp": 1.1758699668539463,
+      "humid": 5.231776676223723
+    },
+    "sum": {
+      "temp_diff_sum": 12.899846860926694,
+      "temp_sum": 8895.499999999998,
+      "humid_sum": 21320.0
+    },
+    "average": {
+      "temp": 31.65658362989323,
+      "humid": 75.87188612099644
+    }
+  },
+  "2023-08-03": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.5,
+    "lowest_temp": 30.1,
+    "correlation_high_low": 0.41035490943257935,
+    "accumulated_hourly_temp_diff_sum": -651.4090186950318,
+    "deviation": {
+      "temp": 1.3053575499966792,
+      "humid": 5.262045952304737
+    },
+    "sum": {
+      "temp_diff_sum": 15.89984686092669,
+      "temp_sum": 9175.200000000008,
+      "humid_sum": 21285.0
+    },
+    "average": {
+      "temp": 31.858333333333363,
+      "humid": 73.90625
+    }
+  },
+  "2023-08-04": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.8,
+    "lowest_temp": 30.2,
+    "correlation_high_low": 0.4281807541760456,
+    "accumulated_hourly_temp_diff_sum": -638.6091718341052,
+    "deviation": {
+      "temp": 0.9628320710431912,
+      "humid": 2.473694552214222
+    },
+    "sum": {
+      "temp_diff_sum": 12.799846860926696,
+      "temp_sum": 9135.500000000025,
+      "humid_sum": 21866.0
+    },
+    "average": {
+      "temp": 31.7204861111112,
+      "humid": 75.92361111111111
+    }
+  },
+  "2023-08-05": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.6,
+    "lowest_temp": 29.9,
+    "correlation_high_low": 0.43667902161723393,
+    "accumulated_hourly_temp_diff_sum": -641.7093249731785,
+    "deviation": {
+      "temp": 0.7581803747854968,
+      "humid": 2.084814288440088
+    },
+    "sum": {
+      "temp_diff_sum": -3.10015313907331,
+      "temp_sum": 8947.400000000003,
+      "humid_sum": 23392.0
+    },
+    "average": {
+      "temp": 31.067361111111122,
+      "humid": 81.22222222222223
+    }
+  },
+  "2023-08-06": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.1,
+    "lowest_temp": 29.3,
+    "correlation_high_low": 0.42353700675878847,
+    "accumulated_hourly_temp_diff_sum": -651.1094781122517,
+    "deviation": {
+      "temp": 1.1636068920509173,
+      "humid": 4.1198278812146185
+    },
+    "sum": {
+      "temp_diff_sum": -9.400153139073307,
+      "temp_sum": 8860.600000000024,
+      "humid_sum": 23343.0
+    },
+    "average": {
+      "temp": 30.765972222222306,
+      "humid": 81.05208333333333
+    }
+  },
+  "2023-08-07": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.0,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.42429851721345907,
+    "accumulated_hourly_temp_diff_sum": -655.359631251325,
+    "deviation": {
+      "temp": 0.928393983552235,
+      "humid": 3.6497928234792982
+    },
+    "sum": {
+      "temp_diff_sum": -4.250153139073312,
+      "temp_sum": 8930.30000000001,
+      "humid_sum": 23648.0
+    },
+    "average": {
+      "temp": 31.007986111111148,
+      "humid": 82.11111111111111
+    }
+  },
+  "2023-08-08": {
+    "is_valid": false,
+    "today_total_data": 180,
+    "highest_temp": 31.6,
+    "lowest_temp": 29.7,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -655.359631251325,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 5475.599999999995,
+      "humid_sum": 14497.0
+    },
+    "average": {
+      "temp": 30.419999999999973,
+      "humid": 80.53888888888889
+    }
+  },
+  "2023-08-09": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.5,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.4281006183010222,
+    "accumulated_hourly_temp_diff_sum": -654.9597843903983,
+    "deviation": {
+      "temp": 1.093082909441722,
+      "humid": 4.329513039560249
+    },
+    "sum": {
+      "temp_diff_sum": 0.3998468609266901,
+      "temp_sum": 8984.00000000001,
+      "humid_sum": 21819.0
+    },
+    "average": {
+      "temp": 31.194444444444475,
+      "humid": 75.76041666666667
+    }
+  },
+  "2023-08-10": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.6,
+    "lowest_temp": 29.9,
+    "correlation_high_low": 0.4354869167706274,
+    "accumulated_hourly_temp_diff_sum": -653.8099375294717,
+    "deviation": {
+      "temp": 0.8341436309349372,
+      "humid": 3.1515978427127025
+    },
+    "sum": {
+      "temp_diff_sum": 1.1498468609266865,
+      "temp_sum": 8986.100000000011,
+      "humid_sum": 22165.0
+    },
+    "average": {
+      "temp": 31.20173611111115,
+      "humid": 76.96180555555556
+    }
+  },
+  "2023-08-11": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.1,
+    "lowest_temp": 30.0,
+    "correlation_high_low": 0.41487445720586535,
+    "accumulated_hourly_temp_diff_sum": -661.2100906685449,
+    "deviation": {
+      "temp": 0.5482082513462707,
+      "humid": 2.7717904222833534
+    },
+    "sum": {
+      "temp_diff_sum": -7.400153139073296,
+      "temp_sum": 8891.300000000014,
+      "humid_sum": 22418.0
+    },
+    "average": {
+      "temp": 30.872569444444494,
+      "humid": 77.84027777777777
+    }
+  },
+  "2023-08-12": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.9,
+    "lowest_temp": 29.6,
+    "correlation_high_low": 0.4157927749419989,
+    "accumulated_hourly_temp_diff_sum": -661.9102438076183,
+    "deviation": {
+      "temp": 1.1660699842378381,
+      "humid": 4.995830389135141
+    },
+    "sum": {
+      "temp_diff_sum": -0.7001531390733113,
+      "temp_sum": 8970.700000000008,
+      "humid_sum": 22031.0
+    },
+    "average": {
+      "temp": 31.148263888888916,
+      "humid": 76.49652777777777
+    }
+  },
+  "2023-08-13": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.1,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.41699545115168557,
+    "accumulated_hourly_temp_diff_sum": -658.9103969466915,
+    "deviation": {
+      "temp": 1.0563095237629374,
+      "humid": 4.198315852723375
+    },
+    "sum": {
+      "temp_diff_sum": 2.9998468609266844,
+      "temp_sum": 9010.900000000029,
+      "humid_sum": 21349.0
+    },
+    "average": {
+      "temp": 31.28784722222232,
+      "humid": 74.12847222222223
+    }
+  },
+  "2023-08-14": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.0,
+    "lowest_temp": 29.8,
+    "correlation_high_low": 0.4172614200821773,
+    "accumulated_hourly_temp_diff_sum": -658.1605500857648,
+    "deviation": {
+      "temp": 0.9298730395052681,
+      "humid": 2.9749387248591637
+    },
+    "sum": {
+      "temp_diff_sum": 0.7498468609266951,
+      "temp_sum": 8994.200000000024,
+      "humid_sum": 21774.0
+    },
+    "average": {
+      "temp": 31.229861111111195,
+      "humid": 75.60416666666667
+    }
+  },
+  "2023-08-15": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.3,
+    "lowest_temp": 30.0,
+    "correlation_high_low": 0.42112425989659413,
+    "accumulated_hourly_temp_diff_sum": -654.7607032248382,
+    "deviation": {
+      "temp": 0.929890931809601,
+      "humid": 2.46361446235725
+    },
+    "sum": {
+      "temp_diff_sum": 3.399846860926697,
+      "temp_sum": 9026.00000000001,
+      "humid_sum": 22318.0
+    },
+    "average": {
+      "temp": 31.34027777777781,
+      "humid": 77.49305555555556
+    }
+  },
+  "2023-08-16": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.7,
+    "lowest_temp": 30.3,
+    "correlation_high_low": 0.4330415046355054,
+    "accumulated_hourly_temp_diff_sum": -645.8608563639115,
+    "deviation": {
+      "temp": 0.935556370001625,
+      "humid": 5.265734614842512
+    },
+    "sum": {
+      "temp_diff_sum": 8.899846860926694,
+      "temp_sum": 9089.000000000013,
+      "humid_sum": 21718.0
+    },
+    "average": {
+      "temp": 31.55902777777782,
+      "humid": 75.40972222222223
+    }
+  },
+  "2023-08-17": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.6,
+    "lowest_temp": 30.1,
+    "correlation_high_low": 0.4229050592721292,
+    "accumulated_hourly_temp_diff_sum": -643.7610095029847,
+    "deviation": {
+      "temp": 0.7671130663710674,
+      "humid": 4.96264863376316
+    },
+    "sum": {
+      "temp_diff_sum": 2.099846860926693,
+      "temp_sum": 9008.700000000015,
+      "humid_sum": 21319.0
+    },
+    "average": {
+      "temp": 31.280208333333388,
+      "humid": 74.02430555555556
+    }
+  },
+  "2023-08-18": {
+    "is_valid": true,
+    "today_total_data": 282,
+    "highest_temp": 32.5,
+    "lowest_temp": 30.1,
+    "correlation_high_low": 0.4111345509294369,
+    "accumulated_hourly_temp_diff_sum": -644.2111626420581,
+    "deviation": {
+      "temp": 0.671971593629326,
+      "humid": 3.1178421368895277
+    },
+    "sum": {
+      "temp_diff_sum": -0.4501531390733149,
+      "temp_sum": 8782.700000000012,
+      "humid_sum": 21164.0
+    },
+    "average": {
+      "temp": 31.14432624113479,
+      "humid": 75.04964539007092
+    }
+  },
+  "2023-08-19": {
+    "is_valid": true,
+    "today_total_data": 272,
+    "highest_temp": 33.3,
+    "lowest_temp": 30.1,
+    "correlation_high_low": 0.41487848913928604,
+    "accumulated_hourly_temp_diff_sum": -638.0492958118533,
+    "deviation": {
+      "temp": 0.9311737968403883,
+      "humid": 4.15373985977268
+    },
+    "sum": {
+      "temp_diff_sum": 6.161866830204705,
+      "temp_sum": 8539.900000000005,
+      "humid_sum": 20403.0
+    },
+    "average": {
+      "temp": 31.396691176470608,
+      "humid": 75.01102941176471
+    }
+  },
+  "2023-08-20": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.6,
+    "lowest_temp": 30.3,
+    "correlation_high_low": 0.42414134408633736,
+    "accumulated_hourly_temp_diff_sum": -625.4494489509266,
+    "deviation": {
+      "temp": 0.9757821728057096,
+      "humid": 4.237363202934137
+    },
+    "sum": {
+      "temp_diff_sum": 12.59984686092669,
+      "temp_sum": 9130.000000000011,
+      "humid_sum": 21440.0
+    },
+    "average": {
+      "temp": 31.70138888888893,
+      "humid": 74.44444444444444
+    }
+  },
+  "2023-08-21": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.8,
+    "lowest_temp": 30.3,
+    "correlation_high_low": 0.44820757639550757,
+    "accumulated_hourly_temp_diff_sum": -607.0996020899998,
+    "deviation": {
+      "temp": 1.136808684157101,
+      "humid": 4.994671881408437
+    },
+    "sum": {
+      "temp_diff_sum": 18.34984686092668,
+      "temp_sum": 9200.10000000001,
+      "humid_sum": 20975.0
+    },
+    "average": {
+      "temp": 31.9447916666667,
+      "humid": 72.82986111111111
+    }
+  },
+  "2023-08-22": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 33.6,
+    "lowest_temp": 30.4,
+    "correlation_high_low": 0.45567849997020105,
+    "accumulated_hourly_temp_diff_sum": -601.5997552290731,
+    "deviation": {
+      "temp": 0.6186730774748808,
+      "humid": 3.020783346720847
+    },
+    "sum": {
+      "temp_diff_sum": 5.499846860926699,
+      "temp_sum": 9010.200000000023,
+      "humid_sum": 21971.0
+    },
+    "average": {
+      "temp": 31.394425087108093,
+      "humid": 76.55400696864112
+    }
+  },
+  "2023-08-23": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.8,
+    "lowest_temp": 29.8,
+    "correlation_high_low": 0.4540692443631679,
+    "accumulated_hourly_temp_diff_sum": -608.0999083681464,
+    "deviation": {
+      "temp": 0.745908253918596,
+      "humid": 3.1130152128246626
+    },
+    "sum": {
+      "temp_diff_sum": -6.500153139073312,
+      "temp_sum": 8903.100000000004,
+      "humid_sum": 23133.0
+    },
+    "average": {
+      "temp": 30.91354166666668,
+      "humid": 80.32291666666667
+    }
+  },
+  "2023-08-24": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 32.3,
+    "lowest_temp": 29.9,
+    "correlation_high_low": 0.4450721494316261,
+    "accumulated_hourly_temp_diff_sum": -614.9000615072198,
+    "deviation": {
+      "temp": 0.6665679167030554,
+      "humid": 2.4927872497040147
+    },
+    "sum": {
+      "temp_diff_sum": -6.800153139073309,
+      "temp_sum": 8877.30000000003,
+      "humid_sum": 22876.0
+    },
+    "average": {
+      "temp": 30.931358885017527,
+      "humid": 79.70731707317073
+    }
+  },
+  "2023-08-25": {
+    "is_valid": false,
+    "today_total_data": 12,
+    "highest_temp": 30.6,
+    "lowest_temp": 30.5,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -614.9000615072198,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 366.7,
+      "humid_sum": 972.0
+    },
+    "average": {
+      "temp": 30.558333333333334,
+      "humid": 81.0
+    }
+  },
+  "2023-08-26": {
+    "is_valid": false,
+    "today_total_data": 16,
+    "highest_temp": 30.6,
+    "lowest_temp": 30.3,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -614.9000615072198,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 487.4999999999999,
+      "humid_sum": 1303.0
+    },
+    "average": {
+      "temp": 30.468749999999993,
+      "humid": 81.4375
+    }
+  },
+  "2023-08-27": {
+    "is_valid": true,
+    "today_total_data": 290,
+    "highest_temp": 33.7,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.4459721517435364,
+    "accumulated_hourly_temp_diff_sum": -607.4002146462931,
+    "deviation": {
+      "temp": 1.2607138475759192,
+      "humid": 6.611596665234023
+    },
+    "sum": {
+      "temp_diff_sum": 7.499846860926688,
+      "temp_sum": 9112.900000000014,
+      "humid_sum": 21873.0
+    },
+    "average": {
+      "temp": 31.423793103448325,
+      "humid": 75.42413793103448
+    }
+  },
+  "2023-08-28": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.6,
+    "lowest_temp": 30.4,
+    "correlation_high_low": 0.4530649084755092,
+    "accumulated_hourly_temp_diff_sum": -593.2503677853664,
+    "deviation": {
+      "temp": 0.9317037252245061,
+      "humid": 4.783173582230412
+    },
+    "sum": {
+      "temp_diff_sum": 14.149846860926687,
+      "temp_sum": 9155.699999999999,
+      "humid_sum": 21485.0
+    },
+    "average": {
+      "temp": 31.790624999999995,
+      "humid": 74.60069444444444
+    }
+  },
+  "2023-08-29": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.0,
+    "lowest_temp": 30.2,
+    "correlation_high_low": 0.4633543911161121,
+    "accumulated_hourly_temp_diff_sum": -574.9505209244397,
+    "deviation": {
+      "temp": 1.1558551106622905,
+      "humid": 5.014897511276887
+    },
+    "sum": {
+      "temp_diff_sum": 18.29984686092669,
+      "temp_sum": 9187.899999999992,
+      "humid_sum": 20925.0
+    },
+    "average": {
+      "temp": 31.90243055555553,
+      "humid": 72.65625
+    }
+  },
+  "2023-08-30": {
+    "is_valid": false,
+    "today_total_data": 164,
+    "highest_temp": 34.4,
+    "lowest_temp": 30.6,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -574.9505209244397,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 5192.9000000000015,
+      "humid_sum": 12510.0
+    },
+    "average": {
+      "temp": 31.66402439024391,
+      "humid": 76.28048780487805
+    }
+  },
+  "2023-08-31": {
+    "is_valid": false,
+    "today_total_data": 108,
+    "highest_temp": 32.9,
+    "lowest_temp": 30.3,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -574.9505209244397,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 3401.600000000001,
+      "humid_sum": 8322.0
+    },
+    "average": {
+      "temp": 31.496296296296304,
+      "humid": 77.05555555555556
+    }
+  },
+  "2023-09-01": {
+    "is_valid": false,
+    "today_total_data": 223,
+    "highest_temp": 33.6,
+    "lowest_temp": 30.5,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -574.9505209244397,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 7107.200000000001,
+      "humid_sum": 16324.0
+    },
+    "average": {
+      "temp": 31.870852017937224,
+      "humid": 73.20179372197309
+    }
+  },
+  "2023-09-04": {
+    "is_valid": false,
+    "today_total_data": 49,
+    "highest_temp": 31.8,
+    "lowest_temp": 31.3,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -574.9505209244397,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 1545.000000000001,
+      "humid_sum": 3657.0
+    },
+    "average": {
+      "temp": 31.530612244897977,
+      "humid": 74.63265306122449
+    }
+  },
+  "2023-09-05": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.9,
+    "lowest_temp": 30.3,
+    "correlation_high_low": 0.4732673376148803,
+    "accumulated_hourly_temp_diff_sum": -562.550674063513,
+    "deviation": {
+      "temp": 0.957043969586676,
+      "humid": 3.7030757569523733
+    },
+    "sum": {
+      "temp_diff_sum": 12.399846860926687,
+      "temp_sum": 9131.40000000002,
+      "humid_sum": 21572.0
+    },
+    "average": {
+      "temp": 31.706250000000068,
+      "humid": 74.90277777777777
+    }
+  },
+  "2023-09-06": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.3,
+    "lowest_temp": 30.1,
+    "correlation_high_low": 0.46003792294191936,
+    "accumulated_hourly_temp_diff_sum": -571.2508272025864,
+    "deviation": {
+      "temp": 0.5560326727274506,
+      "humid": 2.513733017727535
+    },
+    "sum": {
+      "temp_diff_sum": -8.700153139073308,
+      "temp_sum": 8888.900000000007,
+      "humid_sum": 23209.0
+    },
+    "average": {
+      "temp": 30.864236111111136,
+      "humid": 80.58680555555556
+    }
+  },
+  "2023-09-07": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.8,
+    "lowest_temp": 29.6,
+    "correlation_high_low": 0.4598885451635718,
+    "accumulated_hourly_temp_diff_sum": -575.5509803416596,
+    "deviation": {
+      "temp": 1.0383388974198464,
+      "humid": 8.011330198836143
+    },
+    "sum": {
+      "temp_diff_sum": -4.3001531390732985,
+      "temp_sum": 8923.400000000018,
+      "humid_sum": 22373.0
+    },
+    "average": {
+      "temp": 30.98402777777784,
+      "humid": 77.68402777777777
+    }
+  },
+  "2023-09-08": {
+    "is_valid": false,
+    "today_total_data": 215,
+    "highest_temp": 33.3,
+    "lowest_temp": 29.9,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -575.5509803416596,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 6681.999999999996,
+      "humid_sum": 16423.0
+    },
+    "average": {
+      "temp": 31.079069767441844,
+      "humid": 76.38604651162791
+    }
+  },
+  "2023-09-09": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.8,
+    "lowest_temp": 30.5,
+    "correlation_high_low": 0.46949093174213063,
+    "accumulated_hourly_temp_diff_sum": -559.0511334807329,
+    "deviation": {
+      "temp": 1.021349784326821,
+      "humid": 5.462409242967276
+    },
+    "sum": {
+      "temp_diff_sum": 16.49984686092669,
+      "temp_sum": 9174.600000000013,
+      "humid_sum": 21362.0
+    },
+    "average": {
+      "temp": 31.856250000000045,
+      "humid": 74.17361111111111
+    }
+  },
+  "2023-09-10": {
+    "is_valid": true,
+    "today_total_data": 283,
+    "highest_temp": 34.0,
+    "lowest_temp": 30.5,
+    "correlation_high_low": 0.4815927406015177,
+    "accumulated_hourly_temp_diff_sum": -551.9512866198062,
+    "deviation": {
+      "temp": 0.8364892813547721,
+      "humid": 2.5920359760846847
+    },
+    "sum": {
+      "temp_diff_sum": 7.099846860926686,
+      "temp_sum": 8911.099999999997,
+      "humid_sum": 22164.0
+    },
+    "average": {
+      "temp": 31.48798586572437,
+      "humid": 78.31802120141343
+    }
+  },
+  "2023-09-11": {
+    "is_valid": false,
+    "today_total_data": 139,
+    "highest_temp": 32.3,
+    "lowest_temp": 30.1,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -551.9512866198062,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 4353.600000000005,
+      "humid_sum": 11068.0
+    },
+    "average": {
+      "temp": 31.320863309352553,
+      "humid": 79.62589928057554
+    }
+  },
+  "2023-09-12": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 31.8,
+    "lowest_temp": 29.5,
+    "correlation_high_low": 0.479409827926785,
+    "accumulated_hourly_temp_diff_sum": -568.0014397588795,
+    "deviation": {
+      "temp": 0.6311822899451729,
+      "humid": 2.4653242366514365
+    },
+    "sum": {
+      "temp_diff_sum": -16.050153139073306,
+      "temp_sum": 8787.100000000019,
+      "humid_sum": 23693.0
+    },
+    "average": {
+      "temp": 30.510763888888953,
+      "humid": 82.26736111111111
+    }
+  },
+  "2023-09-13": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.1,
+    "lowest_temp": 29.3,
+    "correlation_high_low": 0.47731219022154764,
+    "accumulated_hourly_temp_diff_sum": -580.9015928979528,
+    "deviation": {
+      "temp": 0.9856571725140518,
+      "humid": 3.042663379947384
+    },
+    "sum": {
+      "temp_diff_sum": -12.900153139073314,
+      "temp_sum": 8826.400000000025,
+      "humid_sum": 23003.0
+    },
+    "average": {
+      "temp": 30.64722222222231,
+      "humid": 79.87152777777777
+    }
+  },
+  "2023-09-14": {
+    "is_valid": true,
+    "today_total_data": 289,
+    "highest_temp": 33.2,
+    "lowest_temp": 29.6,
+    "correlation_high_low": 0.47710235470191126,
+    "accumulated_hourly_temp_diff_sum": -587.0017460370261,
+    "deviation": {
+      "temp": 1.0194874463772088,
+      "humid": 3.8787800668270753
+    },
+    "sum": {
+      "temp_diff_sum": -6.100153139073317,
+      "temp_sum": 8925.10000000001,
+      "humid_sum": 23122.0
+    },
+    "average": {
+      "temp": 30.88269896193775,
+      "humid": 80.00692041522491
+    }
+  },
+  "2023-09-15": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 33.0,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.47712610634116676,
+    "accumulated_hourly_temp_diff_sum": -588.5018991760994,
+    "deviation": {
+      "temp": 0.8941182052204845,
+      "humid": 4.245521280873667
+    },
+    "sum": {
+      "temp_diff_sum": -1.500153139073312,
+      "temp_sum": 8946.300000000005,
+      "humid_sum": 22585.0
+    },
+    "average": {
+      "temp": 31.171777003484337,
+      "humid": 78.69337979094077
+    }
+  },
+  "2023-09-16": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.5,
+    "lowest_temp": 29.9,
+    "correlation_high_low": 0.4790739869435594,
+    "accumulated_hourly_temp_diff_sum": -573.6520523151727,
+    "deviation": {
+      "temp": 1.4819631559268573,
+      "humid": 5.132912252751302
+    },
+    "sum": {
+      "temp_diff_sum": 14.849846860926696,
+      "temp_sum": 9151.000000000005,
+      "humid_sum": 21930.0
+    },
+    "average": {
+      "temp": 31.774305555555575,
+      "humid": 76.14583333333333
+    }
+  },
+  "2023-09-17": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.5,
+    "lowest_temp": 30.5,
+    "correlation_high_low": 0.4820091854540842,
+    "accumulated_hourly_temp_diff_sum": -570.802205454246,
+    "deviation": {
+      "temp": 0.7092096975237495,
+      "humid": 1.772830437037805
+    },
+    "sum": {
+      "temp_diff_sum": 2.849846860926693,
+      "temp_sum": 9028.00000000002,
+      "humid_sum": 22999.0
+    },
+    "average": {
+      "temp": 31.347222222222292,
+      "humid": 79.85763888888889
+    }
+  },
+  "2023-09-18": {
+    "is_valid": true,
+    "today_total_data": 274,
+    "highest_temp": 33.5,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.48207128430362906,
+    "accumulated_hourly_temp_diff_sum": -581.1023585933193,
+    "deviation": {
+      "temp": 0.7838107653593616,
+      "humid": 3.0799114166278554
+    },
+    "sum": {
+      "temp_diff_sum": -10.300153139073306,
+      "temp_sum": 8396.400000000005,
+      "humid_sum": 22810.0
+    },
+    "average": {
+      "temp": 30.643795620437974,
+      "humid": 83.24817518248175
+    }
+  },
+  "2023-09-19": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.0,
+    "lowest_temp": 29.4,
+    "correlation_high_low": 0.481544425481127,
+    "accumulated_hourly_temp_diff_sum": -592.3025117323926,
+    "deviation": {
+      "temp": 0.9735605248191358,
+      "humid": 5.483490935481353
+    },
+    "sum": {
+      "temp_diff_sum": -11.200153139073311,
+      "temp_sum": 8847.900000000005,
+      "humid_sum": 23680.0
+    },
+    "average": {
+      "temp": 30.72187500000002,
+      "humid": 82.22222222222223
+    }
+  },
+  "2023-09-20": {
+    "is_valid": true,
+    "today_total_data": 286,
+    "highest_temp": 32.9,
+    "lowest_temp": 29.4,
+    "correlation_high_low": 0.48150277842138384,
+    "accumulated_hourly_temp_diff_sum": -599.902664871466,
+    "deviation": {
+      "temp": 0.9248159212724626,
+      "humid": 3.2488670595334903
+    },
+    "sum": {
+      "temp_diff_sum": -7.600153139073321,
+      "temp_sum": 8825.700000000006,
+      "humid_sum": 23100.0
+    },
+    "average": {
+      "temp": 30.85909090909093,
+      "humid": 80.76923076923077
+    }
+  },
+  "2023-09-21": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.6,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.4814308725810233,
+    "accumulated_hourly_temp_diff_sum": -595.0028180105393,
+    "deviation": {
+      "temp": 1.2262637861666994,
+      "humid": 8.213581115302528
+    },
+    "sum": {
+      "temp_diff_sum": 4.899846860926683,
+      "temp_sum": 9039.900000000003,
+      "humid_sum": 21650.0
+    },
+    "average": {
+      "temp": 31.38854166666668,
+      "humid": 75.17361111111111
+    }
+  },
+  "2023-09-22": {
+    "is_valid": false,
+    "today_total_data": 176,
+    "highest_temp": 34.0,
+    "lowest_temp": 30.1,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -595.0028180105393,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 5545.099999999998,
+      "humid_sum": 13270.0
+    },
+    "average": {
+      "temp": 31.506249999999987,
+      "humid": 75.39772727272727
+    }
+  },
+  "2023-09-24": {
+    "is_valid": false,
+    "today_total_data": 153,
+    "highest_temp": 33.8,
+    "lowest_temp": 31.0,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -595.0028180105393,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 4963.299999999999,
+      "humid_sum": 10734.0
+    },
+    "average": {
+      "temp": 32.439869281045745,
+      "humid": 70.15686274509804
+    }
+  },
+  "2023-09-25": {
+    "is_valid": true,
+    "today_total_data": 266,
+    "highest_temp": 33.7,
+    "lowest_temp": 29.9,
+    "correlation_high_low": 0.4837650622892595,
+    "accumulated_hourly_temp_diff_sum": -585.5030812817712,
+    "deviation": {
+      "temp": 1.1782464086381066,
+      "humid": 3.915748761092537
+    },
+    "sum": {
+      "temp_diff_sum": 9.499736728768095,
+      "temp_sum": 8402.700000000015,
+      "humid_sum": 19734.0
+    },
+    "average": {
+      "temp": 31.58909774436096,
+      "humid": 74.18796992481202
+    }
+  },
+  "2023-09-28": {
+    "is_valid": false,
+    "today_total_data": 153,
+    "highest_temp": 34.4,
+    "lowest_temp": 31.8,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -585.5030812817712,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 5058.699999999998,
+      "humid_sum": 10759.0
+    },
+    "average": {
+      "temp": 33.063398692810445,
+      "humid": 70.3202614379085
+    }
+  },
+  "2023-09-29": {
+    "is_valid": true,
+    "today_total_data": 284,
+    "highest_temp": 34.6,
+    "lowest_temp": 30.8,
+    "correlation_high_low": 0.5055142028879757,
+    "accumulated_hourly_temp_diff_sum": -557.2032344208445,
+    "deviation": {
+      "temp": 1.0669218029008765,
+      "humid": 4.094782788149643
+    },
+    "sum": {
+      "temp_diff_sum": 28.29984686092668,
+      "temp_sum": 9196.100000000015,
+      "humid_sum": 21077.0
+    },
+    "average": {
+      "temp": 32.38063380281695,
+      "humid": 74.21478873239437
+    }
+  },
+  "2023-09-30": {
+    "is_valid": true,
+    "today_total_data": 250,
+    "highest_temp": 34.6,
+    "lowest_temp": 31.0,
+    "correlation_high_low": 0.5273159583839613,
+    "accumulated_hourly_temp_diff_sum": -530.7617207947786,
+    "deviation": {
+      "temp": 1.1253802201922685,
+      "humid": 4.9232509584623045
+    },
+    "sum": {
+      "temp_diff_sum": 26.441513626065927,
+      "temp_sum": 8113.600000000011,
+      "humid_sum": 18510.0
+    },
+    "average": {
+      "temp": 32.45440000000004,
+      "humid": 74.04
+    }
+  },
+  "2023-10-01": {
+    "is_valid": false,
+    "today_total_data": 136,
+    "highest_temp": 34.7,
+    "lowest_temp": 31.8,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -530.7617207947786,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 4466.8,
+      "humid_sum": 9683.0
+    },
+    "average": {
+      "temp": 32.84411764705882,
+      "humid": 71.19852941176471
+    }
+  },
+  "2023-10-02": {
+    "is_valid": true,
+    "today_total_data": 278,
+    "highest_temp": 33.8,
+    "lowest_temp": 30.9,
+    "correlation_high_low": 0.5318518174295102,
+    "accumulated_hourly_temp_diff_sum": -508.91187393385195,
+    "deviation": {
+      "temp": 0.8355206874211684,
+      "humid": 3.672406434229028
+    },
+    "sum": {
+      "temp_diff_sum": 21.8498468609267,
+      "temp_sum": 8919.400000000016,
+      "humid_sum": 21064.0
+    },
+    "average": {
+      "temp": 32.08417266187056,
+      "humid": 75.76978417266187
+    }
+  },
+  "2023-10-03": {
+    "is_valid": false,
+    "today_total_data": 217,
+    "highest_temp": 34.8,
+    "lowest_temp": 30.6,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -508.91187393385195,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 6992.900000000002,
+      "humid_sum": 16436.0
+    },
+    "average": {
+      "temp": 32.225345622119825,
+      "humid": 75.74193548387096
+    }
+  },
+  "2023-10-04": {
+    "is_valid": false,
+    "today_total_data": 37,
+    "highest_temp": 32.6,
+    "lowest_temp": 32.1,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -508.91187393385195,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 1196.8999999999996,
+      "humid_sum": 2818.0
+    },
+    "average": {
+      "temp": 32.34864864864864,
+      "humid": 76.16216216216216
+    }
+  },
+  "2023-10-05": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.5,
+    "lowest_temp": 31.0,
+    "correlation_high_low": 0.5489158664592197,
+    "accumulated_hourly_temp_diff_sum": -481.41202707292524,
+    "deviation": {
+      "temp": 0.9158684972017905,
+      "humid": 4.197890818778984
+    },
+    "sum": {
+      "temp_diff_sum": 27.49984686092669,
+      "temp_sum": 9321.000000000005,
+      "humid_sum": 21663.0
+    },
+    "average": {
+      "temp": 32.36458333333335,
+      "humid": 75.21875
+    }
+  },
+  "2023-10-06": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.9,
+    "lowest_temp": 30.6,
+    "correlation_high_low": 0.5547667334758015,
+    "accumulated_hourly_temp_diff_sum": -477.31218021199857,
+    "deviation": {
+      "temp": 0.7320280332567634,
+      "humid": 3.3504695520383114
+    },
+    "sum": {
+      "temp_diff_sum": 4.0998468609266965,
+      "temp_sum": 9042.70000000001,
+      "humid_sum": 23434.0
+    },
+    "average": {
+      "temp": 31.398263888888923,
+      "humid": 81.36805555555556
+    }
+  },
+  "2023-10-07": {
+    "is_valid": false,
+    "today_total_data": 177,
+    "highest_temp": 34.3,
+    "lowest_temp": 30.0,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -477.31218021199857,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 5528.400000000004,
+      "humid_sum": 14639.0
+    },
+    "average": {
+      "temp": 31.233898305084768,
+      "humid": 82.70621468926554
+    }
+  },
+  "2023-10-09": {
+    "is_valid": false,
+    "today_total_data": 148,
+    "highest_temp": 35.3,
+    "lowest_temp": 31.5,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -477.31218021199857,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 4856.20000000001,
+      "humid_sum": 10964.0
+    },
+    "average": {
+      "temp": 32.81216216216223,
+      "humid": 74.08108108108108
+    }
+  },
+  "2023-10-10": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.5,
+    "lowest_temp": 30.6,
+    "correlation_high_low": 0.5660350105072347,
+    "accumulated_hourly_temp_diff_sum": -460.26233335107185,
+    "deviation": {
+      "temp": 0.9339655596790849,
+      "humid": 3.8193039746896615
+    },
+    "sum": {
+      "temp_diff_sum": 17.0498468609267,
+      "temp_sum": 9184.800000000008,
+      "humid_sum": 22349.0
+    },
+    "average": {
+      "temp": 31.891666666666694,
+      "humid": 77.60069444444444
+    }
+  },
+  "2023-10-11": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.6,
+    "lowest_temp": 29.8,
+    "correlation_high_low": 0.5661056180228985,
+    "accumulated_hourly_temp_diff_sum": -448.56248649014515,
+    "deviation": {
+      "temp": 1.0956625144113084,
+      "humid": 3.466340504488207
+    },
+    "sum": {
+      "temp_diff_sum": 11.699846860926687,
+      "temp_sum": 9106.500000000016,
+      "humid_sum": 22395.0
+    },
+    "average": {
+      "temp": 31.619791666666725,
+      "humid": 77.76041666666667
+    }
+  },
+  "2023-10-12": {
+    "is_valid": false,
+    "today_total_data": 191,
+    "highest_temp": 33.6,
+    "lowest_temp": 30.3,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -448.56248649014515,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 6064.4,
+      "humid_sum": 15188.0
+    },
+    "average": {
+      "temp": 31.750785340314135,
+      "humid": 79.51832460732984
+    }
+  },
+  "2023-10-13": {
+    "is_valid": true,
+    "today_total_data": 233,
+    "highest_temp": 33.9,
+    "lowest_temp": 30.2,
+    "correlation_high_low": 0.5695593646870915,
+    "accumulated_hourly_temp_diff_sum": -433.22804462609713,
+    "deviation": {
+      "temp": 0.9911383219508337,
+      "humid": 5.070756875605013
+    },
+    "sum": {
+      "temp_diff_sum": 15.33444186404801,
+      "temp_sum": 7412.500000000009,
+      "humid_sum": 18113.0
+    },
+    "average": {
+      "temp": 31.813304721030082,
+      "humid": 77.7381974248927
+    }
+  },
+  "2023-10-14": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.9,
+    "lowest_temp": 30.3,
+    "correlation_high_low": 0.5756433289183226,
+    "accumulated_hourly_temp_diff_sum": -420.1281977651704,
+    "deviation": {
+      "temp": 0.8472682563768624,
+      "humid": 4.133827477089423
+    },
+    "sum": {
+      "temp_diff_sum": 13.099846860926704,
+      "temp_sum": 9146.100000000015,
+      "humid_sum": 23239.0
+    },
+    "average": {
+      "temp": 31.757291666666717,
+      "humid": 80.69097222222223
+    }
+  },
+  "2023-10-15": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 35.1,
+    "lowest_temp": 30.3,
+    "correlation_high_low": 0.5810799395240268,
+    "accumulated_hourly_temp_diff_sum": -401.0283509042437,
+    "deviation": {
+      "temp": 1.2267026446563667,
+      "humid": 5.258676676642795
+    },
+    "sum": {
+      "temp_diff_sum": 19.09984686092669,
+      "temp_sum": 9169.500000000007,
+      "humid_sum": 22940.0
+    },
+    "average": {
+      "temp": 31.9494773519164,
+      "humid": 79.93031358885017
+    }
+  },
+  "2023-10-16": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.5,
+    "lowest_temp": 30.8,
+    "correlation_high_low": 0.5916942793985138,
+    "accumulated_hourly_temp_diff_sum": -382.42850404331705,
+    "deviation": {
+      "temp": 1.0756896810560912,
+      "humid": 5.950338418571224
+    },
+    "sum": {
+      "temp_diff_sum": 18.599846860926696,
+      "temp_sum": 9215.100000000017,
+      "humid_sum": 22291.0
+    },
+    "average": {
+      "temp": 31.99687500000006,
+      "humid": 77.39930555555556
+    }
+  },
+  "2023-10-17": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 34.5,
+    "lowest_temp": 29.8,
+    "correlation_high_low": 0.5876732160750245,
+    "accumulated_hourly_temp_diff_sum": -366.92865718239034,
+    "deviation": {
+      "temp": 1.2002272079899916,
+      "humid": 5.598942116550674
+    },
+    "sum": {
+      "temp_diff_sum": 15.499846860926684,
+      "temp_sum": 9129.699999999999,
+      "humid_sum": 21984.0
+    },
+    "average": {
+      "temp": 31.81080139372822,
+      "humid": 76.5993031358885
+    }
+  },
+  "2023-10-18": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.6,
+    "lowest_temp": 30.3,
+    "correlation_high_low": 0.5785468254343484,
+    "accumulated_hourly_temp_diff_sum": -371.32881032146366,
+    "deviation": {
+      "temp": 0.5206791438432439,
+      "humid": 3.2024582451186454
+    },
+    "sum": {
+      "temp_diff_sum": -4.4001531390733035,
+      "temp_sum": 8942.999999999989,
+      "humid_sum": 23930.0
+    },
+    "average": {
+      "temp": 31.052083333333297,
+      "humid": 83.09027777777777
+    }
+  },
+  "2023-10-19": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 33.8,
+    "lowest_temp": 29.6,
+    "correlation_high_low": 0.575768529985521,
+    "accumulated_hourly_temp_diff_sum": -377.728963460537,
+    "deviation": {
+      "temp": 1.0039967961631755,
+      "humid": 4.493055339701166
+    },
+    "sum": {
+      "temp_diff_sum": -6.400153139073314,
+      "temp_sum": 8860.69999999999,
+      "humid_sum": 23906.0
+    },
+    "average": {
+      "temp": 30.87351916376303,
+      "humid": 83.29616724738676
+    }
+  },
+  "2023-10-20": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.1,
+    "lowest_temp": 29.8,
+    "correlation_high_low": 0.5708709508700988,
+    "accumulated_hourly_temp_diff_sum": -391.7291165996103,
+    "deviation": {
+      "temp": 0.49920642560232975,
+      "humid": 2.059856143095171
+    },
+    "sum": {
+      "temp_diff_sum": -14.000153139073298,
+      "temp_sum": 8816.900000000021,
+      "humid_sum": 24302.0
+    },
+    "average": {
+      "temp": 30.614236111111186,
+      "humid": 84.38194444444444
+    }
+  },
+  "2023-10-21": {
+    "is_valid": false,
+    "today_total_data": 130,
+    "highest_temp": 32.0,
+    "lowest_temp": 29.4,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -391.7291165996103,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 3910.0999999999976,
+      "humid_sum": 11056.0
+    },
+    "average": {
+      "temp": 30.07769230769229,
+      "humid": 85.04615384615384
+    }
+  },
+  "2023-10-23": {
+    "is_valid": false,
+    "today_total_data": 91,
+    "highest_temp": 31.4,
+    "lowest_temp": 30.0,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -391.7291165996103,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 2779.1999999999975,
+      "humid_sum": 7443.0
+    },
+    "average": {
+      "temp": 30.540659340659314,
+      "humid": 81.79120879120879
+    }
+  },
+  "2023-10-24": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.1,
+    "lowest_temp": 29.4,
+    "correlation_high_low": 0.5723809601748371,
+    "accumulated_hourly_temp_diff_sum": -415.4292697386836,
+    "deviation": {
+      "temp": 0.625922062895569,
+      "humid": 1.8818515505978823
+    },
+    "sum": {
+      "temp_diff_sum": -23.700153139073308,
+      "temp_sum": 8691.300000000007,
+      "humid_sum": 24395.0
+    },
+    "average": {
+      "temp": 30.178125000000023,
+      "humid": 84.70486111111111
+    }
+  },
+  "2023-10-25": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.0,
+    "lowest_temp": 29.1,
+    "correlation_high_low": 0.5707852540105404,
+    "accumulated_hourly_temp_diff_sum": -430.4294228777569,
+    "deviation": {
+      "temp": 1.1228408098991594,
+      "humid": 4.452417977769543
+    },
+    "sum": {
+      "temp_diff_sum": -15.00015313907332,
+      "temp_sum": 8795.100000000017,
+      "humid_sum": 23890.0
+    },
+    "average": {
+      "temp": 30.538541666666724,
+      "humid": 82.95138888888889
+    }
+  },
+  "2023-10-26": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 32.5,
+    "lowest_temp": 29.2,
+    "correlation_high_low": 0.5729614469025334,
+    "accumulated_hourly_temp_diff_sum": -449.7795760168302,
+    "deviation": {
+      "temp": 0.818097394501543,
+      "humid": 3.499236366607539
+    },
+    "sum": {
+      "temp_diff_sum": -19.350153139073303,
+      "temp_sum": 8717.500000000016,
+      "humid_sum": 23918.0
+    },
+    "average": {
+      "temp": 30.374564459930372,
+      "humid": 83.33797909407666
+    }
+  },
+  "2023-10-27": {
+    "is_valid": true,
+    "today_total_data": 286,
+    "highest_temp": 33.6,
+    "lowest_temp": 29.3,
+    "correlation_high_low": 0.5678525472225469,
+    "accumulated_hourly_temp_diff_sum": -455.0797291559035,
+    "deviation": {
+      "temp": 1.2515773704512376,
+      "humid": 4.773480306381805
+    },
+    "sum": {
+      "temp_diff_sum": -5.300153139073316,
+      "temp_sum": 8854.700000000023,
+      "humid_sum": 23459.0
+    },
+    "average": {
+      "temp": 30.96048951048959,
+      "humid": 82.02447552447552
+    }
+  },
+  "2023-10-28": {
+    "is_valid": false,
+    "today_total_data": 225,
+    "highest_temp": 33.8,
+    "lowest_temp": 29.4,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -455.0797291559035,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 7069.200000000013,
+      "humid_sum": 17531.0
+    },
+    "average": {
+      "temp": 31.418666666666724,
+      "humid": 77.91555555555556
+    }
+  },
+  "2023-10-29": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.8,
+    "lowest_temp": 30.0,
+    "correlation_high_low": 0.5691678430163324,
+    "accumulated_hourly_temp_diff_sum": -457.97988229497685,
+    "deviation": {
+      "temp": 0.9633381291531268,
+      "humid": 3.1480151711430673
+    },
+    "sum": {
+      "temp_diff_sum": -2.900153139073307,
+      "temp_sum": 8949.400000000009,
+      "humid_sum": 23587.0
+    },
+    "average": {
+      "temp": 31.074305555555586,
+      "humid": 81.89930555555556
+    }
+  },
+  "2023-10-30": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.9,
+    "lowest_temp": 29.5,
+    "correlation_high_low": 0.5694778743838804,
+    "accumulated_hourly_temp_diff_sum": -464.38003543405017,
+    "deviation": {
+      "temp": 0.9757030940700032,
+      "humid": 3.656576433670952
+    },
+    "sum": {
+      "temp_diff_sum": -6.400153139073318,
+      "temp_sum": 8902.800000000017,
+      "humid_sum": 23895.0
+    },
+    "average": {
+      "temp": 30.912500000000062,
+      "humid": 82.96875
+    }
+  },
+  "2023-10-31": {
+    "is_valid": false,
+    "today_total_data": 217,
+    "highest_temp": 32.6,
+    "lowest_temp": 29.7,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -464.38003543405017,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 6696.000000000011,
+      "humid_sum": 18031.0
+    },
+    "average": {
+      "temp": 30.857142857142907,
+      "humid": 83.09216589861751
+    }
+  },
+  "2023-11-01": {
+    "is_valid": true,
+    "today_total_data": 292,
+    "highest_temp": 33.8,
+    "lowest_temp": 30.0,
+    "correlation_high_low": 0.5707733581788481,
+    "accumulated_hourly_temp_diff_sum": -460.1801885731235,
+    "deviation": {
+      "temp": 1.0321706463553386,
+      "humid": 4.037733683739792
+    },
+    "sum": {
+      "temp_diff_sum": 4.199846860926694,
+      "temp_sum": 9154.400000000007,
+      "humid_sum": 23542.0
+    },
+    "average": {
+      "temp": 31.350684931506873,
+      "humid": 80.62328767123287
+    }
+  },
+  "2023-11-02": {
+    "is_valid": true,
+    "today_total_data": 283,
+    "highest_temp": 33.2,
+    "lowest_temp": 29.4,
+    "correlation_high_low": 0.5697537925429954,
+    "accumulated_hourly_temp_diff_sum": -469.4803417121968,
+    "deviation": {
+      "temp": 0.9943277050659,
+      "humid": 5.637179897840259
+    },
+    "sum": {
+      "temp_diff_sum": -9.300153139073306,
+      "temp_sum": 8711.600000000008,
+      "humid_sum": 22760.0
+    },
+    "average": {
+      "temp": 30.78303886925798,
+      "humid": 80.42402826855124
+    }
+  },
+  "2023-11-03": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.7,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.5692059173382775,
+    "accumulated_hourly_temp_diff_sum": -477.0804948512701,
+    "deviation": {
+      "temp": 0.8500814117693686,
+      "humid": 3.21054029132035
+    },
+    "sum": {
+      "temp_diff_sum": -7.60015313907331,
+      "temp_sum": 8885.000000000007,
+      "humid_sum": 23627.0
+    },
+    "average": {
+      "temp": 30.85069444444447,
+      "humid": 82.03819444444444
+    }
+  },
+  "2023-11-04": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 31.8,
+    "lowest_temp": 29.5,
+    "correlation_high_low": 0.5681117609245349,
+    "accumulated_hourly_temp_diff_sum": -499.1806479903434,
+    "deviation": {
+      "temp": 0.6385316596400324,
+      "humid": 3.371896077835469
+    },
+    "sum": {
+      "temp_diff_sum": -22.1001531390733,
+      "temp_sum": 8718.700000000004,
+      "humid_sum": 24165.0
+    },
+    "average": {
+      "temp": 30.273263888888906,
+      "humid": 83.90625
+    }
+  },
+  "2023-11-05": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 35.0,
+    "lowest_temp": 29.1,
+    "correlation_high_low": 0.5377342415812573,
+    "accumulated_hourly_temp_diff_sum": -491.4808011294167,
+    "deviation": {
+      "temp": 1.8070895927162531,
+      "humid": 7.4546953417888835
+    },
+    "sum": {
+      "temp_diff_sum": 7.699846860926698,
+      "temp_sum": 9048.70000000001,
+      "humid_sum": 22638.0
+    },
+    "average": {
+      "temp": 31.419097222222256,
+      "humid": 78.60416666666667
+    }
+  },
+  "2023-11-06": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.1,
+    "lowest_temp": 30.1,
+    "correlation_high_low": 0.5403276092301034,
+    "accumulated_hourly_temp_diff_sum": -487.78095426849,
+    "deviation": {
+      "temp": 0.8700797925972714,
+      "humid": 2.7630490593123147
+    },
+    "sum": {
+      "temp_diff_sum": 3.699846860926691,
+      "temp_sum": 9023.10000000002,
+      "humid_sum": 22935.0
+    },
+    "average": {
+      "temp": 31.330208333333402,
+      "humid": 79.63541666666667
+    }
+  },
+  "2023-11-07": {
+    "is_valid": true,
+    "today_total_data": 285,
+    "highest_temp": 34.5,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.5356031891224823,
+    "accumulated_hourly_temp_diff_sum": -493.9811074075633,
+    "deviation": {
+      "temp": 1.190058646206003,
+      "humid": 4.1349116814905855
+    },
+    "sum": {
+      "temp_diff_sum": -6.200153139073308,
+      "temp_sum": 8824.300000000008,
+      "humid_sum": 22859.0
+    },
+    "average": {
+      "temp": 30.962456140350906,
+      "humid": 80.20701754385965
+    }
+  },
+  "2023-11-08": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.8,
+    "lowest_temp": 29.6,
+    "correlation_high_low": 0.5334915014710939,
+    "accumulated_hourly_temp_diff_sum": -497.6812605466366,
+    "deviation": {
+      "temp": 1.0985988199902412,
+      "humid": 3.9630576096347565
+    },
+    "sum": {
+      "temp_diff_sum": -3.700153139073308,
+      "temp_sum": 8938.000000000004,
+      "humid_sum": 24004.0
+    },
+    "average": {
+      "temp": 31.034722222222236,
+      "humid": 83.34722222222223
+    }
+  },
+  "2023-11-09": {
+    "is_valid": false,
+    "today_total_data": 206,
+    "highest_temp": 30.8,
+    "lowest_temp": 29.4,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -497.6812605466366,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 6186.200000000005,
+      "humid_sum": 17371.0
+    },
+    "average": {
+      "temp": 30.030097087378667,
+      "humid": 84.3252427184466
+    }
+  },
+  "2023-11-10": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.7,
+    "lowest_temp": 28.7,
+    "correlation_high_low": 0.49763958053863494,
+    "accumulated_hourly_temp_diff_sum": -496.08141368570995,
+    "deviation": {
+      "temp": 1.8907914935363235,
+      "humid": 6.278882914955671
+    },
+    "sum": {
+      "temp_diff_sum": 1.5998468609266858,
+      "temp_sum": 8990.500000000011,
+      "humid_sum": 22833.0
+    },
+    "average": {
+      "temp": 31.21701388888893,
+      "humid": 79.28125
+    }
+  },
+  "2023-11-11": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.2,
+    "lowest_temp": 29.9,
+    "correlation_high_low": 0.49208499751572704,
+    "accumulated_hourly_temp_diff_sum": -510.7815668247832,
+    "deviation": {
+      "temp": 0.49549754717005773,
+      "humid": 2.528845928164676
+    },
+    "sum": {
+      "temp_diff_sum": -14.7001531390733,
+      "temp_sum": 8818.700000000003,
+      "humid_sum": 23912.0
+    },
+    "average": {
+      "temp": 30.62048611111112,
+      "humid": 83.02777777777777
+    }
+  },
+  "2023-11-12": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.3,
+    "lowest_temp": 29.3,
+    "correlation_high_low": 0.48159336826266097,
+    "accumulated_hourly_temp_diff_sum": -510.08171996385653,
+    "deviation": {
+      "temp": 1.4774487529888585,
+      "humid": 6.852896567001773
+    },
+    "sum": {
+      "temp_diff_sum": 0.6998468609266872,
+      "temp_sum": 8987.10000000001,
+      "humid_sum": 23240.0
+    },
+    "average": {
+      "temp": 31.205208333333367,
+      "humid": 80.69444444444444
+    }
+  },
+  "2023-11-13": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.0,
+    "lowest_temp": 30.3,
+    "correlation_high_low": 0.4657032413584546,
+    "accumulated_hourly_temp_diff_sum": -514.3318731029299,
+    "deviation": {
+      "temp": 0.5293015284548983,
+      "humid": 2.7796868439839195
+    },
+    "sum": {
+      "temp_diff_sum": -4.250153139073305,
+      "temp_sum": 8933.20000000002,
+      "humid_sum": 24076.0
+    },
+    "average": {
+      "temp": 31.018055555555627,
+      "humid": 83.59722222222223
+    }
+  },
+  "2023-11-14": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.5,
+    "lowest_temp": 29.5,
+    "correlation_high_low": 0.4580071884278677,
+    "accumulated_hourly_temp_diff_sum": -507.5320262420032,
+    "deviation": {
+      "temp": 1.3968476396911733,
+      "humid": 4.560611555316639
+    },
+    "sum": {
+      "temp_diff_sum": 6.799846860926689,
+      "temp_sum": 9049.30000000002,
+      "humid_sum": 23719.0
+    },
+    "average": {
+      "temp": 31.421180555555623,
+      "humid": 82.35763888888889
+    }
+  },
+  "2023-11-15": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 33.8,
+    "lowest_temp": 29.9,
+    "correlation_high_low": 0.45889024663911376,
+    "accumulated_hourly_temp_diff_sum": -505.3321793810765,
+    "deviation": {
+      "temp": 0.8350341233478795,
+      "humid": 3.587056823335562
+    },
+    "sum": {
+      "temp_diff_sum": 2.1998468609266943,
+      "temp_sum": 8985.500000000013,
+      "humid_sum": 23796.0
+    },
+    "average": {
+      "temp": 31.308362369338024,
+      "humid": 82.91289198606272
+    }
+  },
+  "2023-11-16": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 33.8,
+    "lowest_temp": 30.0,
+    "correlation_high_low": 0.4603760696766723,
+    "accumulated_hourly_temp_diff_sum": -498.1323325201498,
+    "deviation": {
+      "temp": 1.1648237358031017,
+      "humid": 4.961763006651637
+    },
+    "sum": {
+      "temp_diff_sum": 7.199846860926694,
+      "temp_sum": 9032.299999999997,
+      "humid_sum": 23673.0
+    },
+    "average": {
+      "temp": 31.47142857142856,
+      "humid": 82.48432055749129
+    }
+  },
+  "2023-11-17": {
+    "is_valid": true,
+    "today_total_data": 282,
+    "highest_temp": 35.8,
+    "lowest_temp": 30.3,
+    "correlation_high_low": 0.46756137690789384,
+    "accumulated_hourly_temp_diff_sum": -472.83248565922315,
+    "deviation": {
+      "temp": 1.4821081811835974,
+      "humid": 5.741415103611852
+    },
+    "sum": {
+      "temp_diff_sum": 25.299846860926692,
+      "temp_sum": 9088.900000000003,
+      "humid_sum": 22057.0
+    },
+    "average": {
+      "temp": 32.230141843971644,
+      "humid": 78.21631205673759
+    }
+  },
+  "2023-11-18": {
+    "is_valid": true,
+    "today_total_data": 289,
+    "highest_temp": 32.6,
+    "lowest_temp": 30.5,
+    "correlation_high_low": 0.4564651798870667,
+    "accumulated_hourly_temp_diff_sum": -468.2326387982965,
+    "deviation": {
+      "temp": 0.48737045717236,
+      "humid": 2.7699691359760465
+    },
+    "sum": {
+      "temp_diff_sum": 4.599846860926689,
+      "temp_sum": 9076.600000000006,
+      "humid_sum": 23249.0
+    },
+    "average": {
+      "temp": 31.406920415224935,
+      "humid": 80.44636678200692
+    }
+  },
+  "2023-11-19": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.5,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.45319930791793656,
+    "accumulated_hourly_temp_diff_sum": -468.0327919373698,
+    "deviation": {
+      "temp": 0.9959270353405527,
+      "humid": 3.8738237462056357
+    },
+    "sum": {
+      "temp_diff_sum": 0.1998468609266837,
+      "temp_sum": 8971.799999999994,
+      "humid_sum": 23814.0
+    },
+    "average": {
+      "temp": 31.152083333333312,
+      "humid": 82.6875
+    }
+  },
+  "2023-11-20": {
+    "is_valid": true,
+    "today_total_data": 289,
+    "highest_temp": 34.9,
+    "lowest_temp": 29.9,
+    "correlation_high_low": 0.45232955975381073,
+    "accumulated_hourly_temp_diff_sum": -472.3329450764431,
+    "deviation": {
+      "temp": 1.0094364456053007,
+      "humid": 3.201696279378285
+    },
+    "sum": {
+      "temp_diff_sum": -4.300153139073316,
+      "temp_sum": 8965.800000000005,
+      "humid_sum": 23865.0
+    },
+    "average": {
+      "temp": 31.023529411764724,
+      "humid": 82.57785467128028
+    }
+  },
+  "2023-11-21": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.3,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.4508941745736668,
+    "accumulated_hourly_temp_diff_sum": -482.3330982155164,
+    "deviation": {
+      "temp": 0.71255270746676,
+      "humid": 2.0188158122896245
+    },
+    "sum": {
+      "temp_diff_sum": -10.000153139073308,
+      "temp_sum": 8859.100000000015,
+      "humid_sum": 24776.0
+    },
+    "average": {
+      "temp": 30.760763888888942,
+      "humid": 86.02777777777777
+    }
+  },
+  "2023-11-22": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.1,
+    "lowest_temp": 30.0,
+    "correlation_high_low": 0.4525875969491618,
+    "accumulated_hourly_temp_diff_sum": -468.3832513545897,
+    "deviation": {
+      "temp": 1.3835062364054738,
+      "humid": 8.315860588441154
+    },
+    "sum": {
+      "temp_diff_sum": 13.949846860926701,
+      "temp_sum": 9143.200000000013,
+      "humid_sum": 22767.0
+    },
+    "average": {
+      "temp": 31.74722222222227,
+      "humid": 79.05208333333333
+    }
+  },
+  "2023-11-23": {
+    "is_valid": false,
+    "today_total_data": 177,
+    "highest_temp": 33.6,
+    "lowest_temp": 29.3,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -468.3832513545897,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 5491.9,
+      "humid_sum": 14151.0
+    },
+    "average": {
+      "temp": 31.027683615819207,
+      "humid": 79.94915254237289
+    }
+  },
+  "2023-11-24": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 31.8,
+    "lowest_temp": 29.4,
+    "correlation_high_low": 0.45448759441104053,
+    "accumulated_hourly_temp_diff_sum": -495.183404493663,
+    "deviation": {
+      "temp": 0.5104421762332908,
+      "humid": 2.612678219894267
+    },
+    "sum": {
+      "temp_diff_sum": -26.800153139073316,
+      "temp_sum": 8654.999999999998,
+      "humid_sum": 25195.0
+    },
+    "average": {
+      "temp": 30.05208333333333,
+      "humid": 87.48263888888889
+    }
+  },
+  "2023-11-25": {
+    "is_valid": true,
+    "today_total_data": 279,
+    "highest_temp": 33.6,
+    "lowest_temp": 29.1,
+    "correlation_high_low": 0.44906786164520024,
+    "accumulated_hourly_temp_diff_sum": -504.0835576327363,
+    "deviation": {
+      "temp": 1.1810454085631794,
+      "humid": 5.621996049736521
+    },
+    "sum": {
+      "temp_diff_sum": -8.900153139073304,
+      "temp_sum": 8564.600000000008,
+      "humid_sum": 23209.0
+    },
+    "average": {
+      "temp": 30.697491039426552,
+      "humid": 83.18637992831542
+    }
+  },
+  "2023-11-26": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 31.8,
+    "lowest_temp": 29.4,
+    "correlation_high_low": 0.4508829446919804,
+    "accumulated_hourly_temp_diff_sum": -526.5837107718096,
+    "deviation": {
+      "temp": 0.515559292483763,
+      "humid": 2.0091899202918744
+    },
+    "sum": {
+      "temp_diff_sum": -22.5001531390733,
+      "temp_sum": 8718.100000000022,
+      "humid_sum": 25292.0
+    },
+    "average": {
+      "temp": 30.27118055555563,
+      "humid": 87.81944444444444
+    }
+  },
+  "2023-11-27": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 31.0,
+    "lowest_temp": 29.4,
+    "correlation_high_low": 0.4509868078810388,
+    "accumulated_hourly_temp_diff_sum": -557.383863910883,
+    "deviation": {
+      "temp": 0.3665712996770392,
+      "humid": 2.5243389880103044
+    },
+    "sum": {
+      "temp_diff_sum": -30.800153139073306,
+      "temp_sum": 8611.000000000018,
+      "humid_sum": 25023.0
+    },
+    "average": {
+      "temp": 29.899305555555618,
+      "humid": 86.88541666666667
+    }
+  },
+  "2023-11-28": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 33.3,
+    "lowest_temp": 29.0,
+    "correlation_high_low": 0.4473980831814237,
+    "accumulated_hourly_temp_diff_sum": -584.4840170499563,
+    "deviation": {
+      "temp": 0.9889385674041792,
+      "humid": 3.7411998585869815
+    },
+    "sum": {
+      "temp_diff_sum": -27.10015313907331,
+      "temp_sum": 8628.2,
+      "humid_sum": 25414.0
+    },
+    "average": {
+      "temp": 30.063414634146344,
+      "humid": 88.55052264808363
+    }
+  },
+  "2023-11-29": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.9,
+    "lowest_temp": 29.1,
+    "correlation_high_low": 0.43928749629155,
+    "accumulated_hourly_temp_diff_sum": -596.5841701890296,
+    "deviation": {
+      "temp": 1.2586153718753748,
+      "humid": 5.827973728301955
+    },
+    "sum": {
+      "temp_diff_sum": -12.100153139073306,
+      "temp_sum": 8823.200000000003,
+      "humid_sum": 24384.0
+    },
+    "average": {
+      "temp": 30.63611111111112,
+      "humid": 84.66666666666667
+    }
+  },
+  "2023-11-30": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.3,
+    "lowest_temp": 29.4,
+    "correlation_high_low": 0.4384533354811985,
+    "accumulated_hourly_temp_diff_sum": -598.4343233281029,
+    "deviation": {
+      "temp": 1.252924770801735,
+      "humid": 7.928712053441522
+    },
+    "sum": {
+      "temp_diff_sum": -1.8501531390733135,
+      "temp_sum": 8957.500000000005,
+      "humid_sum": 23421.0
+    },
+    "average": {
+      "temp": 31.102430555555575,
+      "humid": 81.32291666666667
+    }
+  },
+  "2023-12-01": {
+    "is_valid": true,
+    "today_total_data": 286,
+    "highest_temp": 35.1,
+    "lowest_temp": 29.8,
+    "correlation_high_low": 0.4354236334521721,
+    "accumulated_hourly_temp_diff_sum": -583.8344764671762,
+    "deviation": {
+      "temp": 1.411780043453979,
+      "humid": 6.1916403394741115
+    },
+    "sum": {
+      "temp_diff_sum": 14.599846860926696,
+      "temp_sum": 9093.400000000007,
+      "humid_sum": 22323.0
+    },
+    "average": {
+      "temp": 31.79510489510492,
+      "humid": 78.05244755244755
+    }
+  },
+  "2023-12-02": {
+    "is_valid": true,
+    "today_total_data": 283,
+    "highest_temp": 33.4,
+    "lowest_temp": 29.9,
+    "correlation_high_low": 0.435660386108598,
+    "accumulated_hourly_temp_diff_sum": -584.0346296062495,
+    "deviation": {
+      "temp": 0.8672315430517641,
+      "humid": 3.219401255560684
+    },
+    "sum": {
+      "temp_diff_sum": -0.20015313907330778,
+      "temp_sum": 8825.900000000009,
+      "humid_sum": 23539.0
+    },
+    "average": {
+      "temp": 31.186925795053035,
+      "humid": 83.17667844522968
+    }
+  },
+  "2023-12-03": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.8,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.4351983175527089,
+    "accumulated_hourly_temp_diff_sum": -592.0347827453228,
+    "deviation": {
+      "temp": 0.9360139971881286,
+      "humid": 3.494620466221203
+    },
+    "sum": {
+      "temp_diff_sum": -8.000153139073312,
+      "temp_sum": 8890.600000000011,
+      "humid_sum": 23881.0
+    },
+    "average": {
+      "temp": 30.870138888888928,
+      "humid": 82.92013888888889
+    }
+  },
+  "2023-12-04": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.0,
+    "lowest_temp": 29.6,
+    "correlation_high_low": 0.43427654761020107,
+    "accumulated_hourly_temp_diff_sum": -606.7849358843961,
+    "deviation": {
+      "temp": 0.6169949349930669,
+      "humid": 3.0414744199773476
+    },
+    "sum": {
+      "temp_diff_sum": -14.750153139073301,
+      "temp_sum": 8803.300000000003,
+      "humid_sum": 24601.0
+    },
+    "average": {
+      "temp": 30.567013888888898,
+      "humid": 85.42013888888889
+    }
+  },
+  "2023-12-05": {
+    "is_valid": true,
+    "today_total_data": 281,
+    "highest_temp": 32.9,
+    "lowest_temp": 29.5,
+    "correlation_high_low": 0.4346906007317085,
+    "accumulated_hourly_temp_diff_sum": -616.0850890234694,
+    "deviation": {
+      "temp": 0.8552806090111326,
+      "humid": 3.012219555094233
+    },
+    "sum": {
+      "temp_diff_sum": -9.300153139073302,
+      "temp_sum": 8646.30000000002,
+      "humid_sum": 24176.0
+    },
+    "average": {
+      "temp": 30.769750889679784,
+      "humid": 86.0355871886121
+    }
+  },
+  "2023-12-06": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 36.2,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.4220219725055672,
+    "accumulated_hourly_temp_diff_sum": -601.2852421625428,
+    "deviation": {
+      "temp": 1.6970488864023647,
+      "humid": 7.54359436689316
+    },
+    "sum": {
+      "temp_diff_sum": 14.799846860926689,
+      "temp_sum": 9154.000000000013,
+      "humid_sum": 23586.0
+    },
+    "average": {
+      "temp": 31.784722222222268,
+      "humid": 81.89583333333333
+    }
+  },
+  "2023-12-07": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.3,
+    "lowest_temp": 30.3,
+    "correlation_high_low": 0.426666840237973,
+    "accumulated_hourly_temp_diff_sum": -581.685395301616,
+    "deviation": {
+      "temp": 1.1709716682974214,
+      "humid": 5.212789760131645
+    },
+    "sum": {
+      "temp_diff_sum": 19.599846860926693,
+      "temp_sum": 9202.300000000008,
+      "humid_sum": 21942.0
+    },
+    "average": {
+      "temp": 31.952430555555583,
+      "humid": 76.1875
+    }
+  },
+  "2023-12-08": {
+    "is_valid": true,
+    "today_total_data": 286,
+    "highest_temp": 34.9,
+    "lowest_temp": 30.0,
+    "correlation_high_low": 0.42857712108243545,
+    "accumulated_hourly_temp_diff_sum": -556.7855484406894,
+    "deviation": {
+      "temp": 1.5147171154220693,
+      "humid": 5.536178628180268
+    },
+    "sum": {
+      "temp_diff_sum": 24.899846860926694,
+      "temp_sum": 9200.400000000009,
+      "humid_sum": 21054.0
+    },
+    "average": {
+      "temp": 32.1692307692308,
+      "humid": 73.61538461538461
+    }
+  },
+  "2023-12-09": {
+    "is_valid": true,
+    "today_total_data": 286,
+    "highest_temp": 32.0,
+    "lowest_temp": 30.6,
+    "correlation_high_low": 0.40912230577704617,
+    "accumulated_hourly_temp_diff_sum": -555.5857015797626,
+    "deviation": {
+      "temp": 0.3621292396231405,
+      "humid": 2.7095285233445217
+    },
+    "sum": {
+      "temp_diff_sum": 1.1998468609267015,
+      "temp_sum": 8943.10000000002,
+      "humid_sum": 22919.0
+    },
+    "average": {
+      "temp": 31.269580419580493,
+      "humid": 80.13636363636364
+    }
+  },
+  "2023-12-10": {
+    "is_valid": true,
+    "today_total_data": 276,
+    "highest_temp": 34.7,
+    "lowest_temp": 30.0,
+    "correlation_high_low": 0.4111391726565502,
+    "accumulated_hourly_temp_diff_sum": -535.885854718836,
+    "deviation": {
+      "temp": 1.5033032661226031,
+      "humid": 5.697259564092436
+    },
+    "sum": {
+      "temp_diff_sum": 19.699846860926684,
+      "temp_sum": 8798.600000000008,
+      "humid_sum": 21051.0
+    },
+    "average": {
+      "temp": 31.878985507246405,
+      "humid": 76.27173913043478
+    }
+  },
+  "2023-12-11": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 34.3,
+    "lowest_temp": 30.3,
+    "correlation_high_low": 0.41550254728162656,
+    "accumulated_hourly_temp_diff_sum": -527.2860078579092,
+    "deviation": {
+      "temp": 0.8815863971439104,
+      "humid": 4.300484448835549
+    },
+    "sum": {
+      "temp_diff_sum": 8.599846860926693,
+      "temp_sum": 9052.300000000014,
+      "humid_sum": 22875.0
+    },
+    "average": {
+      "temp": 31.541114982578446,
+      "humid": 79.70383275261324
+    }
+  },
+  "2023-12-12": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 35.6,
+    "lowest_temp": 30.3,
+    "correlation_high_low": 0.4229822623663656,
+    "accumulated_hourly_temp_diff_sum": -512.7861609969825,
+    "deviation": {
+      "temp": 1.1898874939522173,
+      "humid": 5.602578771323871
+    },
+    "sum": {
+      "temp_diff_sum": 14.499846860926688,
+      "temp_sum": 9163.500000000007,
+      "humid_sum": 22440.0
+    },
+    "average": {
+      "temp": 31.817708333333357,
+      "humid": 77.91666666666667
+    }
+  },
+  "2023-12-13": {
+    "is_valid": true,
+    "today_total_data": 231,
+    "highest_temp": 33.8,
+    "lowest_temp": 30.7,
+    "correlation_high_low": 0.4241738446924353,
+    "accumulated_hourly_temp_diff_sum": -500.41140381761915,
+    "deviation": {
+      "temp": 0.7875930693576764,
+      "humid": 6.8808893997109495
+    },
+    "sum": {
+      "temp_diff_sum": 12.374757179363346,
+      "temp_sum": 7303.900000000016,
+      "humid_sum": 18223.0
+    },
+    "average": {
+      "temp": 31.618614718614786,
+      "humid": 78.88744588744589
+    }
+  },
+  "2023-12-14": {
+    "is_valid": true,
+    "today_total_data": 275,
+    "highest_temp": 35.2,
+    "lowest_temp": 30.4,
+    "correlation_high_low": 0.43217073535097766,
+    "accumulated_hourly_temp_diff_sum": -478.16166708885106,
+    "deviation": {
+      "temp": 1.3996124138813961,
+      "humid": 7.0416940110639965
+    },
+    "sum": {
+      "temp_diff_sum": 22.249736728768102,
+      "temp_sum": 8848.400000000003,
+      "humid_sum": 20735.0
+    },
+    "average": {
+      "temp": 32.17600000000001,
+      "humid": 75.4
+    }
+  },
+  "2023-12-15": {
+    "is_valid": true,
+    "today_total_data": 284,
+    "highest_temp": 34.7,
+    "lowest_temp": 30.4,
+    "correlation_high_low": 0.43821010404051314,
+    "accumulated_hourly_temp_diff_sum": -470.96182022792436,
+    "deviation": {
+      "temp": 1.0487792352770642,
+      "humid": 4.724238182341294
+    },
+    "sum": {
+      "temp_diff_sum": 7.1998468609267015,
+      "temp_sum": 8952.900000000012,
+      "humid_sum": 22409.0
+    },
+    "average": {
+      "temp": 31.524295774647932,
+      "humid": 78.90492957746478
+    }
+  },
+  "2023-12-16": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 35.3,
+    "lowest_temp": 29.8,
+    "correlation_high_low": 0.4347632432533406,
+    "accumulated_hourly_temp_diff_sum": -467.6619733669977,
+    "deviation": {
+      "temp": 1.2952219216755438,
+      "humid": 4.662933309474961
+    },
+    "sum": {
+      "temp_diff_sum": 3.299846860926678,
+      "temp_sum": 9017.400000000014,
+      "humid_sum": 22701.0
+    },
+    "average": {
+      "temp": 31.310416666666715,
+      "humid": 78.82291666666667
+    }
+  },
+  "2023-12-17": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.1,
+    "lowest_temp": 29.8,
+    "correlation_high_low": 0.43460377155105134,
+    "accumulated_hourly_temp_diff_sum": -468.162126506071,
+    "deviation": {
+      "temp": 1.1908282124627472,
+      "humid": 3.8643431092353926
+    },
+    "sum": {
+      "temp_diff_sum": -0.5001531390733014,
+      "temp_sum": 8973.30000000002,
+      "humid_sum": 22787.0
+    },
+    "average": {
+      "temp": 31.157291666666733,
+      "humid": 79.12152777777777
+    }
+  },
+  "2023-12-18": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.2,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.4334007702422878,
+    "accumulated_hourly_temp_diff_sum": -486.9622796451443,
+    "deviation": {
+      "temp": 0.5675517962915505,
+      "humid": 2.2932969790131015
+    },
+    "sum": {
+      "temp_diff_sum": -18.80015313907331,
+      "temp_sum": 8754.700000000006,
+      "humid_sum": 24418.0
+    },
+    "average": {
+      "temp": 30.39826388888891,
+      "humid": 84.78472222222223
+    }
+  },
+  "2023-12-19": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.4,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.4333585097052955,
+    "accumulated_hourly_temp_diff_sum": -499.2124327842176,
+    "deviation": {
+      "temp": 0.7833773505166393,
+      "humid": 3.8171441937035455
+    },
+    "sum": {
+      "temp_diff_sum": -12.250153139073316,
+      "temp_sum": 8827.000000000015,
+      "humid_sum": 24289.0
+    },
+    "average": {
+      "temp": 30.649305555555607,
+      "humid": 84.33680555555556
+    }
+  },
+  "2023-12-20": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.3,
+    "lowest_temp": 29.6,
+    "correlation_high_low": 0.4332896287659863,
+    "accumulated_hourly_temp_diff_sum": -503.8125859232909,
+    "deviation": {
+      "temp": 1.0952969659744518,
+      "humid": 1.95369821835284
+    },
+    "sum": {
+      "temp_diff_sum": -4.6001531390733135,
+      "temp_sum": 8934.200000000013,
+      "humid_sum": 24436.0
+    },
+    "average": {
+      "temp": 31.021527777777823,
+      "humid": 84.84722222222223
+    }
+  },
+  "2023-12-21": {
+    "is_valid": true,
+    "today_total_data": 274,
+    "highest_temp": 33.5,
+    "lowest_temp": 29.5,
+    "correlation_high_low": 0.43252856770162074,
+    "accumulated_hourly_temp_diff_sum": -516.1127390623642,
+    "deviation": {
+      "temp": 0.9582863054370734,
+      "humid": 3.4102124162520617
+    },
+    "sum": {
+      "temp_diff_sum": -12.300153139073302,
+      "temp_sum": 8412.60000000001,
+      "humid_sum": 23700.0
+    },
+    "average": {
+      "temp": 30.70291970802923,
+      "humid": 86.4963503649635
+    }
+  },
+  "2023-12-22": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.0,
+    "lowest_temp": 29.4,
+    "correlation_high_low": 0.43300786466424857,
+    "accumulated_hourly_temp_diff_sum": -529.9128922014376,
+    "deviation": {
+      "temp": 0.9566611820722899,
+      "humid": 2.8284079431820928
+    },
+    "sum": {
+      "temp_diff_sum": -13.80015313907331,
+      "temp_sum": 8813.60000000002,
+      "humid_sum": 25011.0
+    },
+    "average": {
+      "temp": 30.60277777777785,
+      "humid": 86.84375
+    }
+  },
+  "2023-12-23": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.9,
+    "lowest_temp": 29.6,
+    "correlation_high_low": 0.4277625003991313,
+    "accumulated_hourly_temp_diff_sum": -529.0130453405109,
+    "deviation": {
+      "temp": 1.2243382487599346,
+      "humid": 3.772960508569947
+    },
+    "sum": {
+      "temp_diff_sum": 0.899846860926683,
+      "temp_sum": 8980.600000000017,
+      "humid_sum": 24173.0
+    },
+    "average": {
+      "temp": 31.182638888888945,
+      "humid": 83.93402777777777
+    }
+  },
+  "2023-12-24": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.8,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.4275632646066727,
+    "accumulated_hourly_temp_diff_sum": -530.4131984795841,
+    "deviation": {
+      "temp": 0.9746081833799216,
+      "humid": 5.274372988011624
+    },
+    "sum": {
+      "temp_diff_sum": -1.400153139073307,
+      "temp_sum": 8944.800000000014,
+      "humid_sum": 23286.0
+    },
+    "average": {
+      "temp": 31.05833333333338,
+      "humid": 80.85416666666667
+    }
+  },
+  "2023-12-25": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 35.4,
+    "lowest_temp": 29.8,
+    "correlation_high_low": 0.42420452008504644,
+    "accumulated_hourly_temp_diff_sum": -520.9133516186574,
+    "deviation": {
+      "temp": 1.3337873575940722,
+      "humid": 4.568060359022508
+    },
+    "sum": {
+      "temp_diff_sum": 9.499846860926688,
+      "temp_sum": 9073.800000000001,
+      "humid_sum": 22771.0
+    },
+    "average": {
+      "temp": 31.506250000000005,
+      "humid": 79.06597222222223
+    }
+  },
+  "2023-12-26": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.7,
+    "lowest_temp": 30.2,
+    "correlation_high_low": 0.41959504313977064,
+    "accumulated_hourly_temp_diff_sum": -524.4135047577307,
+    "deviation": {
+      "temp": 0.6079192805454938,
+      "humid": 2.792648994527562
+    },
+    "sum": {
+      "temp_diff_sum": -3.5001531390733085,
+      "temp_sum": 8949.700000000015,
+      "humid_sum": 23677.0
+    },
+    "average": {
+      "temp": 31.075347222222277,
+      "humid": 82.21180555555556
+    }
+  },
+  "2023-12-27": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.7,
+    "lowest_temp": 29.9,
+    "correlation_high_low": 0.41987857974361975,
+    "accumulated_hourly_temp_diff_sum": -524.613657896804,
+    "deviation": {
+      "temp": 1.1071957381533206,
+      "humid": 3.6646916371674014
+    },
+    "sum": {
+      "temp_diff_sum": -0.20015313907331844,
+      "temp_sum": 8978.900000000018,
+      "humid_sum": 24599.0
+    },
+    "average": {
+      "temp": 31.176736111111172,
+      "humid": 85.41319444444444
+    }
+  },
+  "2023-12-28": {
+    "is_valid": true,
+    "today_total_data": 284,
+    "highest_temp": 32.8,
+    "lowest_temp": 29.9,
+    "correlation_high_low": 0.4184654683275901,
+    "accumulated_hourly_temp_diff_sum": -532.8138110358774,
+    "deviation": {
+      "temp": 0.7542772137980238,
+      "humid": 6.327616644074308
+    },
+    "sum": {
+      "temp_diff_sum": -8.200153139073308,
+      "temp_sum": 8777.499999999998,
+      "humid_sum": 23998.0
+    },
+    "average": {
+      "temp": 30.906690140845065,
+      "humid": 84.5
+    }
+  },
+  "2023-12-29": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 34.2,
+    "lowest_temp": 29.8,
+    "correlation_high_low": 0.41826716493788785,
+    "accumulated_hourly_temp_diff_sum": -520.0639641749507,
+    "deviation": {
+      "temp": 1.3072395280226603,
+      "humid": 7.96038461972521
+    },
+    "sum": {
+      "temp_diff_sum": 12.74984686092668,
+      "temp_sum": 9098.800000000003,
+      "humid_sum": 22862.0
+    },
+    "average": {
+      "temp": 31.703135888501752,
+      "humid": 79.65853658536585
+    }
+  },
+  "2023-12-30": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 34.3,
+    "lowest_temp": 30.7,
+    "correlation_high_low": 0.423015126482908,
+    "accumulated_hourly_temp_diff_sum": -500.364117314024,
+    "deviation": {
+      "temp": 0.9039396668435371,
+      "humid": 3.714203998551987
+    },
+    "sum": {
+      "temp_diff_sum": 19.69984686092668,
+      "temp_sum": 9187.800000000005,
+      "humid_sum": 23291.0
+    },
+    "average": {
+      "temp": 32.013240418118485,
+      "humid": 81.15331010452962
+    }
+  },
+  "2023-12-31": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.3,
+    "lowest_temp": 30.6,
+    "correlation_high_low": 0.41951111871536995,
+    "accumulated_hourly_temp_diff_sum": -489.86427045309733,
+    "deviation": {
+      "temp": 0.6974337570594865,
+      "humid": 4.3554401823580084
+    },
+    "sum": {
+      "temp_diff_sum": 10.49984686092668,
+      "temp_sum": 9101.700000000019,
+      "humid_sum": 24322.0
+    },
+    "average": {
+      "temp": 31.603125000000066,
+      "humid": 84.45138888888889
+    }
+  },
+  "2024-01-01": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.5,
+    "lowest_temp": 30.2,
+    "correlation_high_low": 0.4226539649910083,
+    "accumulated_hourly_temp_diff_sum": -474.26442359217066,
+    "deviation": {
+      "temp": 1.3250827993579573,
+      "humid": 3.254179930143217
+    },
+    "sum": {
+      "temp_diff_sum": 15.599846860926675,
+      "temp_sum": 9160.60000000003,
+      "humid_sum": 24887.0
+    },
+    "average": {
+      "temp": 31.80763888888899,
+      "humid": 86.41319444444444
+    }
+  },
+  "2024-01-02": {
+    "is_valid": true,
+    "today_total_data": 277,
+    "highest_temp": 34.8,
+    "lowest_temp": 30.6,
+    "correlation_high_low": 0.42995394186432034,
+    "accumulated_hourly_temp_diff_sum": -454.164576731244,
+    "deviation": {
+      "temp": 1.2366678792627401,
+      "humid": 5.517974666130837
+    },
+    "sum": {
+      "temp_diff_sum": 20.09984686092669,
+      "temp_sum": 8851.100000000015,
+      "humid_sum": 22882.0
+    },
+    "average": {
+      "temp": 31.95342960288814,
+      "humid": 82.60649819494584
+    }
+  },
+  "2024-01-03": {
+    "is_valid": true,
+    "today_total_data": 286,
+    "highest_temp": 34.0,
+    "lowest_temp": 30.0,
+    "correlation_high_low": 0.43088880296374643,
+    "accumulated_hourly_temp_diff_sum": -443.36472987031726,
+    "deviation": {
+      "temp": 1.1925343282747245,
+      "humid": 5.281855956697707
+    },
+    "sum": {
+      "temp_diff_sum": 10.799846860926696,
+      "temp_sum": 9052.90000000001,
+      "humid_sum": 23159.0
+    },
+    "average": {
+      "temp": 31.65349650349654,
+      "humid": 80.97552447552448
+    }
+  },
+  "2024-01-04": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.6,
+    "lowest_temp": 30.1,
+    "correlation_high_low": 0.43307410032428745,
+    "accumulated_hourly_temp_diff_sum": -426.56488300939054,
+    "deviation": {
+      "temp": 1.2207122538238904,
+      "humid": 6.963189111618804
+    },
+    "sum": {
+      "temp_diff_sum": 16.799846860926696,
+      "temp_sum": 9169.399999999996,
+      "humid_sum": 22893.0
+    },
+    "average": {
+      "temp": 31.83819444444443,
+      "humid": 79.48958333333333
+    }
+  },
+  "2024-01-05": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.3,
+    "lowest_temp": 30.0,
+    "correlation_high_low": 0.43420054064338764,
+    "accumulated_hourly_temp_diff_sum": -419.66503614846386,
+    "deviation": {
+      "temp": 0.9792129618685397,
+      "humid": 5.414061873697254
+    },
+    "sum": {
+      "temp_diff_sum": 6.899846860926683,
+      "temp_sum": 9056.000000000007,
+      "humid_sum": 23190.0
+    },
+    "average": {
+      "temp": 31.44444444444447,
+      "humid": 80.52083333333333
+    }
+  },
+  "2024-01-06": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 35.4,
+    "lowest_temp": 29.9,
+    "correlation_high_low": 0.43260572227522404,
+    "accumulated_hourly_temp_diff_sum": -398.16518928753715,
+    "deviation": {
+      "temp": 1.4687002142205683,
+      "humid": 7.477509359347923
+    },
+    "sum": {
+      "temp_diff_sum": 21.49984686092668,
+      "temp_sum": 9195.700000000015,
+      "humid_sum": 22250.0
+    },
+    "average": {
+      "temp": 31.92951388888894,
+      "humid": 77.25694444444444
+    }
+  },
+  "2024-01-07": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 35.7,
+    "lowest_temp": 30.5,
+    "correlation_high_low": 0.44149326161107383,
+    "accumulated_hourly_temp_diff_sum": -377.71534242661045,
+    "deviation": {
+      "temp": 1.2222687806788743,
+      "humid": 6.802896837520355
+    },
+    "sum": {
+      "temp_diff_sum": 20.449846860926698,
+      "temp_sum": 9219.600000000015,
+      "humid_sum": 21765.0
+    },
+    "average": {
+      "temp": 32.01250000000005,
+      "humid": 75.57291666666667
+    }
+  },
+  "2024-01-08": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 31.6,
+    "lowest_temp": 30.1,
+    "correlation_high_low": 0.43161475474174127,
+    "accumulated_hourly_temp_diff_sum": -383.46549556568374,
+    "deviation": {
+      "temp": 0.4352781987872884,
+      "humid": 2.801900465601125
+    },
+    "sum": {
+      "temp_diff_sum": -5.750153139073305,
+      "temp_sum": 8921.800000000007,
+      "humid_sum": 24122.0
+    },
+    "average": {
+      "temp": 30.978472222222244,
+      "humid": 83.75694444444444
+    }
+  },
+  "2024-01-09": {
+    "is_valid": true,
+    "today_total_data": 230,
+    "highest_temp": 33.0,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.43165774058952966,
+    "accumulated_hourly_temp_diff_sum": -384.8448483858954,
+    "deviation": {
+      "temp": 0.943268760550979,
+      "humid": 5.192383909306564
+    },
+    "sum": {
+      "temp_diff_sum": -1.3793528202116647,
+      "temp_sum": 7087.900000000022,
+      "humid_sum": 19871.0
+    },
+    "average": {
+      "temp": 30.81695652173923,
+      "humid": 86.39565217391305
+    }
+  },
+  "2024-01-10": {
+    "is_valid": true,
+    "today_total_data": 284,
+    "highest_temp": 35.5,
+    "lowest_temp": 30.0,
+    "correlation_high_low": 0.43174891064153403,
+    "accumulated_hourly_temp_diff_sum": -367.5450015249687,
+    "deviation": {
+      "temp": 1.3979527781177916,
+      "humid": 6.28995362966695
+    },
+    "sum": {
+      "temp_diff_sum": 17.299846860926692,
+      "temp_sum": 9053.600000000011,
+      "humid_sum": 22407.0
+    },
+    "average": {
+      "temp": 31.87887323943666,
+      "humid": 78.89788732394366
+    }
+  },
+  "2024-01-11": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 35.5,
+    "lowest_temp": 30.5,
+    "correlation_high_low": 0.43975923560667635,
+    "accumulated_hourly_temp_diff_sum": -339.845154664042,
+    "deviation": {
+      "temp": 1.303068343104032,
+      "humid": 7.920270671885803
+    },
+    "sum": {
+      "temp_diff_sum": 27.699846860926687,
+      "temp_sum": 9261.500000000004,
+      "humid_sum": 22246.0
+    },
+    "average": {
+      "temp": 32.270034843205586,
+      "humid": 77.51219512195122
+    }
+  },
+  "2024-01-12": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 35.7,
+    "lowest_temp": 30.1,
+    "correlation_high_low": 0.44123556042707013,
+    "accumulated_hourly_temp_diff_sum": -309.8453078031153,
+    "deviation": {
+      "temp": 1.6412003499105956,
+      "humid": 7.135621388184445
+    },
+    "sum": {
+      "temp_diff_sum": 29.999846860926684,
+      "temp_sum": 9303.1,
+      "humid_sum": 21656.0
+    },
+    "average": {
+      "temp": 32.414982578397215,
+      "humid": 75.45644599303135
+    }
+  },
+  "2024-01-13": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.5,
+    "lowest_temp": 30.4,
+    "correlation_high_low": 0.4447568390178718,
+    "accumulated_hourly_temp_diff_sum": -294.3454609421886,
+    "deviation": {
+      "temp": 0.8880236674495883,
+      "humid": 4.47911821679223
+    },
+    "sum": {
+      "temp_diff_sum": 15.499846860926692,
+      "temp_sum": 9170.000000000002,
+      "humid_sum": 22728.0
+    },
+    "average": {
+      "temp": 31.840277777777786,
+      "humid": 78.91666666666667
+    }
+  },
+  "2024-01-14": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.3,
+    "lowest_temp": 29.9,
+    "correlation_high_low": 0.4445246569638913,
+    "accumulated_hourly_temp_diff_sum": -296.9456140812619,
+    "deviation": {
+      "temp": 0.9560197515909903,
+      "humid": 3.2199465143936092
+    },
+    "sum": {
+      "temp_diff_sum": -2.60015313907331,
+      "temp_sum": 8960.800000000008,
+      "humid_sum": 23352.0
+    },
+    "average": {
+      "temp": 31.11388888888892,
+      "humid": 81.08333333333333
+    }
+  },
+  "2024-01-15": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 34.5,
+    "lowest_temp": 29.8,
+    "correlation_high_low": 0.4436832728030989,
+    "accumulated_hourly_temp_diff_sum": -292.5457672203352,
+    "deviation": {
+      "temp": 1.3249017929697506,
+      "humid": 5.546383884494022
+    },
+    "sum": {
+      "temp_diff_sum": 4.399846860926694,
+      "temp_sum": 9011.500000000005,
+      "humid_sum": 23407.0
+    },
+    "average": {
+      "temp": 31.39895470383277,
+      "humid": 81.55749128919861
+    }
+  },
+  "2024-01-16": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 32.3,
+    "lowest_temp": 29.9,
+    "correlation_high_low": 0.4410077459670024,
+    "accumulated_hourly_temp_diff_sum": -302.64592035940854,
+    "deviation": {
+      "temp": 0.6798976411704457,
+      "humid": 2.6397568017190944
+    },
+    "sum": {
+      "temp_diff_sum": -10.100153139073306,
+      "temp_sum": 8864.800000000014,
+      "humid_sum": 24594.0
+    },
+    "average": {
+      "temp": 30.780555555555605,
+      "humid": 85.39583333333333
+    }
+  },
+  "2024-01-17": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 33.8,
+    "lowest_temp": 29.5,
+    "correlation_high_low": 0.4396234912835747,
+    "accumulated_hourly_temp_diff_sum": -310.94607349848184,
+    "deviation": {
+      "temp": 1.0739264952746301,
+      "humid": 5.045950638052628
+    },
+    "sum": {
+      "temp_diff_sum": -8.300153139073316,
+      "temp_sum": 8848.200000000013,
+      "humid_sum": 23416.0
+    },
+    "average": {
+      "temp": 30.829965156794472,
+      "humid": 81.58885017421603
+    }
+  },
+  "2024-01-18": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.5,
+    "lowest_temp": 29.8,
+    "correlation_high_low": 0.4388142878815412,
+    "accumulated_hourly_temp_diff_sum": -303.74622663755514,
+    "deviation": {
+      "temp": 1.246628506840092,
+      "humid": 5.546258496864639
+    },
+    "sum": {
+      "temp_diff_sum": 7.199846860926691,
+      "temp_sum": 9053.300000000008,
+      "humid_sum": 23369.0
+    },
+    "average": {
+      "temp": 31.435069444444473,
+      "humid": 81.14236111111111
+    }
+  },
+  "2024-01-19": {
+    "is_valid": true,
+    "today_total_data": 276,
+    "highest_temp": 34.5,
+    "lowest_temp": 30.2,
+    "correlation_high_low": 0.4411611642588583,
+    "accumulated_hourly_temp_diff_sum": -295.24637977662843,
+    "deviation": {
+      "temp": 0.9825853824561124,
+      "humid": 4.07694032934814
+    },
+    "sum": {
+      "temp_diff_sum": 8.499846860926692,
+      "temp_sum": 8705.500000000011,
+      "humid_sum": 22525.0
+    },
+    "average": {
+      "temp": 31.541666666666707,
+      "humid": 81.6123188405797
+    }
+  },
+  "2024-01-20": {
+    "is_valid": true,
+    "today_total_data": 283,
+    "highest_temp": 33.9,
+    "lowest_temp": 30.1,
+    "correlation_high_low": 0.4419067895110468,
+    "accumulated_hourly_temp_diff_sum": -283.2465329157017,
+    "deviation": {
+      "temp": 1.1415630633354539,
+      "humid": 2.22674847484917
+    },
+    "sum": {
+      "temp_diff_sum": 11.999846860926684,
+      "temp_sum": 8968.000000000005,
+      "humid_sum": 21536.0
+    },
+    "average": {
+      "temp": 31.68904593639578,
+      "humid": 76.09893992932862
+    }
+  },
+  "2024-01-21": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.5,
+    "lowest_temp": 30.3,
+    "correlation_high_low": 0.4447543821231993,
+    "accumulated_hourly_temp_diff_sum": -268.446686054775,
+    "deviation": {
+      "temp": 1.2404771812301818,
+      "humid": 4.344664449885488
+    },
+    "sum": {
+      "temp_diff_sum": 14.799846860926703,
+      "temp_sum": 9158.700000000019,
+      "humid_sum": 21110.0
+    },
+    "average": {
+      "temp": 31.801041666666734,
+      "humid": 73.29861111111111
+    }
+  },
+  "2024-01-22": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 35.7,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.43837133472216094,
+    "accumulated_hourly_temp_diff_sum": -253.74683919384833,
+    "deviation": {
+      "temp": 1.4667454142895782,
+      "humid": 4.074997100563235
+    },
+    "sum": {
+      "temp_diff_sum": 14.699846860926677,
+      "temp_sum": 9139.400000000005,
+      "humid_sum": 22739.0
+    },
+    "average": {
+      "temp": 31.734027777777797,
+      "humid": 78.95486111111111
+    }
+  },
+  "2024-01-23": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.8,
+    "lowest_temp": 30.3,
+    "correlation_high_low": 0.4387715735469414,
+    "accumulated_hourly_temp_diff_sum": -245.64699233292163,
+    "deviation": {
+      "temp": 0.9720703626438546,
+      "humid": 3.7573936884823387
+    },
+    "sum": {
+      "temp_diff_sum": 8.099846860926696,
+      "temp_sum": 9085.50000000001,
+      "humid_sum": 22322.0
+    },
+    "average": {
+      "temp": 31.546875000000032,
+      "humid": 77.50694444444444
+    }
+  },
+  "2024-01-24": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 31.1,
+    "lowest_temp": 29.6,
+    "correlation_high_low": 0.43720459714634746,
+    "accumulated_hourly_temp_diff_sum": -269.19714547199493,
+    "deviation": {
+      "temp": 0.35768608102878213,
+      "humid": 3.774144239116242
+    },
+    "sum": {
+      "temp_diff_sum": -23.55015313907331,
+      "temp_sum": 8703.800000000003,
+      "humid_sum": 23018.0
+    },
+    "average": {
+      "temp": 30.221527777777787,
+      "humid": 79.92361111111111
+    }
+  },
+  "2024-01-25": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.9,
+    "lowest_temp": 29.4,
+    "correlation_high_low": 0.42991851094805383,
+    "accumulated_hourly_temp_diff_sum": -270.39729861106827,
+    "deviation": {
+      "temp": 1.5433549314543447,
+      "humid": 5.514727362430933
+    },
+    "sum": {
+      "temp_diff_sum": -1.200153139073315,
+      "temp_sum": 8956.800000000017,
+      "humid_sum": 23127.0
+    },
+    "average": {
+      "temp": 31.100000000000062,
+      "humid": 80.30208333333333
+    }
+  },
+  "2024-01-26": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 35.2,
+    "lowest_temp": 29.8,
+    "correlation_high_low": 0.4276260895251606,
+    "accumulated_hourly_temp_diff_sum": -256.14745175014156,
+    "deviation": {
+      "temp": 1.544650789010993,
+      "humid": 7.819184640197467
+    },
+    "sum": {
+      "temp_diff_sum": 14.249846860926688,
+      "temp_sum": 9140.300000000007,
+      "humid_sum": 22065.0
+    },
+    "average": {
+      "temp": 31.7371527777778,
+      "humid": 76.61458333333333
+    }
+  },
+  "2024-01-27": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.4,
+    "lowest_temp": 30.1,
+    "correlation_high_low": 0.42910600993716813,
+    "accumulated_hourly_temp_diff_sum": -240.64760488921488,
+    "deviation": {
+      "temp": 1.153124947723241,
+      "humid": 5.065512887560668
+    },
+    "sum": {
+      "temp_diff_sum": 15.499846860926688,
+      "temp_sum": 9162.8,
+      "humid_sum": 21451.0
+    },
+    "average": {
+      "temp": 31.815277777777776,
+      "humid": 74.48263888888889
+    }
+  },
+  "2024-01-28": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 33.8,
+    "lowest_temp": 30.2,
+    "correlation_high_low": 0.4295424596664631,
+    "accumulated_hourly_temp_diff_sum": -227.3977580282882,
+    "deviation": {
+      "temp": 1.0225967375768892,
+      "humid": 5.4252135446340235
+    },
+    "sum": {
+      "temp_diff_sum": 13.249846860926677,
+      "temp_sum": 9111.900000000021,
+      "humid_sum": 20620.0
+    },
+    "average": {
+      "temp": 31.748780487804954,
+      "humid": 71.84668989547038
+    }
+  },
+  "2024-01-29": {
+    "is_valid": true,
+    "today_total_data": 286,
+    "highest_temp": 34.5,
+    "lowest_temp": 30.2,
+    "correlation_high_low": 0.43168768078303116,
+    "accumulated_hourly_temp_diff_sum": -210.8979111673615,
+    "deviation": {
+      "temp": 1.127411591943158,
+      "humid": 4.339696128999518
+    },
+    "sum": {
+      "temp_diff_sum": 16.499846860926677,
+      "temp_sum": 9116.900000000016,
+      "humid_sum": 20943.0
+    },
+    "average": {
+      "temp": 31.877272727272782,
+      "humid": 73.22727272727273
+    }
+  },
+  "2024-01-30": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.5,
+    "lowest_temp": 30.6,
+    "correlation_high_low": 0.4353688414744157,
+    "accumulated_hourly_temp_diff_sum": -185.7980643064348,
+    "deviation": {
+      "temp": 1.1383414588804943,
+      "humid": 7.369576336665795
+    },
+    "sum": {
+      "temp_diff_sum": 25.0998468609267,
+      "temp_sum": 9274.600000000002,
+      "humid_sum": 20523.0
+    },
+    "average": {
+      "temp": 32.20347222222223,
+      "humid": 71.26041666666667
+    }
+  },
+  "2024-01-31": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 36.1,
+    "lowest_temp": 30.9,
+    "correlation_high_low": 0.4491337565942464,
+    "accumulated_hourly_temp_diff_sum": -146.69821744550813,
+    "deviation": {
+      "temp": 1.364791253243717,
+      "humid": 9.133248745046249
+    },
+    "sum": {
+      "temp_diff_sum": 39.09984686092668,
+      "temp_sum": 9439.499999999998,
+      "humid_sum": 21738.0
+    },
+    "average": {
+      "temp": 32.77604166666666,
+      "humid": 75.47916666666667
+    }
+  },
+  "2024-02-01": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 36.6,
+    "lowest_temp": 31.1,
+    "correlation_high_low": 0.4671911415126646,
+    "accumulated_hourly_temp_diff_sum": -105.39837058458144,
+    "deviation": {
+      "temp": 1.4554813169873935,
+      "humid": 6.811346747295399
+    },
+    "sum": {
+      "temp_diff_sum": 41.299846860926685,
+      "temp_sum": 9439.800000000003,
+      "humid_sum": 20221.0
+    },
+    "average": {
+      "temp": 32.89128919860628,
+      "humid": 70.45644599303135
+    }
+  },
+  "2024-02-02": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 33.8,
+    "lowest_temp": 30.8,
+    "correlation_high_low": 0.4655150835076309,
+    "accumulated_hourly_temp_diff_sum": -93.94852372365474,
+    "deviation": {
+      "temp": 0.5134983501001296,
+      "humid": 3.982601048449507
+    },
+    "sum": {
+      "temp_diff_sum": 11.449846860926698,
+      "temp_sum": 9127.2,
+      "humid_sum": 22632.0
+    },
+    "average": {
+      "temp": 31.69166666666667,
+      "humid": 78.58333333333333
+    }
+  },
+  "2024-02-03": {
+    "is_valid": false,
+    "today_total_data": 211,
+    "highest_temp": 34.2,
+    "lowest_temp": 30.2,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -93.94852372365474,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 6659.300000000011,
+      "humid_sum": 16523.0
+    },
+    "average": {
+      "temp": 31.56066350710906,
+      "humid": 78.30805687203791
+    }
+  },
+  "2024-02-04": {
+    "is_valid": false,
+    "today_total_data": 106,
+    "highest_temp": 33.8,
+    "lowest_temp": 31.2,
+    "correlation_high_low": null,
+    "accumulated_hourly_temp_diff_sum": -93.94852372365474,
+    "deviation": {
+      "temp": null,
+      "humid": null
+    },
+    "sum": {
+      "temp_diff_sum": null,
+      "temp_sum": 3442.599999999998,
+      "humid_sum": 7908.0
+    },
+    "average": {
+      "temp": 32.47735849056602,
+      "humid": 74.60377358490567
+    }
+  },
+  "2024-02-05": {
+    "is_valid": true,
+    "today_total_data": 287,
+    "highest_temp": 35.5,
+    "lowest_temp": 29.8,
+    "correlation_high_low": 0.4620545714346008,
+    "accumulated_hourly_temp_diff_sum": -73.44867686272805,
+    "deviation": {
+      "temp": 1.4216319939610984,
+      "humid": 7.455073304889723
+    },
+    "sum": {
+      "temp_diff_sum": 20.499846860926695,
+      "temp_sum": 9183.199999999997,
+      "humid_sum": 20738.0
+    },
+    "average": {
+      "temp": 31.997212543553996,
+      "humid": 72.25783972125436
+    }
+  },
+  "2024-02-06": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 35.5,
+    "lowest_temp": 30.6,
+    "correlation_high_low": 0.4686965209093918,
+    "accumulated_hourly_temp_diff_sum": -39.54883000180136,
+    "deviation": {
+      "temp": 1.445218142148465,
+      "humid": 5.033451707508575
+    },
+    "sum": {
+      "temp_diff_sum": 33.89984686092669,
+      "temp_sum": 9385.999999999993,
+      "humid_sum": 21073.0
+    },
+    "average": {
+      "temp": 32.59027777777775,
+      "humid": 73.17013888888889
+    }
+  },
+  "2024-02-07": {
+    "is_valid": true,
+    "today_total_data": 286,
+    "highest_temp": 33.3,
+    "lowest_temp": 30.1,
+    "correlation_high_low": 0.4678006048555467,
+    "accumulated_hourly_temp_diff_sum": -29.598983140874665,
+    "deviation": {
+      "temp": 0.7748153921272818,
+      "humid": 3.010424534113576
+    },
+    "sum": {
+      "temp_diff_sum": 9.949846860926698,
+      "temp_sum": 9055.200000000015,
+      "humid_sum": 21625.0
+    },
+    "average": {
+      "temp": 31.661538461538516,
+      "humid": 75.6118881118881
+    }
+  },
+  "2024-02-08": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.6,
+    "lowest_temp": 29.6,
+    "correlation_high_low": 0.4649116057609048,
+    "accumulated_hourly_temp_diff_sum": -17.599136279947984,
+    "deviation": {
+      "temp": 1.4462831762976662,
+      "humid": 5.47499643264724
+    },
+    "sum": {
+      "temp_diff_sum": 11.99984686092668,
+      "temp_sum": 9124.500000000013,
+      "humid_sum": 21213.0
+    },
+    "average": {
+      "temp": 31.68229166666671,
+      "humid": 73.65625
+    }
+  },
+  "2024-02-09": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.0,
+    "lowest_temp": 30.0,
+    "correlation_high_low": 0.4652988543240037,
+    "accumulated_hourly_temp_diff_sum": -16.49928941902129,
+    "deviation": {
+      "temp": 0.802238140423788,
+      "humid": 4.761487844472099
+    },
+    "sum": {
+      "temp_diff_sum": 1.099846860926693,
+      "temp_sum": 9010.000000000007,
+      "humid_sum": 22869.0
+    },
+    "average": {
+      "temp": 31.284722222222246,
+      "humid": 79.40625
+    }
+  },
+  "2024-02-10": {
+    "is_valid": true,
+    "today_total_data": 288,
+    "highest_temp": 34.7,
+    "lowest_temp": 29.7,
+    "correlation_high_low": 0.46313717028696333,
+    "accumulated_hourly_temp_diff_sum": -10.399442558094592,
+    "deviation": {
+      "temp": 1.3909512032444196,
+      "humid": 5.532625203949436
+    },
+    "sum": {
+      "temp_diff_sum": 6.0998468609267,
+      "temp_sum": 9048.1,
+      "humid_sum": 22369.0
+    },
+    "average": {
+      "temp": 31.41701388888889,
+      "humid": 77.67013888888889
+    }
+  },
+  "2024-02-11": {
+    "is_valid": true,
+    "today_total_data": 278,
+    "highest_temp": 35.2,
+    "lowest_temp": 30.3,
+    "correlation_high_low": 0.4662648887625753,
+    "accumulated_hourly_temp_diff_sum": 4.450404302832091,
+    "deviation": {
+      "temp": 1.296551584824597,
+      "humid": 5.986311871035223
+    },
+    "sum": {
+      "temp_diff_sum": 14.849846860926682,
+      "temp_sum": 8842.000000000011,
+      "humid_sum": 20804.0
+    },
+    "average": {
+      "temp": 31.80575539568349,
+      "humid": 74.83453237410072
+    }
+  }
+}

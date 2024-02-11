@@ -107,7 +107,7 @@ function calculatePercentageInRange(data: number, range: Range): number {
 
       <span v-if="dataStore.isSelectedDataValid && !isDataPoint"
             class="absolute -top-1 h-2 w-2 rounded-full dark:bg-neutral-400 transition-all
-                   group-hover:translate-y-1 group-hover:translate-x-0.5 group-hover:h-full group-hover:w-1"
+                   group-hover:translate-y-1 group-hover:translate-x-0.5 group-hover:h-full group-hover:w-1 group-hover:dark:bg-white"
             :style="{left: averagePercentage + '%'}"/>
     </div>
   </div>

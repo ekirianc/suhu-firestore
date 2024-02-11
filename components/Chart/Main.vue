@@ -52,13 +52,6 @@ const chartRefreshTrigger = ref(0);
 
 const { width, isSmallScreen, isLargeScreen, SMALL_SCREEN, XL_SCREEN } = windowSize()
 
-watch(width, (width) => {
-  // to keep it responsive on window resize
-  // specialized for option menu
-  isSmallScreen.value = width < SMALL_SCREEN
-  isLargeScreen.value = width < XL_SCREEN
-})
-
 const disableSeriesToggle = ref(false)
 const disableShowLabel = ref(false)
 

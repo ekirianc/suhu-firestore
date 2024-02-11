@@ -160,15 +160,29 @@ function colorize(opaque: boolean) {
     let c;
 
     if (max > 36) {
-      c = 'rgb(255,173,66)'; // 💀💀💀
+      c = 'rgb(239,181,104)'; // 💀💀💀
     } else if (max > 35) {
-      c = 'rgb(174,34,255)'; // hot 🥵
+      c = 'rgb(209,139,250)'; // hot 🥵
     } else if (max < 32.9 && min > 29) {
-      c = '#3383fc'; // min max on overall average
+      c = '#91b9f6'; // min max on overall average
     } else if (min < 29 && max < 33) {
-      c = '#33f5fc'; // below average
+      c = '#91e8c7'; // below average
     } else{
-      c = 'rgb(255,34,99)'; // 33 to 35
+      c = 'rgb(232,111,146)'; // 33 to 35
+    }
+
+    if (isDark.value){
+      if (max > 36) {
+        c = 'rgb(199,137,57)'; // 💀💀💀
+      } else if (max > 35) {
+        c = 'rgb(121,14,182)'; // hot 🥵
+      } else if (max < 32.9 && min > 29) {
+        c = '#416598'; // min max on overall average
+      } else if (min < 29 && max < 33) {
+        c = '#4e999b'; // below average
+      } else{
+        c = 'rgb(218,33,89)'; // 33 to 35
+      }
     }
 
     return opaque ? c : transparentize(c, 1 - Math.abs(max / 50));
