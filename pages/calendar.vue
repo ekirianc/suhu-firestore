@@ -5,7 +5,7 @@ import {
   addMonths,
   eachDayOfInterval, endOfDay,
   endOfMonth,
-  format, getDate,
+  format,
   isSameDay,
   isSameMonth,
   parse, startOfDay,
@@ -156,8 +156,8 @@ let selectedData = $ref({
 const chartRefreshTrigger = ref(0);
 const refreshChart = () => chartRefreshTrigger.value += 1;
 
-const activeIndex = ref()
 const activeMonth = ref()
+const activeDate = ref()
 
 const isEndOfDatasetDay = ref()
 const isStartOfDatasetDay = ref()
@@ -176,8 +176,8 @@ const getSelectedEntries = async (_datetime: Date, currMonth: string) => {
     generateCalendarDays();
   }
 
-  activeIndex.value = getDate(_datetime) - 1
   activeMonth.value = currMonth
+  activeDate.value = startOfDay(_datetime)
 
   const noDataDate = ref(format(_datetime, "dd MMMM yyyy"))
 
@@ -279,7 +279,10 @@ const handleSelectedEntries = (title: string, data?: any) => {
 
 };
 
-const closeSlide = () => slideIn.value = false
+const closeSlide = () => {
+  slideIn.value = false
+  activeDate.value = false
+}
 
 const chartData = ref<{ labels: Date[]; datasets: ChartDataset[];}>({
   labels: [],
@@ -335,9 +338,9 @@ const { width, isSmallScreen, isLargeScreen, isMediumScreen, SMALL_SCREEN, XL_SC
 
         </div>
       </div>
-
-      <div class="flex rounded-xl overflow-hidden border dark:border-neutral-700">
-        <div class="relative text-white dark:bg-zinc-800 bg-zinc-100 border-r border-r-zinc-300 dark:border-r-zinc-600">
+      <!--Calendar Content-->
+      <div class="flex rounded-xl overflow-hidden border dark:border-neutral-700 dark:bg-zinc-800 bg-zinc-100">
+        <div class="relative text-white  border-r border-r-zinc-300 dark:border-r-zinc-600">
           <div class="divide-y divide-zinc-200 dark:divide-zinc-700">
             <div v-for="columnTitle in columnTitles" :key="columnTitle"  class="w-24 h-12 flex items-center content-center px-4">
               <div class="text-sm dark:text-white text-gray-700 w-full">{{ columnTitle }}</div>
@@ -348,7 +351,7 @@ const { width, isSmallScreen, isLargeScreen, isMediumScreen, SMALL_SCREEN, XL_SC
           <div class="flex">
             <div v-for="(data, index) in calendarDays" :key="index" >
               <CalendarDay @click="getSelectedEntries(data.datetime, currentMonth)" :datetime="data.datetime"
-                           :is-active="activeIndex === index && activeMonth === currentMonth"/>
+                           :is-active="`${activeDate}` === `${startOfDay(data.datetime)}`"/>
             </div>
           </div>
           <div class="flex">
@@ -363,118 +366,142 @@ const { width, isSmallScreen, isLargeScreen, isMediumScreen, SMALL_SCREEN, XL_SC
           </div>
         </div>
       </div>
+      <!--Overall Data-->
+      <div class="grid lg:grid-flow-col gap-4 dark:text-slate-200 text-slate-800 [&>div]:px-6 [&>div]:py-4 mt-4 [&>div]:grid after:mb-8 md:after:hidden">
+        <div class="card-2">
+          <span class="font-bold">Total recorded days</span>
+          <span class="text-2xl">{{ dataStore.overall_recorded_days }}</span>
+        </div>
+        <div class="card-2">
+          <span class="font-bold">Total valid days</span>
+          <span class="text-2xl">{{ dataStore.overall_valid_days }}</span>
+        </div>
+        <div class="card-2 cursor-pointer" @click="getSelectedEntries(new Date(dataStore.overall_high_temp.datetime), currentMonth)">
+          <span class="font-bold">High temp record</span>
+          <span class="text-sm dark:text-slate-300">{{ format(new Date(dataStore.overall_high_temp.datetime), 'PPpp') }}</span>
+          <span class="text-2xl">{{ dataStore.overall_high_temp.value }} °C</span>
+        </div>
+        <div class="card-2 cursor-pointer"  @click="getSelectedEntries(new Date(dataStore.overall_low_temp.datetime), currentMonth)">
+          <span class="font-bold">Low temp record</span>
+          <span class="text-sm dark:text-slate-300">{{ format(new Date(dataStore.overall_low_temp.datetime), 'PPpp') }}</span>
+          <span class="text-2xl">{{ dataStore.overall_low_temp.value }} °C</span>
+        </div>
+      </div>
     </div>
   </div>
 
+
   <lazy-client-only>
-    <div class="w-0 h-full absolute top-0 right-0 overflow-x-hidden transition-all"
-         :class="{'w-full md:w-1/2 lg:w-1/3' : slideIn}">
-      <div class="absolute p-4 top-0 border-l border-zinc-300 w-full h-full overflow-y-auto overflow-x-hidden shadow-xl transition-all duration-500
-                  bg-slate-100 dark:border-zinc-700 backdrop-blur dark:text-zinc-100 z-50 dark:bg-zinc-800 -right-full"
-           :class="{'right-0': slideIn, 'dark:bg-zinc-800/70': !isMediumScreen}">
-        <!--navigation-->
-        <div class="flex justify-between space-x-4 items-center text-neutral-600 dark:text-neutral-200 mb-4">
-          <div class="flex space-x-4 items-center">
-            <button @click="closeSlide" class="btn">
-              <icon name="material-symbols-light:double-arrow" class="text-2xl"/>
-            </button>
-            <span class="text-xl"> {{ selectedData.title }} </span>
-          </div>
-          <div class="flex space-x-2 items-center">
-            <span v-if="isSlideLoading"><Icon name="eos-icons:loading" class="text-2xl"/></span>
-            <!-- go to next -->
-            <button @click="getSelectedEntries(yesterday, currentMonth)"
-                    :disabled="isStartOfDatasetDay"
-                    :class="[isStartOfDatasetDay ? 'bg-transparent':'bg-zinc-300 dark:bg-zinc-600 btn']"
-            >
-              <icon name="solar:arrow-left-linear" class="text-2xl"/>
-            </button>
-            <!-- go to previous -->
-            <button  @click="getSelectedEntries(tommorow, currentMonth)"
-                     :disabled="isEndOfDatasetDay"
-                     :class="[isEndOfDatasetDay ? 'bg-transparent':'bg-zinc-300 dark:bg-zinc-600 btn']"
-            >
-              <icon name="solar:arrow-right-linear" class="text-2xl"/>
-            </button>
-          </div>
-        </div>
-
-        <div v-if="isSlideInFirst"><Loading class="h-2/3"/></div>
-
-        <div v-else class="grid gap-4">
-          <!--chart-->
-          <div class="p-4 card-2">
-            <div class="aspect-[4/2]">
-              <Line v-if="selectedData.exist" :key="chartRefreshTrigger"
-                    :data="chartData" :options="chartOptionsMain"
-                    :plugins="[htmlLegendPlugin, borderPlugin]"/>
-              <div v-else class="h-full text-center flex items-center">
-                <h2 class="text-4xl dark:text-neutral-600 w-full"> no data <span class="text-2xl relative -top-1">🫤</span> </h2>
-              </div>
+    <div class="fixed z-50 h-full overflow-hidden top-0 right-0" :class="[slideIn ? 'w-full md:w-1/2 lg:w-1/3' : 'w-0 delay-200']">
+      <div class="absolute w-full h-full top-0 right-0 transition-all "
+           :class="{'translate-x-full': !slideIn}">
+        <div class="absolute w-full h-full p-4 top-0 border-l border-zinc-300 overflow-y-auto overflow-x-hidden shadow-xl transition-all duration-500
+                    bg-slate-100 dark:border-zinc-700 backdrop-blur dark:text-zinc-100 dark:bg-zinc-800 -right-full"
+             :class="{'right-0': slideIn, 'dark:bg-zinc-800/70': !isMediumScreen}">
+          <!--navigation-->
+          <div class="flex justify-between space-x-4 items-center text-neutral-600 dark:text-neutral-200 mb-4">
+            <div class="flex space-x-4 items-center">
+              <button @click="closeSlide" class="btn">
+                <icon name="material-symbols-light:double-arrow" class="text-2xl"/>
+              </button>
+              <span class="text-xl"> {{ selectedData.title }} </span>
             </div>
-            <div v-if="selectedData.exist" id="legend-container" class="text-gray-600 dark:text-gray-200"></div>
+            <div class="flex space-x-2 items-center">
+              <span v-if="isSlideLoading"><Icon name="eos-icons:loading" class="text-2xl"/></span>
+              <!-- go to next -->
+              <button @click="getSelectedEntries(yesterday, currentMonth)"
+                      :disabled="isStartOfDatasetDay"
+                      :class="[isStartOfDatasetDay ? 'bg-transparent':'bg-zinc-300 dark:bg-zinc-600/20 btn']"
+              >
+                <icon name="solar:arrow-left-linear" class="text-2xl"/>
+              </button>
+              <!-- go to previous -->
+              <button  @click="getSelectedEntries(tommorow, currentMonth)"
+                       :disabled="isEndOfDatasetDay"
+                       :class="[isEndOfDatasetDay ? 'bg-transparent':'bg-zinc-300 dark:bg-zinc-600/20 btn']"
+              >
+                <icon name="solar:arrow-right-linear" class="text-2xl"/>
+              </button>
+            </div>
           </div>
-          <!-- detail -->
-          <div v-if="selectedData.isValid" class="grid grid-cols-2 gap-4">
-            <DataCard label="Data Point"
-                      :data="selectedData.data.today_data_point_count"
-                      icon="solar:check-read-linear"
-                      color="text-green-500 dark:text-green-300"
-            />
-            <DataCard label="Temp Diff Sum"
-                      :data="selectedData.data.today_statistics.temp_diff_sum"
-                      :range="dataStore.overall_min_max.tempDiffSum"
-                      :average="dataStore.overall_hourly_temp_diff_average"
-                      icon="ph:sigma-bold"
-                      unit="°C"
-            />
-            <DataCard label="Highest Temp"
-                      :data="selectedData.data.today_highest_temp.value"
-                      :range="dataStore.overall_min_max.highTemp"
-                      :average="dataStore.overall_high_temp_average"
-                      icon="uil:temperature"
-                      color="text-red-400"
-                      unit="°C"
-            />
-            <DataCard label="Lowest Temp"
-                      :data="selectedData.data.today_lowest_temp.value"
-                      :range="dataStore.overall_min_max.lowTemp"
-                      :average="dataStore.overall_low_temp_average"
-                      icon="uil:temperature-empty"
-                      color="text-sky-400"
-                      unit="°C"
-            />
-            <DataCard label="Temp Avg"
-                      :data="selectedData.data.today_average.temp"
-                      :average="dataStore.overall_temp_average"
-                      :range="dataStore.overall_min_max.tempAvg"
-                      icon="mdi:temperature-celsius"
-                      unit="°C"
-            />
-            <DataCard label="Humid Avg"
-                      :data="selectedData.data.today_average.humid"
-                      :range="dataStore.overall_min_max.humidAvg"
-                      :average="dataStore.overall_humid_average"
-                      icon="material-symbols:humidity-percentage-outline"
-                      unit="%"
-            />
+
+          <div v-if="isSlideInFirst"><Loading class="h-2/3"/></div>
+
+          <div v-else class="grid gap-4">
+            <!--chart-->
+            <div class="p-4 card-2">
+              <div class="aspect-[4/2]">
+                <Line v-if="selectedData.exist" :key="chartRefreshTrigger"
+                      :data="chartData" :options="chartOptionsMain"
+                      :plugins="[htmlLegendPlugin, borderPlugin]"/>
+                <div v-else class="h-full text-center flex items-center">
+                  <h2 class="text-4xl dark:text-neutral-600 w-full"> no data <span class="text-2xl relative -top-1">🫤</span> </h2>
+                </div>
+              </div>
+              <div v-if="selectedData.exist" id="legend-container" class="text-gray-600 dark:text-gray-200"></div>
+            </div>
+            <!-- detail -->
+            <div v-if="selectedData.isValid" class="grid grid-cols-2 gap-4">
+              <DataCard label="Data Point"
+                        :data="selectedData.data.today_data_point_count"
+                        icon="solar:check-read-linear"
+                        color="text-green-500 dark:text-green-300"
+              />
+              <DataCard label="Temp Diff Sum"
+                        :data="selectedData.data.today_statistics.temp_diff_sum"
+                        :range="dataStore.overall_min_max.tempDiffSum"
+                        :average="dataStore.overall_hourly_temp_diff_average"
+                        icon="ph:sigma-bold"
+                        unit="°C"
+              />
+              <DataCard label="Highest Temp"
+                        :data="selectedData.data.today_highest_temp.value"
+                        :range="dataStore.overall_min_max.highTemp"
+                        :average="dataStore.overall_high_temp_average"
+                        icon="uil:temperature"
+                        color="text-red-400"
+                        unit="°C"
+              />
+              <DataCard label="Lowest Temp"
+                        :data="selectedData.data.today_lowest_temp.value"
+                        :range="dataStore.overall_min_max.lowTemp"
+                        :average="dataStore.overall_low_temp_average"
+                        icon="uil:temperature-empty"
+                        color="text-sky-400"
+                        unit="°C"
+              />
+              <DataCard label="Temp Avg"
+                        :data="selectedData.data.today_average.temp"
+                        :average="dataStore.overall_temp_average"
+                        :range="dataStore.overall_min_max.tempAvg"
+                        icon="mdi:temperature-celsius"
+                        unit="°C"
+              />
+              <DataCard label="Humid Avg"
+                        :data="selectedData.data.today_average.humid"
+                        :range="dataStore.overall_min_max.humidAvg"
+                        :average="dataStore.overall_humid_average"
+                        icon="material-symbols:humidity-percentage-outline"
+                        unit="%"
+              />
+            </div>
+            <div v-else-if="selectedData.exist">
+              <DataCard label="Data Point"
+                        :data="selectedData.data.today_data_point_count"
+                        icon="iconamoon:close"
+                        color="dark:text-red-400"
+              />
+            </div>
           </div>
-          <div v-else-if="selectedData.exist">
-            <DataCard label="Data Point"
-                      :data="selectedData.data.today_data_point_count"
-                      icon="iconamoon:close"
-                      color="dark:text-red-400"
-            />
+
+          <!-- legend -->
+          <div v-if="selectedData.isValid" class="flex items-center space-x-2 mt-2 pl-2">
+            <span class="h-3 w-3 rounded-full bg-pink-600 dark:bg-sky-200"></span>
+            <span class="text-slate-800 dark:text-slate-100">average</span>
           </div>
         </div>
 
-        <!-- legend -->
-        <div v-if="selectedData.isValid" class="flex items-center space-x-2 mt-2 pl-2">
-          <span class="h-3 w-3 rounded-full bg-pink-600 dark:bg-sky-200"></span>
-          <span class="text-slate-800 dark:text-slate-100">average</span>
-        </div>
       </div>
-
     </div>
   </lazy-client-only>
 

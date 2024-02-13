@@ -75,8 +75,10 @@ const { width, isSmallScreen, isLargeScreen, SMALL_SCREEN, XL_SCREEN } = windowS
 
 <template>
   <div class="card-2 overflow-hidden relative group">
-    <div class="px-1 py-4 md:p-4 flex space-x-4" :class="{'items-center ': !isSmallScreen, 'group-hover:-translate-y-2 transition-all': !isDataPoint}">
-      <div class="text-xl md:text-3xl text-neutral-600 dark:text-neutral-100 leading-none hidden md:block ">
+    <div class="px-3 py-4 md:p-4 flex items-center space-x-2 md:space-x-4"
+         :class="{'group-hover:-translate-y-2 transition-all': !isDataPoint}">
+      <div class="text-xl md:text-3xl text-neutral-600 dark:text-neutral-100 leading-none md:block"
+           :class="[isDataPoint ? 'block':'hidden']">
         <Icon v-if="isDataPoint && isValid && props.data < 288" name="solar:unread-linear" :class="props.color"/>
         <Icon v-else :name="props.icon!" :class="props.color"/>
       </div>

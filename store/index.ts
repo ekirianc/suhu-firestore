@@ -60,11 +60,18 @@ export const useDataStore = defineStore('temperature', {
 
     overall_datasets: [] as Datasets[],
     overall_min_max: generateMinMaxRefsObject(propertyNames),
+
     overall_temp_average: 0,
     overall_humid_average: 0,
     overall_high_temp_average: 0,
     overall_low_temp_average: 0,
     overall_hourly_temp_diff_average: 0,
+
+    overall_recorded_days: 0,
+    overall_valid_days: 0,
+
+    overall_high_temp: {datetime: '', value: 0},
+    overall_low_temp: {datetime: '', value: 0},
 
     activeRoute: '',
     isFullscreen: false,
@@ -100,6 +107,12 @@ export const useDataStore = defineStore('temperature', {
             this.overall_low_temp_average = overallData.overall_average.low_temp
 
             this.overall_hourly_temp_diff_average = overallData.overall_average.hourly_temp_diff
+
+            this.overall_recorded_days = overallData.total_recorded_days
+            this.overall_valid_days = overallData.total_valid_days
+
+            this.overall_high_temp = overallData.highest_temp_record
+            this.overall_low_temp = overallData.low_temp_record
           }
         });
 
@@ -236,8 +249,8 @@ export const useDataStore = defineStore('temperature', {
               const firstKey = keys[0];
               const keyBeforeFirst = String(Number(firstKey) - 1);
 
-              let adjHourlyTemp: any[] = []
-              let adjHourlyHumid: any[] = []
+              let adjHourlyTemp: any[]
+              let adjHourlyHumid: any[]
 
               if (firstKey === '0'){
                 // if hourly temp start at 0, add realtemp to begining
