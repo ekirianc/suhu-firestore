@@ -1,1 +1,0 @@
-python "_process and upload.py"
