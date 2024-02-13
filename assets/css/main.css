@@ -14,6 +14,9 @@
     h2{
         @apply font-bold text-xl dark:text-gray-100
     }
+    *{
+        @apply select-none
+    }
 }
 
 @layer components{
@@ -28,36 +31,23 @@
         @apply border dark:border-gray-700 dark:hover:border-gray-500 hover:border-gray-400/70
     }
     .btn{
-        @apply p-2 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-xl
+        @apply p-2 rounded-xl hover:bg-slate-200 dark:hover:bg-zinc-700
     }
 
     /* HTML: <div class="loader"></div> */
     .loader {
-        width: 40px;
+        width: 50px;
         aspect-ratio: 1;
-        color: #f65a9f;
-        position: relative;
-        background: radial-gradient(10px,currentColor 94%,#0000);
-    }
-    .loader:before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        border-radius: 50%;
+        --_c:no-repeat radial-gradient(farthest-side, #ff598b 92%,#0000);
         background:
-                radial-gradient(9px at bottom right,#0000 94%,currentColor) top    left,
-                radial-gradient(9px at bottom left ,#0000 94%,currentColor) top    right,
-                radial-gradient(9px at top    right,#0000 94%,currentColor) bottom left,
-                radial-gradient(9px at top    left ,#0000 94%,currentColor) bottom right;
-        background-size: 20px 20px;
-        background-repeat: no-repeat;
-        animation: l18 1.5s infinite cubic-bezier(0.3,1,0,1);
+                var(--_c) top,
+                var(--_c) left,
+                var(--_c) right,
+                var(--_c) bottom;
+        background-size: 12px 12px;
+        animation: l7 1s infinite;
     }
-    @keyframes l18 {
-        33%  {inset:-10px;transform: rotate(0deg)}
-        66%  {inset:-10px;transform: rotate(90deg)}
-        100% {inset:0    ;transform: rotate(90deg)}
-    }
+    @keyframes l7 {to{transform: rotate(.5turn)}}
 }
 
 @layer utilities{

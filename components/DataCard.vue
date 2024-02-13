@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {useDataStore, usePreferences} from "~/store";
-import {average} from "chroma.ts";
+import {windowSize} from "~/composables/windowSize";
 
 interface Range {
   min: number;
@@ -31,7 +31,6 @@ let percentage = $ref(0)
 let averagePercentage = $ref(0)
 
 const data = ref(0)
-const trend = ref()
 
 watchEffect(() => {
   data.value = props.data
@@ -70,18 +69,20 @@ function calculatePercentageInRange(data: number, range: Range): number {
   return (dataRelativeToMin / rangeSize) * 100;
 }
 
+const { width, isSmallScreen, isLargeScreen, SMALL_SCREEN, XL_SCREEN } = windowSize()
+
 </script>
 
 <template>
   <div class="card-2 overflow-hidden relative group">
-    <div class="p-4 flex space-x-4 items-center  ">
-      <div class="text-4xl text-neutral-600 dark:text-neutral-100">
+    <div class="px-1 py-4 md:p-4 flex space-x-4" :class="{'items-center ': !isSmallScreen, 'group-hover:-translate-y-2 transition-all': !isDataPoint}">
+      <div class="text-xl md:text-3xl text-neutral-600 dark:text-neutral-100 leading-none hidden md:block ">
         <Icon v-if="isDataPoint && isValid && props.data < 288" name="solar:unread-linear" :class="props.color"/>
         <Icon v-else :name="props.icon!" :class="props.color"/>
       </div>
 
       <div class="w-full">
-        <h3 class="text-neutral-500 leading-none dark:text-neutral-400 mb-1"> {{ props.label }} </h3>
+        <h3 class="text-neutral-500 leading-none dark:text-neutral-400 mb-1 text-sm "> {{ props.label }} </h3>
         <div class="text-xl text-neutral-700 dark:text-neutral-200">
 
           <stats-data :isDataPoint :data :unit/>
@@ -91,22 +92,26 @@ function calculatePercentageInRange(data: number, range: Range): number {
 
     </div>
 
-    <div v-if="!isDataPoint" class="absolute text-sm bottom-6 z-10 w-full ">
-      <div class="relative w-full text-neutral-100 bg-neutral-700 border border-neutral-600 opacity-0 group-hover:opacity-100 transition-all">
+    <!-- percentage value -->
+    <div v-if="!isDataPoint" class="absolute text-sm bottom-5 z-10 w-full">
+      <div class="relative w-full border border-neutral-200 bg-neutral-100 opacity-0 group-hover:opacity-100 transition-all
+                  dark:text-neutral-100 dark:bg-neutral-700 dark:border-neutral-600">
         <span class="px-2 ">{{ range.min }}</span>
         <span class="absolute" :style="{left: averagePercentage - 5 + '%'}">{{ props.average.toFixed(2) }}</span>
         <span class="absolute right-0 px-2">{{ range.max }}</span>
       </div>
     </div>
 
-    <div class="relative dark:bg-neutral-700 w-full z-0">
+    <!-- percentage bar -->
+    <div class="relative bg-pink-100 dark:bg-neutral-700 w-full z-0">
 
-      <div class="h-6 dark:bg-sky-400/30" :style="{width: percentage + '%'}">
-        <stats-data :isDataPoint :data="percentage" unit="%" class="pl-4"/>
+      <div class="dark:bg-sky-400/30 bg-pink-300/50" :style="{width: percentage + '%'}">
+        <stats-data :isDataPoint :data="percentage" unit="%" :isPercentage="true" class="pl-4"/>
       </div>
 
+      <!-- Average dot indicator -->
       <span v-if="dataStore.isSelectedDataValid && !isDataPoint"
-            class="absolute -top-1 h-2 w-2 rounded-full dark:bg-neutral-400 transition-all
+            class="absolute -top-1 h-2 w-2 rounded-full bg-pink-600 dark:bg-sky-200 transition-all
                    group-hover:translate-y-1 group-hover:translate-x-0.5 group-hover:h-full group-hover:w-1 group-hover:dark:bg-white"
             :style="{left: averagePercentage + '%'}"/>
     </div>

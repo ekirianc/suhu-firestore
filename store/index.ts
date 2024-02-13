@@ -66,7 +66,7 @@ export const useDataStore = defineStore('temperature', {
     overall_low_temp_average: 0,
     overall_hourly_temp_diff_average: 0,
 
-    activeRouter: '',
+    activeRoute: '',
     isFullscreen: false,
     isSelectedDataValid: false
   }),

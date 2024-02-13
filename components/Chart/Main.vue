@@ -525,9 +525,9 @@ function findIndexForTime(start: Date) {
                   'md:basis-3/4': !isOptionHiddenRef,
                   'fixed top-0 left-0 w-full h-screen border-2 dark:border-pink-400 z-50': isFullscreen,
                   'card-effect': !isFullscreen,
-                  'px-0': isSmallScreen}">
+                  'px-1': isSmallScreen}">
 
-      <div class="flex justify-between relative -top-1 mb-2" :class="{'px-4': isSmallScreen}">
+      <div class="flex justify-between relative -top-1 mb-2 text-sm md:text-base" :class="{'px-4': isSmallScreen}">
         <!-- Select  -->
         <time-range-tabs :chart-loaded="chartLoaded"
                          :time-ranges="timeRanges"
@@ -537,7 +537,7 @@ function findIndexForTime(start: Date) {
         <div class="flex items-center space-x-2 dark:text-gray-200">
           <!-- reset zoom -->
           <button @click="refreshChart" class="rounded-lg px-2 h-full hover:bg-gray-200 dark:hover:bg-gray-600">
-            <Icon name="pepicons-pop:arrow-spin" class="text-lg"/>
+            <Icon name="pepicons-pop:arrow-spin" class="text-lg relative -top-0.5"/>
           </button>
           <!-- Setting -->
           <button v-if="!isFullscreen" @click="optionToggle"

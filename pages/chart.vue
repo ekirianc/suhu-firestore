@@ -10,9 +10,10 @@ useHead({
 
 const dataStore = useDataStore();
 
+const route = useRoute()
 const isLoading = ref(true)
 onMounted( () => {
-  dataStore.activeRouter = 'chart'
+  dataStore.activeRoute = route.path
   isLoading.value = false
 })
 
@@ -25,19 +26,19 @@ const { width, isSmallScreen } = windowSize()
   <div class="grid lg:grid-cols-8 xl:grid-cols-6 mb-8 md:mx-20">
     <sidebar-info class="overflow-hidden hidden lg:block lg:col-span-2 xl:col-span-1"/>
 
-    <div v-if="isLoading" class="relative lg:col-span-6 xl:col-span-5">
-      <loading class="h-3/4"/>
+    <div v-if="isLoading" class="lg:col-span-6 xl:col-span-5">
+      <loading class="h-1/2"/>
     </div>
-    <div v-else class="lg:col-span-6 xl:col-span-5 overflow-hidden">
+    <div v-else class="lg:col-span-6 xl:col-span-5 overflow-hidden w-full">
       <sidebar-info-mini class="lg:hidden"/>
       <chart-main/>
 
-      <div class="xl:flex mt-4 space-y-4 xl:space-y-0 xl:space-x-4 w-full">
-        <div class="xl:basis-1/2">
+      <div class="xl:flex mt-4 space-y-4 xl:space-y-0 ">
+        <div class="xl:w-1/2 xl:pr-2">
           <chart-high-low class="mb-4"/>
           <chart-correlation />
         </div>
-        <div class="xl:basis-1/2">
+        <div class="xl:w-1/2 xl:pl-2">
           <chart-temp-diff class="mb-4"/>
           <accumulated-temp-diff/>
         </div>

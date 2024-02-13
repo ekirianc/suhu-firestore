@@ -33,6 +33,7 @@ export interface ChartDataset {
 export interface CalendarDays{
     dataset?: object
     datetime: Date
+    isActive?: boolean
 }
 
 // ############################################

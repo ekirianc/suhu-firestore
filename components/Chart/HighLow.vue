@@ -192,11 +192,13 @@ function colorize(opaque: boolean) {
 const initialMin = new Date(lastDate).setDate(lastDate.getDate() - 60)
 
 const barRefreshTrigger = ref(0)
+const refreshChart = () => {
+  barRefreshTrigger.value += 1
+}
 onMounted(()=>{
   chartOptions_HighLow.value.scales.x.min = initialMin
 
-  barRefreshTrigger.value += 1
-
+  refreshChart()
   initialZoom()
 })
 
@@ -206,7 +208,7 @@ onMounted(async () => {
   // }
   chartColorsSet(darkModeScaleColor())
 
-  barRefreshTrigger.value += 1
+  refreshChart()
 })
 
 const darkModeScaleColor = () => (isDark.value ? '#bebebe' : '#484848');
@@ -214,13 +216,13 @@ watch([useDark(), ], async () => {
 
   chartColorsSet(darkModeScaleColor())
 
-  barRefreshTrigger.value += 1;
+  refreshChart()
   initialZoom()
 });
 
 watch(isFullscreen, async (fullscreenNew ,fullscreenOld) => {
   if (fullscreenOld){
-    barRefreshTrigger.value += 1
+    refreshChart()
     initialZoom()
   }
   if (fullscreenNew){
@@ -249,7 +251,7 @@ function resetGraph() {
 
 function showAllButton() {
   chartOptions_HighLow.value.scales.x.min = new Date(firstDate).setDate(firstDate.getDate() - 8)
-  barRefreshTrigger.value += 1
+  refreshChart()
 }
 
 function initialZoom(){
