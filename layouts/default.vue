@@ -81,10 +81,10 @@ onMounted(() => {
       </div>
 
       <button @click="toggleColorModeHandler()" class="block md:hidden dark:text-gray-400 dark:hover:text-gray-100 text-gray-600 hover:text-gray-900">
-            <span class="rounded-full border border-transparent hover:border-gray-400 transition-all p-3">
-              <span v-if="isDark"> <icon name="tabler:moon" class="text-xl relative bottom-0.5"/> </span>
-              <span v-else> <icon name="tabler:sun" class="text-xl relative bottom-0.5"/> </span>
-            </span>
+        <span class="rounded-full border border-transparent hover:border-gray-400 transition-all p-3">
+          <span v-if="isDark"> <icon name="tabler:moon" class="text-xl relative bottom-0.5"/> </span>
+          <span v-else> <icon name="tabler:sun" class="text-xl relative bottom-0.5"/> </span>
+        </span>
       </button>
 
     </div>
@@ -93,7 +93,7 @@ onMounted(() => {
          :class="{'xl:pl-8 lg:pr-20' : !isCalendarRoute}">
       <div class="flex justify-between h-full items-center">
 
-        <time-section/>
+        <clock/>
 
         <div class="flex w-full justify-end dark:text-gray-300 text-gray-600">
           <!--<button class=" dark:hover:text-gray-100 mr-2 hover:text-gray-900">-->
@@ -107,7 +107,7 @@ onMounted(() => {
               <span v-else> <icon name="tabler:sun" class="text-xl relative bottom-0.5"/> </span>
             </span>
           </button>
-          <progress-bar class="w-2/3 hidden lg:block"/>
+          <day-progress-bar class="w-2/3 hidden lg:block"/>
         </div>
       </div>
     </div>

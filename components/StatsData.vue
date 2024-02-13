@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import {setChartTicksAndGridColor} from "~/composables/utils";
-
 interface Props{
   isDataPoint: boolean
   data: number

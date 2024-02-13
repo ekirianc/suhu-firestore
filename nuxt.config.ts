@@ -46,7 +46,7 @@ export default defineNuxtConfig({
         { name: "theme-color", content: "#2d001d" },
       ],
       link: [
-        {rel: "shortcut icon", type: "image/svg+xml", href: "/img/logo-fav.svg"},
+        {rel: "shortcut icon", type: "image/svg+xml", href: "/logo-fav.svg"},
       ]
     }
   },
