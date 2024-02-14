@@ -378,12 +378,12 @@ const { width, isSmallScreen, isLargeScreen, isMediumScreen, SMALL_SCREEN, XL_SC
         </div>
         <div class="card-2 cursor-pointer" @click="getSelectedEntries(new Date(dataStore.overall_high_temp.datetime), currentMonth)">
           <span class="font-bold">High temp record</span>
-          <span class="text-sm dark:text-slate-300">{{ format(new Date(dataStore.overall_high_temp.datetime), 'PPpp') }}</span>
+          <span class="text-sm dark:text-slate-300">{{ format(new Date(dataStore.overall_high_temp.datetime), 'PP') }}</span>
           <span class="text-2xl">{{ dataStore.overall_high_temp.value }} °C</span>
         </div>
         <div class="card-2 cursor-pointer"  @click="getSelectedEntries(new Date(dataStore.overall_low_temp.datetime), currentMonth)">
           <span class="font-bold">Low temp record</span>
-          <span class="text-sm dark:text-slate-300">{{ format(new Date(dataStore.overall_low_temp.datetime), 'PPpp') }}</span>
+          <span class="text-sm dark:text-slate-300">{{ format(new Date(dataStore.overall_low_temp.datetime), 'PP') }}</span>
           <span class="text-2xl">{{ dataStore.overall_low_temp.value }} °C</span>
         </div>
       </div>
